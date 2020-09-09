@@ -1,0 +1,288 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enderlook.Collections</name>
+    </assembly>
+    <members>
+        <member name="T:Enderlook.Collections.PriorityQueue`1">
+            <summary>
+            A data structure to store elements with priority.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Enderlook.Collections.PriorityQueue`1.Count">
+            <summary>
+            Count of elements.
+            </summary>
+        </member>
+        <member name="M:Enderlook.Collections.PriorityQueue`1.Enqueue(`0,System.Single)">
+            <summary>
+            Add an element.
+            </summary>
+            <param name="item">Element to add.</param>
+            <param name="priority">Priority of the element.</param>
+        </member>
+        <member name="M:Enderlook.Collections.PriorityQueue`1.DequeueMin">
+            <summary>
+            Dequeues the element with lowest priority.
+            </summary>
+            <returns>Element with lowest priority.</returns>
+        </member>
+        <member name="M:Enderlook.Collections.PriorityQueue`1.DequeueMax">
+            <summary>
+            Dequeues the element with highest priority.
+            </summary>
+            <returns>Element with highest priority.</returns>
+        </member>
+        <member name="M:Enderlook.Collections.PriorityQueue`1.Clear">
+            <summary>
+            Clears the queue.
+            </summary>
+        </member>
+        <member name="T:Enderlook.Collections.SortedList`1">
+            <summary>
+            List data structured which store elements in a sorted way.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Enderlook.Collections.SortedList`1.Capacity">
+            <summary>
+            Internal capacity of this <see cref="T:Enderlook.Collections.SortedList`1"/>.
+            </summary>
+        </member>
+        <member name="P:Enderlook.Collections.SortedList`1.Count">
+            <summary>
+             How may elements are in this <see cref="T:Enderlook.Collections.SortedList`1"/>
+            </summary>
+        </member>
+        <member name="P:Enderlook.Collections.SortedList`1.System#Collections#IList#IsReadOnly">
+            <inheritdoc />
+        </member>
+        <member name="P:Enderlook.Collections.SortedList`1.System#Collections#Generic#ICollection{T}#IsReadOnly">
+            <inheritdoc />
+        </member>
+        <member name="P:Enderlook.Collections.SortedList`1.System#Collections#IList#IsFixedSize">
+            <inheritdoc />
+        </member>
+        <member name="P:Enderlook.Collections.SortedList`1.System#Collections#ICollection#IsSynchronized">
+            <inheritdoc />
+        </member>
+        <member name="P:Enderlook.Collections.SortedList`1.SyncRoot">
+            <inheritdoc />
+        </member>
+        <member name="P:Enderlook.Collections.SortedList`1.System#Collections#IList#Item(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="P:Enderlook.Collections.SortedList`1.Item(System.Int32)">
+            <summary>
+            Gets the element at the given <paramref name="index"/>.
+            </summary>
+            <param name="index">Index of element.</param>
+            <returns>Element at <paramref name="index"/>.</returns>
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.#ctor(System.Collections.Generic.IComparer{`0})">
+            <summary>
+            Creates a sorted list.
+            </summary>
+            <param name="comparer">Comparer used to sort elements.</param>
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.#ctor">
+            <summary>
+            Creates a sorted list.
+            </summary>
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.#ctor(System.Int32,System.Collections.Generic.IComparer{`0})">
+            <summary>
+            Creates a sorted list.
+            </summary>
+            <param name="capacity">Initial capacity of its backign array.</param>
+            <param name="comparer">Comparer used to sort elements.</param>
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.Add(`0)">
+            <summary>
+            Adds the given <paramref name="item"/> to this <see cref="T:Enderlook.Collections.SortedList`1"/> in a sorted index.
+            </summary>
+            <param name="item">Element to add.</param>
+            <returns>Index where this <paramref name="item"/> was added.</returns>
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.System#Collections#Generic#ICollection{T}#Add(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.System#Collections#IList#Add(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Add the elements in <paramref name="collection"/> to this <see cref="T:Enderlook.Collections.SortedList`1"/>. Elements will added sorted.
+            </summary>
+            <param name="collection">Elements to add.</param>
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.AddRange(System.Collections.IEnumerable)">
+            <summary>
+            Add the elements in <paramref name="collection"/> to this <see cref="T:Enderlook.Collections.SortedList`1"/>. Elements will added sorted.
+            </summary>
+            <param name="collection">Elements to add.</param>
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.AsReadOnly">
+            <summary>
+            Produces a readonly version of this <see cref="T:Enderlook.Collections.SortedList`1"/>.
+            </summary>
+            <returns>Readonly version of this <see cref="T:Enderlook.Collections.SortedList`1"/>.</returns>
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.BinarySearch(`0)">
+            <summary>
+            Uses a binary search algorithm to locate the element <paramref name="item"/> in this <see cref="T:Enderlook.Collections.SortedList`1"/>.
+            </summary>
+            <param name="item">The object to locate. The value can be <see langword="null"/> for reference types.</param>
+            <returns>The zero-based index of <paramref name="item"/> in this <see cref="T:Enderlook.Collections.SortedList`1"/>, if item is found; otherwise, a negative number that is the bitwise complement of the index of the next element that is larger than item or, if there is no larger element, the bitwise complement of <see cref="P:Enderlook.Collections.SortedList`1.Count"/>.</returns>
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.BinarySearch(System.Int32,System.Int32,`0)">
+            <summary>
+            Uses a binary search algorithm to locate the element <paramref name="item"/> in this <see cref="T:Enderlook.Collections.SortedList`1"/>.
+            </summary>
+            <param name="index">The zero-based starting index of the range to search.</param>
+            <param name="count">The length of the range to search.</param>
+            <param name="item">The object to locate. The value can be <see langword="null"/> for reference types.</param>
+            <returns>The zero-based index of <paramref name="item"/> in this <see cref="T:Enderlook.Collections.SortedList`1"/>, if item is found; otherwise, a negative number that is the bitwise complement of the index of the next element that is larger than item or, if there is no larger element, the bitwise complement of <see cref="P:Enderlook.Collections.SortedList`1.Count"/>.</returns>
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.Clear">
+            <summary>
+            Clear the content of this <see cref="T:Enderlook.Collections.SortedList`1"/>.
+            </summary>
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.Contains(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.System#Collections#IList#Contains(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.CopyTo(`0[])">
+            <summary>
+            Copies the content of this <see cref="T:Enderlook.Collections.SortedList`1"/> to <paramref name="array"/>.
+            </summary>
+            <param name="array">Array where elements will be copied to.</param>
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.System#Collections#ICollection#CopyTo(System.Array,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.CopyTo(System.Int32,`0[],System.Int32,System.Int32)">
+            <summary>
+            Copies a section of this <see cref="T:Enderlook.Collections.SortedList`1"/> to <paramref name="array"/>.
+            </summary>
+            <param name="index">Starting index in this <see cref="T:Enderlook.Collections.SortedList`1"/>.</param>
+            <param name="array">Array where elements will be copied to.</param>
+            <param name="arrayIndex">Starting index in the target <paramref name="array"/>.</param>
+            <param name="count">Amount of elements to be copied.</param>
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.CopyTo(`0[],System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.GetRangeList(System.Int32,System.Int32)">
+            <summary>
+            Creates a shallow copy of a range of elements in this <see cref="T:Enderlook.Collections.SortedList`1"/>.
+            </summary>
+            <param name="index">The zero-based <see cref="T:Enderlook.Collections.SortedList`1"/> index at which the range starts.</param>
+            <param name="count">The number of elements in the range.</param>
+            <returns>A shallow copy of a range of elements in the source <see cref="T:Enderlook.Collections.SortedList`1"/>.</returns>
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.GetRange(System.Int32,System.Int32)">
+            <summary>
+            Creates a shallow copy of a range of elements in this <see cref="T:Enderlook.Collections.SortedList`1"/>.
+            </summary>
+            <param name="index">The zero-based <see cref="T:Enderlook.Collections.SortedList`1"/> index at which the range starts.</param>
+            <param name="count">The number of elements in the range.</param>
+            <returns>A shallow copy of a range of elements in the source <see cref="T:Enderlook.Collections.SortedList`1"/>.</returns>
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.IndexOf(`0)">
+            <summary>
+            Searches for the specified object and returns the zero-based index of the first occurrence within the entire <see cref="T:Enderlook.Collections.SortedList`1"/>.
+            </summary>
+            <param name="item">The object to locate in the <see cref="T:Enderlook.Collections.SortedList`1"/>. The value can be null for reference types.</param>
+            <returns>The zero-based index of the first occurrence of item within the entire <see cref="T:Enderlook.Collections.SortedList`1"/>, if found; otherwise, -1.</returns>
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.System#Collections#IList#IndexOf(System.Object)">
+            <summary>
+            Searches for the specified object and returns the zero-based index of the first occurrence within the entire <see cref="T:Enderlook.Collections.SortedList`1"/>.
+            </summary>
+            <param name="value">The object to locate in the <see cref="T:Enderlook.Collections.SortedList`1"/>. The value can be null for reference types.</param>
+            <returns>The zero-based index of the first occurrence of item within the entire <see cref="T:Enderlook.Collections.SortedList`1"/>, if found; otherwise, -1.</returns>
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.Remove(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.System#Collections#IList#Remove(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.RemoveAll(System.Predicate{`0})">
+            <summary>
+            Removes all the elements that match the conditions defined by the specified predicate.
+            </summary>
+            <param name="match">The <see cref="T:System.Predicate`1"/> delegate that defines the conditions of the elements to remove.</param>
+            <returns>The number of elements removed from the <see cref="T:Enderlook.Collections.SortedList`1"/>.</returns>
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.RemoveAt(System.Int32)">
+            <summary>
+            Removes the element at the specified index of the <see cref="T:Enderlook.Collections.SortedList`1"/>.
+            </summary>
+            <param name="index">The zero-based index of the element to remove.</param>
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.RemoveRange(System.Int32,System.Int32)">
+            <summary>
+            Removes a range of elements from the <see cref="T:Enderlook.Collections.SortedList`1"/>.
+            </summary>
+            <param name="index">The zero-based starting index of the range of elements to remove.</param>
+            <param name="count">The number of elements to remove.</param>
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.RemoveElements(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Removes the elements in <paramref name="collection"/> from <see cref="T:Enderlook.Collections.SortedList`1"/>.
+            </summary>
+            <param name="collection">Elements to remove from <see cref="T:Enderlook.Collections.SortedList`1"/>.</param>
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.RemoveElements(System.Collections.IEnumerable)">
+            <summary>
+            Removes the elements in <paramref name="collection"/> from <see cref="T:Enderlook.Collections.SortedList`1"/>.
+            </summary>
+            <param name="collection">Elements to remove from <see cref="T:Enderlook.Collections.SortedList`1"/>.</param>
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.ToArray">
+            <summary>
+            Copies the elements of the <see cref="T:Enderlook.Collections.SortedList`1"/> to a new array.
+            </summary>
+            <returns>An array containing copies of the elements of the <see cref="T:Enderlook.Collections.SortedList`1"/>.</returns>
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.ToList">
+            <summary>
+            Copies the elements of the <see cref="T:Enderlook.Collections.SortedList`1"/> to a new <see cref="T:System.Collections.Generic.List`1"/>.
+            </summary>
+            <returns>A <see cref="T:System.Collections.Generic.List`1"/> containing copies of the elements of the <see cref="T:Enderlook.Collections.SortedList`1"/>.</returns>
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.TrimExcess">
+            <summary>
+            Sets the <see cref="P:Enderlook.Collections.SortedList`1.Capacity"/> to <see cref="P:Enderlook.Collections.SortedList`1.Count"/> minimizing the memory overhead.
+            </summary>
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.Insert(System.Int32,`0)">
+            <summary>
+            This method is not supported.
+            </summary>
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.Insert(System.Int32,System.Object)">
+            <summary>
+            This method is not supported.
+            </summary>
+        </member>
+        <member name="M:Enderlook.Collections.SortedList`1.ForEach(System.Action{`0})">
+            <summary>
+            Performs the specified action on each element of the <see cref="T:Enderlook.Collections.SortedList`1"/>.
+            </summary>
+            <param name="action">The <see cref="T:System.Action"/> delegate to perform on each element of the <see cref="T:Enderlook.Collections.SortedList`1"/>.</param>
+        </member>
+    </members>
+</doc>
