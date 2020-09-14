@@ -34,6 +34,11 @@
             </summary>
             <returns>Element with highest priority.</returns>
         </member>
+        <member name="M:Enderlook.Collections.PriorityQueue`1.Clear">
+            <summary>
+            Clears the queue.
+            </summary>
+        </member>
         <member name="T:Enderlook.Collections.SortedList`1">
             <summary>
             List data structured which store elements in a sorted way.
