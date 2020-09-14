@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 14bed8c9aaa3ee64387bce920d85d70a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - viewMeshFilter: {instanceID: 0}
+  - meshFilterMaterial: {fileID: 2100000, guid: ed39373ea4c1e3d42857a5030078f347,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
