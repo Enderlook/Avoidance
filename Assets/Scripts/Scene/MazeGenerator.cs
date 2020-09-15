@@ -13,6 +13,7 @@ namespace Avoidance.Scene
     /// <summary>
     /// Produces a maze.
     /// </summary>
+    [DefaultExecutionOrder(0)]
     public class MazeGenerator : MonoBehaviour
     {
         // http://weblog.jamisbuck.org/2011/1/27/maze-generation-growing-tree-algorithm
@@ -42,7 +43,8 @@ namespace Avoidance.Scene
         private GameObject wallPrefab;
 #pragma warning restore CS0649
 
-        public Graph graph { get; private set; }
+        public static Graph Graph { get; private set; }
+        public static AStar Pathfinding { get; } = new AStar();
 
         private List<Vector2Int> toVisit = new List<Vector2Int>();
 
@@ -57,7 +59,7 @@ namespace Avoidance.Scene
             CalculateTotalWeigth();
             int[] grid = GenerateGrid();
             GenerateGeometry(grid);
-            graph = GenerateGraph(grid);
+            Graph = GenerateGraph(grid);
         }
 
         private void GenerateGeometry(int[] grid)
