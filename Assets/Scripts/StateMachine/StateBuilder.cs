@@ -38,7 +38,7 @@ namespace Avoidance
         /// <returns><see cref="this"/>.</returns>
         /// <exception cref="InvalidOperationException">Thrown when this state already has a registered entry action.</exception>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="action"/> is <see langword="null"/>.</exception>
-        public StateBuilder<TState, TEvent> ExecuteOnEntry(Action<object> action)
+        private StateBuilder<TState, TEvent> ExecuteOnEntry(Delegate action)
         {
             if (!(onEntry is null))
                 throw new InvalidOperationException("Already has a registered entry action");
@@ -49,6 +49,14 @@ namespace Avoidance
             return this;
         }
 
+        /// <inheritdoc cref="ExecuteOnEntry(Delegate)"/>
+        public StateBuilder<TState, TEvent> ExecuteOnEntry(Action action)
+            => ExecuteOnEntry((Delegate)action);
+
+        /// <inheritdoc cref="ExecuteOnEntry(Delegate)"/>
+        public StateBuilder<TState, TEvent> ExecuteOnEntry(Action<object> action)
+            => ExecuteOnEntry((Delegate)action);
+
         /// <summary>
         /// Determines an action to execute on exit of this state.
         /// </summary>
@@ -56,7 +64,7 @@ namespace Avoidance
         /// <returns><see cref="this"/>.</returns>
         /// <exception cref="InvalidOperationException">Thrown when this state already has a registered exit action.</exception>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="action"/> is <see langword="null"/>.</exception>
-        public StateBuilder<TState, TEvent> ExecuteOnExit(Action<object> action)
+        private StateBuilder<TState, TEvent> ExecuteOnExit(Delegate action)
         {
             if (!(onExit is null))
                 throw new InvalidOperationException("Already has a registered exit action");
@@ -66,6 +74,14 @@ namespace Avoidance
             onExit = action;
             return this;
         }
+
+        /// <inheritdoc cref="ExecuteOnExit(Delegate)"/>
+        public StateBuilder<TState, TEvent> ExecuteOnExit(Action action)
+            => ExecuteOnExit((Delegate)action);
+
+        /// <inheritdoc cref="ExecuteOnExit(Delegate)"/>
+        public StateBuilder<TState, TEvent> ExecuteOnExit(Action<object> action)
+            => ExecuteOnExit((Delegate)action);
 
         /// <summary>
         /// Add a behaviour that is executed on an event.
@@ -106,7 +122,10 @@ namespace Avoidance
             {
                 int slot = transitions.Reserve();
                 trans.Add(@event, slot);
-                transitions.Store(builder.ToTransition(transitions, statesMap), slot);
+                if (builder is null)
+                    transitions.Store(new Transition<TState, TEvent>(-1, null, (0,0)), slot);
+                else
+                    transitions.Store(builder.ToTransition(transitions, statesMap), slot);
             }
 
             return new State<TState, TEvent>(state, onEntry, onExit, trans);
