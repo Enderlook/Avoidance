@@ -2,7 +2,6 @@
 using Enderlook.Unity.Navigation;
 using Enderlook.Unity.Navigation.D2;
 
-using System;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -14,7 +13,6 @@ namespace Avoidance.Scene
     /// <summary>
     /// Produces a maze.
     /// </summary>
-    [Serializable]
     public class MazeGenerator : MonoBehaviour
     {
         // http://weblog.jamisbuck.org/2011/1/27/maze-generation-growing-tree-algorithm
@@ -52,8 +50,6 @@ namespace Avoidance.Scene
 
         private int totalWeigth;
 
-        public Graph g;
-
         private const int SCALE_MULTIPLIER = 2;
 
         private void Awake()
@@ -61,7 +57,7 @@ namespace Avoidance.Scene
             CalculateTotalWeigth();
             int[] grid = GenerateGrid();
             GenerateGeometry(grid);
-            g = GenerateGraph(grid);
+            graph = GenerateGraph(grid);
         }
 
         private void GenerateGeometry(int[] grid)
