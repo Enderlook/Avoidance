@@ -151,6 +151,7 @@ namespace Avoidance.Scene
 
             Graph graph = ScriptableObject.CreateInstance<Graph>();
             ((IGraphSetter<Node, Edge>)graph).Root = nodes[0];
+            graph.SetOrientation(Graph.Orientation.XY_TO_XZ);
             return graph;
         }
 
