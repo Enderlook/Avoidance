@@ -1039,13 +1039,14 @@ GameObject:
   - component: {fileID: 590434431233088805}
   - component: {fileID: 1105267163}
   - component: {fileID: 1105267162}
+  - component: {fileID: 3914122042028659045}
   m_Layer: 10
   m_Name: Player_Kyle
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7402694293063364703
 Transform:
   m_ObjectHideFlags: 0
@@ -1072,7 +1073,7 @@ Animator:
   m_GameObject: {fileID: 5827938181232493132}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 32a5ccb3d2f191645a8d41bff5794e9f, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1114,6 +1115,24 @@ MonoBehaviour:
   movementForce: 10
   rotationSpeed: 5
   maximumRotationX: 45
+--- !u!114 &3914122042028659045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5827938181232493132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 310e1a2a1103d2f41a99fa34cb6f1f6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundCheckerPoint:
+  - {x: 0, y: 0, z: 0}
+  radius: 0.12
+  layersToDetect:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &6110230905401743243
 GameObject:
   m_ObjectHideFlags: 0
