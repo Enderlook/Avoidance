@@ -413,7 +413,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 422821131}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.65, z: 0}
+  m_LocalPosition: {x: 0, y: 0.34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1165832903}
@@ -738,7 +738,7 @@ MonoBehaviour:
   follow: {fileID: 0}
   autoLookTarget: 1
   tagNameOfTheObject: Player
-  fieldOfView: 70
+  fieldOfView: 65
   nearClippingPlanes: 0.09
   farClippingPlanes: 1000
   obstacles:
@@ -746,9 +746,9 @@ MonoBehaviour:
     m_Bits: 768
   maxCheckDistanceObstacles: 0.1
   lookInTheDirection: 0
-  pivotPosition: {x: 0, y: 1.65, z: 0}
-  cameraCentralPosition: {x: 0, y: -1.2, z: -0.45}
-  cameraRotation: {x: 18.35, y: 0, z: 0}
+  pivotPosition: {x: 0, y: 0.34, z: 0}
+  cameraCentralPosition: {x: 0, y: 0.13, z: -0.4}
+  cameraRotation: {x: 19.57, y: 0, z: 0}
   positionOffsetLeft: {x: 0, y: 0, z: 0}
   positionOffsetRight: {x: 0, y: 0, z: 0}
   cameraSettings:
@@ -1135,8 +1135,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1165832902}
-  m_LocalRotation: {x: 0.15945047, y: 0, z: 0, w: 0.987206}
-  m_LocalPosition: {x: 0, y: -1.2, z: -0.45}
+  m_LocalRotation: {x: 0.16995151, y: 0, z: 0, w: 0.9854524}
+  m_LocalPosition: {x: 0, y: 0.13, z: -0.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 422821132}
@@ -1196,7 +1196,7 @@ Camera:
     height: 1
   near clip plane: 0.09
   far clip plane: 1000
-  field of view: 70
+  field of view: 65
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
