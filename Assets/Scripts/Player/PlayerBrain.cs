@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Enderlook.Unity.Prefabs.HealthBarGUI;
+
+using System;
 
 using UnityEngine;
 
@@ -9,6 +11,9 @@ namespace Avoidance.Player
     {
 #pragma warning disable CS0649
         [Header("Stamina")]
+        [SerializeField, Tooltip("Stamina Bar.")]
+        private HealthBar staminaBar;
+
         [SerializeField, Tooltip("Amount of stamina the player has.")]
         private float maximumStamina;
         private float stamina;
@@ -51,6 +56,7 @@ namespace Avoidance.Player
         private void Awake()
         {
             stamina = maximumStamina;
+            staminaBar.ManualUpdate(stamina, maximumStamina);
             movementSystem = GetComponent<ThirdPersonMovementRigidbody>();
 
             stateMachine = StateMachine<PlayerState, PlayerEvent>.Builder()
@@ -133,6 +139,7 @@ namespace Avoidance.Player
 
             stamina += staminaRecovering * staminaIdleMultiplier * Time.deltaTime;
             stamina = Mathf.Min(stamina, maximumStamina);
+            staminaBar.UpdateValues(stamina);
         }
 
         private void Walk()
@@ -151,6 +158,7 @@ namespace Avoidance.Player
         {
             stamina += staminaRecovering * Time.deltaTime;
             stamina = Mathf.Min(stamina, maximumStamina);
+            staminaBar.UpdateValues(stamina);
         }
 
         private void Run()
@@ -166,6 +174,7 @@ namespace Avoidance.Player
                 stamina = 0;
                 stateMachine.Fire(PlayerEvent.StopRunning);
             }
+            staminaBar.UpdateValues(stamina);
         }
 
         private void Sneak()
