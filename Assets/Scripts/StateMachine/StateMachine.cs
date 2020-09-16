@@ -95,7 +95,7 @@ namespace Avoidance
                 }
             }
             else
-                throw new ArgumentException($"State {currentState.state} doesn't have a ny transition with event {@event}");
+                throw new ArgumentException($"State {currentState.state} doesn't have any transition with event {@event}");
         }
 
         private bool InspectSubTransition(int subTransitionIndex, State<TState, TEvent> currentState, object parameter)
