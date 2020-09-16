@@ -98,6 +98,21 @@ namespace Avoidance
                 throw new ArgumentException($"State {currentState.state} doesn't have any transition with event {@event}");
         }
 
+        /// <inheritdoc cref="Update(object)"/>
+        public void Update() => Update(null);
+
+        /// <summary>
+        /// Executes the update event of the current state if has any.
+        /// </summary>
+        /// <param name="parameter">Parameter of the event.</param>
+        public void Update(object parameter)
+        {
+            if (currentState < 0)
+                throw new InvalidOperationException("State machine has not started.");
+
+            ExecuteVoid(states[currentState].onUpdate, parameter);
+        }
+
         private bool InspectSubTransition(int subTransitionIndex, State<TState, TEvent> currentState, object parameter)
         {
             Transition<TState, TEvent> transition = transitions[subTransitionIndex];

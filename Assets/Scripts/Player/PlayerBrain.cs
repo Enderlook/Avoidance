@@ -61,6 +61,7 @@ namespace Avoidance.Player
                 .SetInitialState(PlayerState.Idle)
                 .In(PlayerState.Idle)
                     .ExecuteOnEntry(movementSystem.SetIdle)
+                    .ExecuteOnUpdate(Rest)
                     .On(PlayerEvent.StartSneaking)
                         .Goto(PlayerState.Sneaking)
                     .On(PlayerEvent.StartWalking)
@@ -73,6 +74,7 @@ namespace Avoidance.Player
                     .Ignore(PlayerEvent.StopSneaking)
                 .In(PlayerState.Sneaking)
                     .ExecuteOnEntry(movementSystem.SetSneaking)
+                    .ExecuteOnUpdate(Sneak)
                     .On(PlayerEvent.StopMovement)
                         .Goto(PlayerState.Idle)
                     .On(PlayerEvent.StartRunning)
@@ -85,6 +87,7 @@ namespace Avoidance.Player
                     .Ignore(PlayerEvent.StartWalking)
                 .In(PlayerState.Walking)
                     .ExecuteOnEntry(movementSystem.SetWalking)
+                    .ExecuteOnUpdate(Walk)
                     .On(PlayerEvent.StopMovement)
                         .Goto(PlayerState.Idle)
                     .On(PlayerEvent.StartSneaking)
@@ -96,6 +99,7 @@ namespace Avoidance.Player
                     .Ignore(PlayerEvent.StopRunning)
                     .Ignore(PlayerEvent.StopSneaking)
                 .In(PlayerState.Running)
+                    .ExecuteOnUpdate(Run)
                     .ExecuteOnEntry(movementSystem.SetRunning)
                     .On(PlayerEvent.StopMovement)
                         .Goto(PlayerState.Idle)
@@ -111,24 +115,7 @@ namespace Avoidance.Player
             bool HasEnoughStamina() => stamina >= minStaminaToRun;
         }
 
-        private void Update()
-        {
-            switch (stateMachine.State)
-            {
-                case PlayerState.Sneaking:
-                    Sneak();
-                    break;
-                case PlayerState.Running:
-                    Run();
-                    break;
-                case PlayerState.Idle:
-                    Rest();
-                    break;
-                case PlayerState.Walking:
-                    Walk();
-                    break;
-            }
-        }
+        private void Update() => stateMachine.Update();
 
         private void Rest()
         {

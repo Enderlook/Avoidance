@@ -67,6 +67,7 @@ namespace Avoidance.Enemies
                 .SetInitialState(EnemyState.Idle)
                 .In(EnemyState.Idle)
                     .ExecuteOnEntry(StartResting)
+                    .ExecuteOnUpdate(Idle)
                     .On(EnemyEvent.StopResting)
                         .Goto(EnemyState.Patrol)
                 .In(EnemyState.Patrol)
@@ -78,16 +79,7 @@ namespace Avoidance.Enemies
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
-        private void Update()
-        {
-            state = stateMachine.State.ToString();
-            switch (stateMachine.State)
-            {
-                case EnemyState.Idle:
-                    Idle();
-                    break;
-            }
-        }
+        private void Update() => stateMachine.Update();
 
         private void StartResting()
         {

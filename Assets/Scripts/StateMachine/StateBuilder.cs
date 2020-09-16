@@ -14,6 +14,7 @@ namespace Avoidance
     {
         private Delegate onEntry;
         private Delegate onExit;
+        private Delegate onUpdate;
         internal TState State { get; }
 
         private Dictionary<TEvent, TransitionBuilder<TState, TEvent>> transitions = new Dictionary<TEvent, TransitionBuilder<TState, TEvent>>();
@@ -84,6 +85,32 @@ namespace Avoidance
             => ExecuteOnExit((Delegate)action);
 
         /// <summary>
+        /// Determines an action to execute on update while in this state.
+        /// </summary>
+        /// <param name="action">Action to execute.</param>
+        /// <returns><see cref="this"/>.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when this state already has a registered update action.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="action"/> is <see langword="null"/>.</exception>
+        private StateBuilder<TState, TEvent> ExecuteOnUpdate(Delegate action)
+        {
+            if (!(onUpdate is null))
+                throw new InvalidOperationException("Already has a registered entry action");
+            if (action is null)
+                throw new ArgumentNullException(nameof(action));
+
+            onUpdate = action;
+            return this;
+        }
+
+        /// <inheritdoc cref="ExecuteOnUpdate(Delegate)"/>
+        public StateBuilder<TState, TEvent> ExecuteOnUpdate(Action action)
+            => ExecuteOnUpdate((Delegate)action);
+
+        /// <inheritdoc cref="ExecuteOnUpdate(Delegate)"/>
+        public StateBuilder<TState, TEvent> ExecuteOnUpdate(Action<object> action)
+            => ExecuteOnUpdate((Delegate)action);
+
+        /// <summary>
         /// Add a behaviour that is executed on an event.
         /// </summary>
         /// <param name="event">Raised event.</param>
@@ -128,7 +155,7 @@ namespace Avoidance
                     transitions.Store(builder.ToTransition(transitions, statesMap), slot);
             }
 
-            return new State<TState, TEvent>(state, onEntry, onExit, trans);
+            return new State<TState, TEvent>(state, onEntry, onExit, onUpdate, trans);
         }
     }
 }
