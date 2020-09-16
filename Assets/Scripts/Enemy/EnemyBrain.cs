@@ -1,4 +1,6 @@
-﻿using Enderlook.Enumerables;
+﻿using Avoidance.Scene;
+
+using Enderlook.Enumerables;
 using Enderlook.Unity.Navigation.D2;
 
 using UnityEngine;
@@ -113,7 +115,7 @@ namespace Avoidance.Enemies
             Node newWaypoint;
             do
             {
-                newWaypoint = waypoints.RandomPick();
+                newWaypoint = waypoints.RandomPickWeighted(e => 1000 / Vector3.Distance(MazeGenerator.Graph.TweakOrientationToWorld(e.Position), transform.position));
             } while (newWaypoint == waypoint);
             waypoint = newWaypoint;
         }
