@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8150760654224925436}
   - component: {fileID: 8150760654224925439}
   - component: {fileID: 8150760654224925438}
-  - component: {fileID: 4746525049924577225}
+  - component: {fileID: 8167439949595855933}
   m_Layer: 5
   m_Name: FloatingTextCanvas
   m_TagString: Untagged
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &4746525049924577225
+--- !u!114 &8167439949595855933
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,12 +109,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8150760654224925313}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1349926358, guid: 1dbd1fe98358a32418820ec89509d1b4, type: 3}
+  m_Script: {fileID: 1349926358, guid: 32e818e1d716691478b668cea4b55b47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBeforeDestroy: 0
+  timeBeforeDestroy: 1
   textColor: {r: 1, g: 0, b: 0, a: 1}
-  randomOffset: {x: 0.1, y: 0.1}
+  randomOffset: {x: 1, y: 1}
   scaleMultiplier: 1
   digitPrecision: 0
   roundingMode: 1

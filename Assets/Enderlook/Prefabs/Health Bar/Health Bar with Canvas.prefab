@@ -28,6 +28,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3545516496439625122, guid: d53e9038544373f468a4d49b83a0d569,
+        type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1796805699}
     - target: {fileID: 3835330508921528676, guid: d53e9038544373f468a4d49b83a0d569,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -174,6 +179,11 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8330654967809700925, guid: d53e9038544373f468a4d49b83a0d569,
+        type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1796805699}
+    - target: {fileID: 8688224936222303620, guid: d53e9038544373f468a4d49b83a0d569,
         type: 3}
       propertyPath: canvas
       value: 
