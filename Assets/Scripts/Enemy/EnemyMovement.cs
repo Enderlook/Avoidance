@@ -47,7 +47,7 @@ namespace Avoidance.Enemies
 
         public void StartMovement() => canMove = true;
 
-        public void Stop() => canMove = false;
+        public void StopMovement() => canMove = false;
 
         public void SetOnReachTarget(Action onReachTarget) => this.onReachTarget = onReachTarget;
 

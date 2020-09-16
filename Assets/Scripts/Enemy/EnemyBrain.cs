@@ -1,14 +1,12 @@
-﻿using Avoidance.Scene;
-
-using Enderlook.Enumerables;
+﻿using Enderlook.Enumerables;
 using Enderlook.Unity.Navigation.D2;
 
 using UnityEngine;
 
 namespace Avoidance.Enemies
 {
-    [RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(EnemyMovement))]
-    public class Enemy : MonoBehaviour
+    [RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(EnemyPathfinder)), DefaultExecutionOrder(1)]
+    public class EnemyBrain : MonoBehaviour
     {
 #pragma warning disable CS0649
         [Header("States Duration")]
@@ -27,33 +25,12 @@ namespace Avoidance.Enemies
         private Node waypoint;
         private Node[] waypoints;
 
-        private Path path = new Path();
-        private int pathIndex;
-
-        private EnemyMovement movementSystem;
+        private EnemyPathfinder movementSystem;
 
         public void SetWayPoints(params Node[] waypoints)
         {
             this.waypoints = waypoints;
             waypoint = waypoints[0];
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
-        private void OnDrawGizmos()
-        {
-            if (stateMachine.State == EnemyState.Patrol && path.FoundPath)
-            {
-                Gizmos.color = Color.cyan;
-                int i = pathIndex;
-                if (path.TryGetValueAt(i, out Node old))
-                {
-                    while (path.TryGetNext(ref i, out Node value))
-                    {
-                        Gizmos.DrawLine(MazeGenerator.Graph.TweakOrientationToWorld(old.Position), MazeGenerator.Graph.TweakOrientationToWorld(value.Position));
-                        old = value;
-                    }
-                }
-            }
         }
 
         private enum EnemyState
@@ -79,7 +56,7 @@ namespace Avoidance.Enemies
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
         private void Awake()
         {
-            movementSystem = GetComponent<EnemyMovement>();
+            movementSystem = GetComponent<EnemyPathfinder>();
             movementSystem.SetOnReachTarget(OnReachTarget);
 
             idleLeft = idleDuration;
@@ -113,7 +90,7 @@ namespace Avoidance.Enemies
         private void StartResting()
         {
             idleLeft = idleDuration;
-            movementSystem.Stop();
+            movementSystem.StopMovement();
         }
 
         private void Idle()
@@ -125,19 +102,10 @@ namespace Avoidance.Enemies
 
         private void OnReachTarget()
         {
-            if (path.TryGetNext(ref pathIndex, out Node node))
-            {
-                Vector3 target = MazeGenerator.Graph.TweakOrientationToWorld(node.Position);
-                movementSystem.SetTarget(target);
-            }
-            else
-            {
-                GetNewWaypoint();
-                if (--patrolsLeft == 0)
-                    stateMachine.Fire(EnemyEvent.StartResting);
-                else
-                    CalculatePath();
-            }
+            GetNewWaypoint();
+            movementSystem.SetPathTo(waypoint);
+            if (--patrolsLeft == 0)
+                stateMachine.Fire(EnemyEvent.StartResting);
         }
 
         private void GetNewWaypoint()
@@ -152,20 +120,8 @@ namespace Avoidance.Enemies
 
         private void StartPatroling()
         {
-            CalculatePath();
+            movementSystem.SetPathTo(waypoint);
             patrolsLeft = patrolsAmount;
-            movementSystem.StartMovement();
-        }
-
-        private void CalculatePath() => CalculatePath(transform.position);
-
-        private void CalculatePath(Vector3 position)
-        {
-            Node from = MazeGenerator.Graph.FindClosestNode(new Vector2(position.x, position.z));
-            MazeGenerator.Pathfinding.CalculatePath(from, waypoint, path);
-            pathIndex = 0;
-            Debug.Assert(path.FoundPath);
-            movementSystem.SetTarget(MazeGenerator.Graph.TweakOrientationToWorld(path.GetValueAt(0).Position));
         }
     }
 }

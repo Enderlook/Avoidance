@@ -18,7 +18,7 @@ namespace Avoidance.Enemies
         private int enemiesAmount = 5;
 
         [SerializeField, Tooltip("Prefab of enemies.")]
-        private Enemy enemyPrefab;
+        private EnemyBrain enemyPrefab;
 
         [SerializeField, Tooltip("Player transform.")]
         private Transform player;
@@ -56,7 +56,7 @@ namespace Avoidance.Enemies
                     c = nodes.RandomPick();
                 } while (c == b || c == a);
 
-                Enemy enemy = Instantiate(enemyPrefab, position, Quaternion.identity, transform);
+                EnemyBrain enemy = Instantiate(enemyPrefab, position, Quaternion.identity, transform);
                 enemy.SetWayPoints(a, b, c);
             }
         }
