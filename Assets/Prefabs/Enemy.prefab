@@ -125,8 +125,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementForce: 30
   maximumSpeed: 1.75
-  avoidanceRange: 0.5
-  avoidancePrediction: 1
+  avoidanceRange: 1
+  avoidancePrediction: 0.25
+  avoidanceForce: 15
   layersToAvoid:
     serializedVersion: 2
     m_Bits: 2048
