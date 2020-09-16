@@ -714,11 +714,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 590434431233088805, guid: 694119ec681dd424ea4e58d5c49c4bd7,
-        type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5827938181232493132, guid: 694119ec681dd424ea4e58d5c49c4bd7,
         type: 3}
       propertyPath: m_Name
@@ -781,25 +776,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 694119ec681dd424ea4e58d5c49c4bd7, type: 3}
---- !u!1 &1105267161 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5827938181232493132, guid: 694119ec681dd424ea4e58d5c49c4bd7,
-    type: 3}
-  m_PrefabInstance: {fileID: 1105267160}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1105267162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1105267161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8331801cf28424e4e8bb1619094160a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locomotionParameter: Vertical
 --- !u!1 &1157220359
 GameObject:
   m_ObjectHideFlags: 0
