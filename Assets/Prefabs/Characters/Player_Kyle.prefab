@@ -1042,6 +1042,7 @@ GameObject:
   - component: {fileID: 3914122042028659045}
   - component: {fileID: 1105267162}
   - component: {fileID: 2132882680911115982}
+  - component: {fileID: 5368124319739733166}
   m_Layer: 10
   m_Name: Player_Kyle
   m_TagString: Player
@@ -1156,7 +1157,6 @@ MonoBehaviour:
   walkingSpeed: 1
   runningSpeed: 2
   smoothRotation: 0.1
-  state: 
 --- !u!114 &2132882680911115982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1170,6 +1170,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   locomotionParameter: Vertical
+--- !u!114 &5368124319739733166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5827938181232493132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df71776f95004f642bd7a760e0c5820f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6110230905401743243
 GameObject:
   m_ObjectHideFlags: 0
