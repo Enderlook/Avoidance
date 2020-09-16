@@ -152,7 +152,7 @@ MonoBehaviour:
   enemiesAmount: 1
   enemyPrefab: {fileID: 2117891672685637841, guid: 51b8ccf39a78b03408cb72c6597ee89c,
     type: 3}
-  player: {fileID: 1268369859}
+  player: {fileID: 1105267161}
 --- !u!4 &23311895
 Transform:
   m_ObjectHideFlags: 0
@@ -776,6 +776,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 694119ec681dd424ea4e58d5c49c4bd7, type: 3}
+--- !u!4 &1105267161 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7402694293063364703, guid: 694119ec681dd424ea4e58d5c49c4bd7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1105267160}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1157220359
 GameObject:
   m_ObjectHideFlags: 0
@@ -974,12 +980,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!4 &1268369859 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9027595738646991526, guid: f0a894ab3f29ae74e9a1750f7d1c3584,
-    type: 3}
-  m_PrefabInstance: {fileID: 9027595737791360141}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1663535222
 GameObject:
   m_ObjectHideFlags: 0
