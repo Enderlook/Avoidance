@@ -15,6 +15,9 @@ namespace Avoidance.Enemies
         [SerializeField, Tooltip("Maximum velocity allowed.")]
         private float maximumSpeed;
 
+        [SerializeField, Tooltip("Speed that the character will rotate")]
+        private float rotationSpeed = 5f;
+
         [SerializeField, Tooltip("Minimum distance to target to reach it.")]
         private float reachThreshold;
 
@@ -63,6 +66,7 @@ namespace Avoidance.Enemies
 
             Vector3 direction = target - transform.position;
             direction.y = 0;
+            rigidbody.rotation = Quaternion.Slerp(rigidbody.rotation, Quaternion.LookRotation(direction.normalized), rotationSpeed * Time.fixedDeltaTime);
             if (direction.magnitude < reachThreshold)
                 onReachTarget.Invoke();
             else
