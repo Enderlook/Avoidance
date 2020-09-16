@@ -103,17 +103,19 @@ namespace Avoidance.Characters.Player
             if (!groundChecker.IsGrounded())
                 return;
 
-            switch (stateMachine.State)
-            {
-                case PlayerState.Idle:
-                    //Regenerate();
-                    CheckMovementInput();
-                    break;
-                case PlayerState.Walking:
-                    Move(movement, Time.fixedDeltaTime);
-                    break;
-            }
+            movement.Set(Input.GetAxis(horizontalInput), 0, Input.GetAxis(verticalInput));
+            //switch (stateMachine.State)
+            //{
+            //    case PlayerState.Idle:
+            //        //Regenerate();
+            //        CheckMovementInput();
+            //        break;
+            //    case PlayerState.Walking:
+            //        Move(movement, Time.fixedDeltaTime);
+            //        break;
+            //}
             Rotate(movement);
+            Move(movement, Time.fixedDeltaTime);
         }
 
         private void CheckMovementInput()
@@ -127,10 +129,10 @@ namespace Avoidance.Characters.Player
 
         private void Move(Vector3 move, float time)
         {
-            float vertical = Input.GetAxis(verticalInput);
-            float horizontal = Input.GetAxis(horizontalInput);
-            if (vertical == 0 && horizontal == 0)
-                stateMachine.Fire(PlayerEvent.StopWalking);
+            //float vertical = Input.GetAxis(verticalInput);
+            //float horizontal = Input.GetAxis(horizontalInput);
+            //if (vertical == 0 && horizontal == 0)
+            //    stateMachine.Fire(PlayerEvent.StopWalking);
 
             Vector3 dir = move;
             dir.y = 0;
