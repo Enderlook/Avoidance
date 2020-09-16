@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4925443342948059721}
   - component: {fileID: 4925443342948059720}
   - component: {fileID: 4925443342948059727}
-  m_Layer: 9
+  m_Layer: 13
   m_Name: Field Of View Filter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
