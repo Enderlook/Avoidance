@@ -25,7 +25,7 @@ Material:
     - __dirty: 1
     m_Colors:
     - _GridColor: {r: 0, g: 0.5831602, b: 2.297397, a: 1}
-    - _GridScale: {r: 1.5, g: 1.5, b: 0, a: 0}
+    - _GridScale: {r: 4, g: 4, b: 0, a: 0}
     - _LinesThickness: {r: 0.9, g: 0.9, b: 0, a: 0}
     - _MaterialColor: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
     - _SpeedGridOffset: {r: 1, g: 0, b: 0, a: 0}
