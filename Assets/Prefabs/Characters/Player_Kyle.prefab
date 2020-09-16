@@ -1041,6 +1041,7 @@ GameObject:
   - component: {fileID: 8934046463561440403}
   - component: {fileID: 3914122042028659045}
   - component: {fileID: 1105267162}
+  - component: {fileID: 2132882680911115982}
   m_Layer: 10
   m_Name: Player_Kyle
   m_TagString: Player
@@ -1077,7 +1078,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 32a5ccb3d2f191645a8d41bff5794e9f, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -1149,6 +1150,19 @@ MonoBehaviour:
   normalSpeed: 3
   runningSpeed: 4
   smoothRotation: 0.1
+--- !u!114 &2132882680911115982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5827938181232493132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8331801cf28424e4e8bb1619094160a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  locomotionParameter: Vertical
 --- !u!1 &6110230905401743243
 GameObject:
   m_ObjectHideFlags: 0
