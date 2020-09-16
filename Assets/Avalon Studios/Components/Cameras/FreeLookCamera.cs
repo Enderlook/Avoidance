@@ -28,9 +28,11 @@ namespace AvalonStudios.Additions.Components.Cameras
 
         public CameraSettings CameraSetting => cameraSettings;
 
+        public Vector3 PivotPosition { get { return pivotPosition; } set { pivotPosition = value; } }
+
         public Vector3 CameraPosition { get { return cameraCentralPosition; } set { cameraCentralPosition = value; } }
 
-        public Quaternion CameraRotation { get { return cameraRotation; } set { cameraRotation = value; } }
+        public Vector3 CameraRotation { get { return cameraRotation; } set { cameraRotation = value; } }
 
         public Vector3 PositionOffsetLeft { get { return positionOffsetLeft; } set { positionOffsetLeft = value; } }
 
@@ -72,10 +74,13 @@ namespace AvalonStudios.Additions.Components.Cameras
         private LookInTheDirection lookInTheDirection = LookInTheDirection.Center;
 
         [SerializeField]
+        private Vector3 pivotPosition = Vector3.zero;
+
+        [SerializeField]
         private Vector3 cameraCentralPosition = Vector3.zero;
 
         [SerializeField]
-        private Quaternion cameraRotation = Quaternion.Euler(Vector3.zero);
+        private Vector3 cameraRotation = Vector3.zero;
 
         [SerializeField]
         private Vector3 positionOffsetLeft = Vector3.zero;
@@ -335,9 +340,5 @@ namespace AvalonStudios.Additions.Components.Cameras
                 transform.position = newPos;
             }
         }
-
-        public void MoveCameraPositionByEditor(Vector3 pos) => cameraCentralPosition = pos;
-
-        public void MoveCameraRotationByEditor(Quaternion quaternion) => cameraRotation = quaternion;
     }
 }

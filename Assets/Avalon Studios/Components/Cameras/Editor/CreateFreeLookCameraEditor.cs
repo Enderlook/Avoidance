@@ -11,7 +11,7 @@ public class CreateThirdPersonFollowCameraEditor
     [MenuItem("Avalon Studios/Cameras/Free Look Camera")]
     public static void Create()
     {
-        GameObject parent = new GameObject("Third Person Follow Camera", typeof(FreeLookCamera));
+        GameObject parent = new GameObject("Free Look Camera", typeof(FreeLookCamera));
         GameObject pivot = new GameObject("Pivot");
         GameObject camera = new GameObject("Camera", typeof(Camera), typeof(AudioListener), typeof(Render));
 
@@ -33,8 +33,9 @@ public class CreateThirdPersonFollowCameraEditor
 
         if (freeLook != null)
         {
+            freeLook.PivotPosition = pivot.transform.localPosition;
             freeLook.CameraPosition = camera.transform.localPosition;
-            freeLook.CameraRotation = camera.transform.localRotation;
+            freeLook.CameraRotation = camera.transform.localRotation.eulerAngles;
             freeLook.FieldOfView = cameraComponent.fieldOfView;
             freeLook.NearClippingPlanes = cameraComponent.nearClipPlane;
             freeLook.FarClippingPlanes = cameraComponent.farClipPlane;
