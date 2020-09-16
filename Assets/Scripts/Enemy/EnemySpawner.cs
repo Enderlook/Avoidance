@@ -31,9 +31,20 @@ namespace Avoidance.Enemies
         {
             Player = player;
             IReadOnlyCollection<Node> nodes = ((IGraphAtoms<Node, Edge>)MazeGenerator.Graph).Nodes;
+            HashSet<Vector3> alreadyUsed = new HashSet<Vector3>();
+            alreadyUsed.Add(player.position);
             for (int i = 0; i < enemiesAmount; i++)
             {
-                Node a = nodes.RandomPick();
+                Node a;
+                Vector3 position;
+                do
+                {
+                    a = nodes.RandomPick();
+                    position = MazeGenerator.Graph.TweakOrientationToWorld(a.Position);
+                    position.y = player.position.y;
+                } while (alreadyUsed.Contains(position));
+                alreadyUsed.Add(position);
+
                 Node b;
                 Node c;
                 do
@@ -45,8 +56,7 @@ namespace Avoidance.Enemies
                     c = nodes.RandomPick();
                 } while (c == b || c == a);
 
-                Vector2 position = a.Position;
-                Enemy enemy = Instantiate(enemyPrefab, new Vector3(position.x, .5f, position.y), Quaternion.identity, transform);
+                Enemy enemy = Instantiate(enemyPrefab, position, Quaternion.identity, transform);
                 enemy.SetWayPoints(a, b, c);
             }
         }
