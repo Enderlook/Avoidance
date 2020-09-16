@@ -1,15 +1,10 @@
-﻿using Avoidance.Scene;
-
-using Enderlook.Enumerables;
-using Enderlook.Unity.Navigation;
-using Enderlook.Unity.Navigation.D2;
-
-using AvalonStudios.Additions.Utils.InputsManager;
+﻿using AvalonStudios.Additions.Components.Cameras;
 using AvalonStudios.Additions.Components.GroundCheckers;
-using AvalonStudios.Additions.Components.Cameras;
+using AvalonStudios.Additions.Utils.InputsManager;
+
+using System;
 
 using UnityEngine;
-using System;
 
 namespace Avoidance.Player
 {
@@ -89,6 +84,7 @@ namespace Avoidance.Player
             stateMachine = StateMachine<PlayerState, PlayerEvent>.Builder()
                 .SetInitialState(PlayerState.Idle)
                 .In(PlayerState.Idle)
+                    .ExecuteOnEntry(SetMovement(0, 0))
                     .On(PlayerEvent.StartSneaking)
                         .Goto(PlayerState.Sneaking)
                     .On(PlayerEvent.StartWalking)
