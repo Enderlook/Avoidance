@@ -1,10 +1,31 @@
-﻿using UnityEngine;
+﻿using System;
+
+using UnityEngine;
 
 namespace Avoidance.Player
 {
     [RequireComponent(typeof(ThirdPersonMovementRigidbody)), DefaultExecutionOrder(3)]
     public class PlayerBrain : MonoBehaviour
     {
+#pragma warning disable CS0649
+        [Header("Stamina")]
+        [SerializeField, Tooltip("Amount of stamina the player has.")]
+        private float maximumStamina;
+        private float stamina;
+
+        [SerializeField, Tooltip("Stamina consumed per second when running.")]
+        private float runCost;
+
+        [SerializeField, Tooltip("Minimum amount of stamina to start running.")]
+        private float minStaminaToRun;
+
+        [SerializeField, Tooltip("Stamina recovered per second when walking or sneaking.")]
+        private float staminaRecovering;
+
+        [SerializeField, Tooltip("Stamina recovering multiplier when idle.")]
+        private float staminaIdleMultiplier;
+#pragma warning restore CS0649
+
         private enum PlayerState
         {
             Idle,
@@ -29,6 +50,7 @@ namespace Avoidance.Player
 
         private void Awake()
         {
+            stamina = maximumStamina;
             movementSystem = GetComponent<ThirdPersonMovementRigidbody>();
 
             stateMachine = StateMachine<PlayerState, PlayerEvent>.Builder()
@@ -40,7 +62,9 @@ namespace Avoidance.Player
                     .On(PlayerEvent.StartWalking)
                         .Goto(PlayerState.Walking)
                     .On(PlayerEvent.StartRunning)
-                        .Goto(PlayerState.Running)
+                        .If(HasEnoughStamina)
+                            .Goto(PlayerState.Running)
+                        .Goto(PlayerState.Walking)
                     .Ignore(PlayerEvent.StopRunning)
                     .Ignore(PlayerEvent.StopSneaking)
                 .In(PlayerState.Sneaking)
@@ -48,7 +72,9 @@ namespace Avoidance.Player
                     .On(PlayerEvent.StopMovement)
                         .Goto(PlayerState.Idle)
                     .On(PlayerEvent.StartRunning)
-                        .Goto(PlayerState.Running)
+                        .If(HasEnoughStamina)
+                            .Goto(PlayerState.Running)
+                        .Goto(PlayerState.Walking)
                     .On(PlayerEvent.StopSneaking)
                         .Goto(PlayerState.Walking)
                     .Ignore(PlayerEvent.StopRunning)
@@ -60,7 +86,9 @@ namespace Avoidance.Player
                     .On(PlayerEvent.StartSneaking)
                         .Goto(PlayerState.Sneaking)
                     .On(PlayerEvent.StartRunning)
-                        .Goto(PlayerState.Running)
+                        .If(HasEnoughStamina)
+                            .Goto(PlayerState.Running)
+                        .StaySelf()
                     .Ignore(PlayerEvent.StopRunning)
                     .Ignore(PlayerEvent.StopSneaking)
                 .In(PlayerState.Running)
@@ -75,6 +103,8 @@ namespace Avoidance.Player
                     .Ignore(PlayerEvent.StartWalking)
                 .Build();
             stateMachine.Start();
+
+            bool HasEnoughStamina() => stamina >= minStaminaToRun;
         }
 
         private void Update()
@@ -100,6 +130,9 @@ namespace Avoidance.Player
         {
             if (movementSystem.IsMoving)
                 stateMachine.Fire(PlayerEvent.StartWalking);
+
+            stamina += staminaRecovering * staminaIdleMultiplier * Time.deltaTime;
+            stamina = Mathf.Min(stamina, maximumStamina);
         }
 
         private void Walk()
@@ -110,6 +143,14 @@ namespace Avoidance.Player
                 stateMachine.Fire(PlayerEvent.StartRunning);
             if (!movementSystem.IsMoving)
                 stateMachine.Fire(PlayerEvent.StopMovement);
+
+            RecoverStamina();
+        }
+
+        private void RecoverStamina()
+        {
+            stamina += staminaRecovering * Time.deltaTime;
+            stamina = Mathf.Min(stamina, maximumStamina);
         }
 
         private void Run()
@@ -118,6 +159,13 @@ namespace Avoidance.Player
                 stateMachine.Fire(PlayerEvent.StopRunning);
             if (!movementSystem.IsMoving)
                 stateMachine.Fire(PlayerEvent.StopMovement);
+
+            stamina -= runCost * Time.deltaTime;
+            if (stamina <= 0)
+            {
+                stamina = 0;
+                stateMachine.Fire(PlayerEvent.StopRunning);
+            }
         }
 
         private void Sneak()
@@ -126,6 +174,8 @@ namespace Avoidance.Player
                 stateMachine.Fire(PlayerEvent.StopSneaking);
             if (!movementSystem.IsMoving)
                 stateMachine.Fire(PlayerEvent.StopMovement);
+
+            RecoverStamina();
         }
     }
 }

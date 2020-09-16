@@ -1182,6 +1182,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df71776f95004f642bd7a760e0c5820f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maximumStamina: 25
+  runCost: 5
+  minStaminaToRun: 10
+  staminaRecovering: 2
+  staminaIdleMultiplier: 3
 --- !u!1 &6110230905401743243
 GameObject:
   m_ObjectHideFlags: 0
