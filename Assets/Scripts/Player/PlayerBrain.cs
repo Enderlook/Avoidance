@@ -82,30 +82,50 @@ namespace Avoidance.Player
             switch (stateMachine.State)
             {
                 case PlayerState.Sneaking:
-                    if (!movementSystem.IsSneaking)
-                        stateMachine.Fire(PlayerEvent.StopSneaking);
-                    if (!movementSystem.IsMoving)
-                        stateMachine.Fire(PlayerEvent.StopMovement);
+                    Sneak();
                     break;
                 case PlayerState.Running:
-                    if (!movementSystem.IsRunning)
-                        stateMachine.Fire(PlayerEvent.StopRunning);
-                    if (!movementSystem.IsMoving)
-                        stateMachine.Fire(PlayerEvent.StopMovement);
+                    Run();
                     break;
                 case PlayerState.Idle:
-                    if (movementSystem.IsMoving)
-                        stateMachine.Fire(PlayerEvent.StartWalking);
+                    Rest();
                     break;
                 case PlayerState.Walking:
-                    if (movementSystem.IsSneaking)
-                        stateMachine.Fire(PlayerEvent.StartSneaking);
-                    else if (movementSystem.IsRunning)
-                        stateMachine.Fire(PlayerEvent.StartRunning);
-                    if (!movementSystem.IsMoving)
-                        stateMachine.Fire(PlayerEvent.StopMovement);
+                    Walk();
                     break;
             }
+        }
+
+        private void Rest()
+        {
+            if (movementSystem.IsMoving)
+                stateMachine.Fire(PlayerEvent.StartWalking);
+        }
+
+        private void Walk()
+        {
+            if (movementSystem.IsSneaking)
+                stateMachine.Fire(PlayerEvent.StartSneaking);
+            else if (movementSystem.IsRunning)
+                stateMachine.Fire(PlayerEvent.StartRunning);
+            if (!movementSystem.IsMoving)
+                stateMachine.Fire(PlayerEvent.StopMovement);
+        }
+
+        private void Run()
+        {
+            if (!movementSystem.IsRunning)
+                stateMachine.Fire(PlayerEvent.StopRunning);
+            if (!movementSystem.IsMoving)
+                stateMachine.Fire(PlayerEvent.StopMovement);
+        }
+
+        private void Sneak()
+        {
+            if (!movementSystem.IsSneaking)
+                stateMachine.Fire(PlayerEvent.StopSneaking);
+            if (!movementSystem.IsMoving)
+                stateMachine.Fire(PlayerEvent.StopMovement);
         }
     }
 }
