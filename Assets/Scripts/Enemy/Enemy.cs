@@ -3,6 +3,8 @@
 using Enderlook.Enumerables;
 using Enderlook.Unity.Navigation.D2;
 
+using System;
+
 using UnityEngine;
 
 namespace Avoidance.Enemies
@@ -17,6 +19,16 @@ namespace Avoidance.Enemies
 
         [SerializeField, Tooltip("Maximum velocity allowed.")]
         private float maximumSpeed;
+
+        [Header("Avoidance")]
+        [SerializeField, Tooltip("Avoidance range.")]
+        private float avoidanceRange;
+
+        [SerializeField, Tooltip("The nemy will try to avoid the predicted location in this value of seconds.")]
+        private float avoidancePrediction;
+
+        [SerializeField, Tooltip("Layers to avoid.")]
+        private LayerMask layersToAvoid;
 
         [Header("States Duration")]
         [SerializeField, Tooltip("How many seconds should stay in idle.")]
@@ -46,6 +58,10 @@ namespace Avoidance.Enemies
             waypoint = waypoints[0];
         }
 
+#if UNITY_EDITOR
+        private (Vector3, Vector3)[] avoidGizmos = Array.Empty<(Vector3, Vector3)>();
+        private Vector3 finalAvoidGizmos;
+#endif
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
         private void OnDrawGizmos()
         {
@@ -68,6 +84,16 @@ namespace Avoidance.Enemies
                     }
                 }
             }
+
+            Gizmos.color = Color.gray;
+            Gizmos.DrawWireSphere(rigidbody.position, avoidanceRange);
+            foreach ((Vector3 position, Vector3 force) in avoidGizmos)
+            {
+                Gizmos.DrawSphere(position, .1f);
+                Gizmos.DrawLine(rigidbody.position, rigidbody.position + force);
+            }
+            Gizmos.color = Color.black;
+            Gizmos.DrawLine(rigidbody.position, rigidbody.position + finalAvoidGizmos);
         }
 
         private enum EnemyState
@@ -127,6 +153,7 @@ namespace Avoidance.Enemies
                     Patrol();
                     break;
             }
+            AvoidCollisions();
         }
 
         private void StartResting() => idleLeft = idleDuration;
@@ -155,6 +182,39 @@ namespace Avoidance.Enemies
                 if (rigidbody.velocity.magnitude < maximumSpeed)
                     rigidbody.AddForce(direction.normalized * movementForce, ForceMode.Force);
             return false;
+        }
+
+        private void AvoidCollisions()
+        {
+            Collider[] colliders = Physics.OverlapSphere(rigidbody.position, avoidanceRange, layersToAvoid);
+#if UNITY_EDITOR
+            avoidGizmos = new (Vector3, Vector3)[colliders.Length];
+            int i = 0;
+#endif
+            Vector3 totalForce = Vector3.zero;
+            foreach (Collider collider in colliders)
+            {
+                if (collider.transform == transform)
+                    continue;
+                Vector3 predictedPosition;
+                if (collider.TryGetComponent(out Rigidbody other))
+                    predictedPosition = (other.velocity * avoidancePrediction) + collider.transform.position;
+                else
+                    predictedPosition = collider.transform.position;
+                Vector3 direction = rigidbody.position - predictedPosition;
+                float range = avoidanceRange * avoidanceRange;
+                Vector3 avoidForce = direction.normalized * ((range - direction.sqrMagnitude) / range);
+                totalForce += avoidForce;
+#if UNITY_EDITOR
+                avoidGizmos[i++] = (predictedPosition, avoidForce);
+#endif
+            }
+
+            totalForce = (totalForce.sqrMagnitude > 1 ? totalForce.normalized : totalForce) * movementForce;
+#if UNITY_EDITOR
+            finalAvoidGizmos = totalForce / rigidbody.mass;
+#endif
+            rigidbody.AddForce(totalForce, ForceMode.Force);
         }
 
         private void Patrol()

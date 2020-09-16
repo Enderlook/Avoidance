@@ -124,6 +124,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementForce: 30
-  maximumSpeed: 0
+  maximumSpeed: 1.75
+  avoidanceRange: 0.5
+  avoidancePrediction: 1
+  layersToAvoid:
+    serializedVersion: 2
+    m_Bits: 2048
   idleDuration: 5
   patrolsAmount: 2
