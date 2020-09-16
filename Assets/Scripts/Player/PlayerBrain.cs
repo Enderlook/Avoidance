@@ -1,7 +1,5 @@
 ﻿using Enderlook.Unity.Prefabs.HealthBarGUI;
 
-using System;
-
 using UnityEngine;
 
 namespace Avoidance.Player
