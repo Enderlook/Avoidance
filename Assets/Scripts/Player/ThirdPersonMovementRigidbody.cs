@@ -9,55 +9,56 @@ using AvalonStudios.Additions.Components.GroundCheckers;
 using AvalonStudios.Additions.Components.Cameras;
 
 using UnityEngine;
+using System;
 
 namespace Avoidance.Characters.Player
 {
     [RequireComponent(typeof(Rigidbody)), DefaultExecutionOrder(1)]
     public class ThirdPersonMovementRigidbody : MonoBehaviour
     {
-        // Enums ---
-
         private enum PlayerState
         {
             Idle,
+            Sneaking,
             Walking,
+            Running,
         }
 
         private enum PlayerEvent
         {
+            StartSneaking,
             StartWalking,
-            StopWalking
+            StartRunning,
+            StopMovement,
+            StopSneaking,
+            StopRunning,
         }
 
-        // Variables ---
-
+#pragma warning disable CS0649
         [Header("Inputs")]
-
         [SerializeField]
         private string verticalInput = "Vertical";
-
         [SerializeField]
         private string horizontalInput = "Horizontal";
 
-        [SerializeField]
-        private KeyInputManager walkInput = null;
-
-        [SerializeField]
-        private KeyInputManager runInput = null;
+        [SerializeField, Tooltip("Key maintained to enable sneaking.")]
+        private KeyInputManager sneakInput;
+        [SerializeField, Tooltip("Key maintained to enable running.")]
+        private KeyInputManager runInput;
 
         [Header("Setup")]
+        [SerializeField, Tooltip("Sneaking speed for movement")]
+        private float sneakingSpeed;
 
         [SerializeField, Tooltip("Walking speed for movement")]
-        private float walkingSpeed = 0;
-
-        [SerializeField, Tooltip("Normal speed for movement")]
-        private float normalSpeed = 0;
+        private float walkingSpeed;
 
         [SerializeField, Tooltip("Running speed for movement")]
-        private float runningSpeed = 0;
+        private float runningSpeed;
 
         [SerializeField, Tooltip("Rotation speed")]
         private float smoothRotation = .1f;
+#pragma warning restore CS0649
 
         private PlayerAnimation playerAnimation;
         private GroundChecker groundChecker;
@@ -69,8 +70,7 @@ namespace Avoidance.Characters.Player
 
         private float targetAngle;
         private float turnSmoothVelocity;
-        private bool isWalking;
-        private bool isRunning;
+        private float movementSpeed;
 
         private void Awake()
         {
@@ -86,6 +86,7 @@ namespace Avoidance.Characters.Player
                     freeLook = pivot.parent.GetComponent<FreeLookCamera>();
             }
 
+            // Spawn Character with position and rotation
             Node node = ((IGraphAtoms<Node, Edge>)MazeGenerator.Graph).Nodes.RandomPick();
             Vector3 position = node.Position;
             transform.position = new Vector3(position.x, 0, position.y);
@@ -100,35 +101,80 @@ namespace Avoidance.Characters.Player
             stateMachine = StateMachine<PlayerState, PlayerEvent>.Builder()
                 .SetInitialState(PlayerState.Idle)
                 .In(PlayerState.Idle)
+                    .On(PlayerEvent.StartSneaking)
+                        .Goto(PlayerState.Sneaking)
                     .On(PlayerEvent.StartWalking)
                         .Goto(PlayerState.Walking)
-                .In(PlayerState.Walking)
-                    .On(PlayerEvent.StopWalking)
+                    .On(PlayerEvent.StartRunning)
+                        .Goto(PlayerState.Running)
+                    .Ignore(PlayerEvent.StopRunning)
+                    .Ignore(PlayerEvent.StopSneaking)
+                .In(PlayerState.Sneaking)
+                    .ExecuteOnEntry(SetMovement(sneakingSpeed, .34f))
+                    .On(PlayerEvent.StopMovement)
                         .Goto(PlayerState.Idle)
+                    .On(PlayerEvent.StartRunning)
+                        .Goto(PlayerState.Running)
+                    .On(PlayerEvent.StopSneaking)
+                        .Goto(PlayerState.Walking)
+                    .Ignore(PlayerEvent.StopRunning)
+                    .Ignore(PlayerEvent.StartWalking)
+                .In(PlayerState.Walking)
+                    .ExecuteOnEntry(SetMovement(walkingSpeed, .84f))
+                    .On(PlayerEvent.StopMovement)
+                        .Goto(PlayerState.Idle)
+                    .On(PlayerEvent.StartSneaking)
+                        .Goto(PlayerState.Sneaking)
+                    .On(PlayerEvent.StartRunning)
+                        .Goto(PlayerState.Running)
+                    .Ignore(PlayerEvent.StopRunning)
+                    .Ignore(PlayerEvent.StopSneaking)
+                .In(PlayerState.Running)
+                    .ExecuteOnEntry(SetMovement(runningSpeed, 1))
+                    .On(PlayerEvent.StopMovement)
+                        .Goto(PlayerState.Idle)
+                    .On(PlayerEvent.StartSneaking)
+                        .Goto(PlayerState.Sneaking)
+                    .On(PlayerEvent.StopRunning)
+                        .Goto(PlayerState.Walking)
+                    .Ignore(PlayerEvent.StopSneaking)
+                    .Ignore(PlayerEvent.StartWalking)
                 .Build();
             stateMachine.Start();
+
+            Action SetMovement(float speed, float animation)
+            {
+                return () =>
+                {
+                    movementSpeed = speed;
+                    playerAnimation.PlayLocomotion(animation);
+                };
+            }
         }
 
         private void Update()
         {
-            isWalking = walkInput.Execute();
-            isRunning = runInput.Execute();
-
-            //if (walkInput.Execute())
-            //{
-            //    isRunning = false;
-            //    isWalking = true;
-            //}
-            //else if (runInput.Execute())
-            //{
-            //    isWalking = false;
-            //    isRunning = true;
-            //}
-            //else
-            //{
-            //    isWalking = false;
-            //    isRunning = false;
-            //}
+            switch (stateMachine.State)
+            {
+                case PlayerState.Sneaking:
+                    if (!sneakInput.Execute())
+                        stateMachine.Fire(PlayerEvent.StopSneaking);
+                    break;
+                case PlayerState.Running:
+                    if (!runInput.Execute())
+                        stateMachine.Fire(PlayerEvent.StopRunning);
+                    break;
+                case PlayerState.Idle:
+                    if (Input.GetAxis(horizontalInput) != 0 || Input.GetAxis(verticalInput) != 0)
+                        stateMachine.Fire(PlayerEvent.StartWalking);
+                    break;
+                case PlayerState.Walking:
+                    if (sneakInput.Execute())
+                        stateMachine.Fire(PlayerEvent.StartSneaking);
+                    else if (runInput.Execute())
+                        stateMachine.Fire(PlayerEvent.StartRunning);
+                    break;
+            }
         }
 
         private void FixedUpdate()
@@ -136,61 +182,33 @@ namespace Avoidance.Characters.Player
             if (!groundChecker.IsGrounded())
                 return;
 
-            movement.Set(Input.GetAxis(horizontalInput), 0, Input.GetAxis(verticalInput));
-            //switch (stateMachine.State)
-            //{
-            //    case PlayerState.Idle:
-            //        //Regenerate();
-            //        CheckMovementInput();
-            //        break;
-            //    case PlayerState.Walking:
-            //        Move(movement, Time.fixedDeltaTime);
-            //        break;
-            //}
-            Rotate(movement);
-            Move(movement, Time.fixedDeltaTime);
-        }
-
-        private void CheckMovementInput()
-        {
-            float v = Input.GetAxis(verticalInput);
-            float h = Input.GetAxis(horizontalInput);
-            movement.Set(h, 0, v);
-            if (movement != Vector3.zero)
-                stateMachine.Fire(PlayerEvent.StartWalking);
-        }
-
-        private void Move(Vector3 move, float time)
-        {
-            //float vertical = Input.GetAxis(verticalInput);
-            //float horizontal = Input.GetAxis(horizontalInput);
-            //if (vertical == 0 && horizontal == 0)
-            //    stateMachine.Fire(PlayerEvent.StopWalking);
-
-            Vector3 dir = move;
-            dir.y = 0;
-
-            if (dir.normalized != Vector3.zero)
+            switch (stateMachine.State)
             {
-                Vector3 moveDir = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
-
-                float velocity;
-                velocity = isRunning ? runningSpeed : isWalking ? walkingSpeed : normalSpeed;
-                Vector3 newMovement = moveDir.normalized * velocity * time;
-
-                rigidbody.MovePosition(rigidbody.position + newMovement);
+                case PlayerState.Sneaking:
+                case PlayerState.Walking:
+                case PlayerState.Running:
+                    Move();
+                    break;
             }
+            Rotate(movement);
+        }
 
-            float running;
-
-            if (isRunning)
-                running = move.x != 0 || move.z != 0 ? 1f : 0;
-            else if (isWalking)
-                running = move.x != 0 || move.z != 0 ? .34f : 0;
+        private void Move()
+        {
+            movement.Set(Input.GetAxis(horizontalInput), 0, Input.GetAxis(verticalInput));
+            if (movement == Vector3.zero)
+                stateMachine.Fire(PlayerEvent.StopMovement);
             else
-                running = move.x != 0 || move.z != 0 ? .85f : 0;
-
-            playerAnimation.PlayLocomotion(running);
+            {
+                Vector3 dir = movement;
+                dir.y = 0;
+                if (dir.normalized != Vector3.zero)
+                {
+                    Vector3 moveDir = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
+                    Vector3 newMovement = moveDir.normalized * Time.fixedDeltaTime * movementSpeed;
+                    rigidbody.MovePosition(rigidbody.position + newMovement);
+                }
+            }
         }
 
         private void Rotate(Vector3 move)

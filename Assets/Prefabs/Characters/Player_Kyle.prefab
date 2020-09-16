@@ -1058,7 +1058,7 @@ Transform:
   m_GameObject: {fileID: 5827938181232493132}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
   - {fileID: 6343195539912511642}
   - {fileID: 5726281176752583999}
@@ -1146,16 +1146,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   verticalInput: Vertical
   horizontalInput: Horizontal
-  walkInput:
-    keys: 34010000
+  sneakInput:
+    keys: 30010000
     canBeHoldDown: 1
   runInput:
-    keys: 20000000
+    keys: 32010000
     canBeHoldDown: 1
-  walkingSpeed: 0.1
-  normalSpeed: 3
-  runningSpeed: 4
+  sneakingSpeed: 0.5
+  walkingSpeed: 1
+  runningSpeed: 2
   smoothRotation: 0.1
+  state: 
 --- !u!114 &2132882680911115982
 MonoBehaviour:
   m_ObjectHideFlags: 0
