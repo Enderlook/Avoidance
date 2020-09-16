@@ -51,6 +51,7 @@ namespace Avoidance.Player
 
         private ThirdPersonMovementRigidbody movementSystem;
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
         private void Awake()
         {
             stamina = maximumStamina;
@@ -115,6 +116,7 @@ namespace Avoidance.Player
             bool HasEnoughStamina() => stamina >= minStaminaToRun;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
         private void Update() => stateMachine.Update();
 
         private void Rest()
