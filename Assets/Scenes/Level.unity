@@ -272,7 +272,7 @@ GameObject:
   m_Layer: 0
   m_Name: Pivot
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -714,6 +714,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1105267162, guid: 694119ec681dd424ea4e58d5c49c4bd7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5827938181232493132, guid: 694119ec681dd424ea4e58d5c49c4bd7,
         type: 3}
       propertyPath: m_Name
@@ -776,6 +780,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 694119ec681dd424ea4e58d5c49c4bd7, type: 3}
+--- !u!1 &1105267161 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5827938181232493132, guid: 694119ec681dd424ea4e58d5c49c4bd7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1105267160}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1105267162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105267161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c23e1fb7fe1e4e4e945219ae8dc3a6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  verticalInput: Vertical
+  horizontalInput: Horizontal
+  walkingSpeed: 0.1
+  normalSpeed: 3
+  runningSpeed: 4
+  smoothRotation: 0.1
 --- !u!1 &1157220359
 GameObject:
   m_ObjectHideFlags: 0
