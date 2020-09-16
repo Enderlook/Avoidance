@@ -46,7 +46,7 @@ namespace Avoidance.Enemies
                 } while (c == b || c == a);
 
                 Vector2 position = a.Position;
-                Enemy enemy = Instantiate(enemyPrefab, new Vector3(position.x, .5f, position.y), Quaternion.identity);
+                Enemy enemy = Instantiate(enemyPrefab, new Vector3(position.x, .5f, position.y), Quaternion.identity, transform);
                 enemy.SetWayPoints(a, b, c);
             }
         }
