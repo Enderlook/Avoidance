@@ -11,7 +11,7 @@ using AvalonStudios.Additions.Components.Cameras;
 using UnityEngine;
 using System;
 
-namespace Avoidance.Characters.Player
+namespace Avoidance.Player
 {
     [RequireComponent(typeof(Rigidbody)), DefaultExecutionOrder(1)]
     public class ThirdPersonMovementRigidbody : MonoBehaviour

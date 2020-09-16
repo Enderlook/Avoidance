@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Avoidance.Characters.Player
+namespace Avoidance.Player
 {
     public class PlayerAnimation : MonoBehaviour
     {
