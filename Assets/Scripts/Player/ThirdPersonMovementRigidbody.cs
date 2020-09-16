@@ -52,6 +52,7 @@ namespace Avoidance.Characters.Player
         [SerializeField, Tooltip("Rotation speed")]
         private float smoothRotation = .1f;
 
+        private PlayerAnimation playerAnimation;
         private GroundChecker groundChecker;
         private new Rigidbody rigidbody;
         private FreeLookCamera freeLook;
@@ -64,6 +65,7 @@ namespace Avoidance.Characters.Player
 
         private void Awake()
         {
+            playerAnimation = GetComponent<PlayerAnimation>();
             groundChecker = GetComponent<GroundChecker>();
             rigidbody = GetComponent<Rigidbody>();
             mainCamera = Camera.main.transform;
@@ -147,6 +149,11 @@ namespace Avoidance.Characters.Player
 
                 rigidbody.MovePosition(rigidbody.position + newMovement);
             }
+
+            float running;
+
+            running = move.x != 0 || move.z != 0 ? .85f : 0;
+            playerAnimation.PlayLocomotion(running);
         }
 
         private void Rotate(Vector3 move)
