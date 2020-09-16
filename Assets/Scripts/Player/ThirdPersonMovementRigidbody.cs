@@ -4,6 +4,7 @@ using Enderlook.Enumerables;
 using Enderlook.Unity.Navigation;
 using Enderlook.Unity.Navigation.D2;
 
+using AvalonStudios.Additions.Utils.InputsManager;
 using AvalonStudios.Additions.Components.GroundCheckers;
 using AvalonStudios.Additions.Components.Cameras;
 
@@ -38,6 +39,12 @@ namespace Avoidance.Characters.Player
         [SerializeField]
         private string horizontalInput = "Horizontal";
 
+        [SerializeField]
+        private KeyInputManager walkInput = null;
+
+        [SerializeField]
+        private KeyInputManager runInput = null;
+
         [Header("Setup")]
 
         [SerializeField, Tooltip("Walking speed for movement")]
@@ -62,6 +69,8 @@ namespace Avoidance.Characters.Player
 
         private float targetAngle;
         private float turnSmoothVelocity;
+        private bool isWalking;
+        private bool isRunning;
 
         private void Awake()
         {
@@ -98,6 +107,28 @@ namespace Avoidance.Characters.Player
                         .Goto(PlayerState.Idle)
                 .Build();
             stateMachine.Start();
+        }
+
+        private void Update()
+        {
+            isWalking = walkInput.Execute();
+            isRunning = runInput.Execute();
+
+            //if (walkInput.Execute())
+            //{
+            //    isRunning = false;
+            //    isWalking = true;
+            //}
+            //else if (runInput.Execute())
+            //{
+            //    isWalking = false;
+            //    isRunning = true;
+            //}
+            //else
+            //{
+            //    isWalking = false;
+            //    isRunning = false;
+            //}
         }
 
         private void FixedUpdate()
@@ -144,7 +175,7 @@ namespace Avoidance.Characters.Player
                 Vector3 moveDir = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
 
                 float velocity;
-                velocity = normalSpeed;
+                velocity = isRunning ? runningSpeed : isWalking ? walkingSpeed : normalSpeed;
                 Vector3 newMovement = moveDir.normalized * velocity * time;
 
                 rigidbody.MovePosition(rigidbody.position + newMovement);
@@ -152,7 +183,13 @@ namespace Avoidance.Characters.Player
 
             float running;
 
-            running = move.x != 0 || move.z != 0 ? .85f : 0;
+            if (isRunning)
+                running = move.x != 0 || move.z != 0 ? 1f : 0;
+            else if (isWalking)
+                running = move.x != 0 || move.z != 0 ? .34f : 0;
+            else
+                running = move.x != 0 || move.z != 0 ? .85f : 0;
+
             playerAnimation.PlayLocomotion(running);
         }
 

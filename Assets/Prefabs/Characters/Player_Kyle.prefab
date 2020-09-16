@@ -1146,6 +1146,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   verticalInput: Vertical
   horizontalInput: Horizontal
+  walkInput:
+    keys: 34010000
+    canBeHoldDown: 1
+  runInput:
+    keys: 20000000
+    canBeHoldDown: 1
   walkingSpeed: 0.1
   normalSpeed: 3
   runningSpeed: 4
