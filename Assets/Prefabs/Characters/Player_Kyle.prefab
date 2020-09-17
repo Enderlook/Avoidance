@@ -1244,7 +1244,7 @@ MonoBehaviour:
   runInput:
     keys: 32010000
     canBeHoldDown: 1
-  sneakingSpeed: 0.5
+  sneakingSpeed: 0.35
   walkingSpeed: 1
   runningSpeed: 2
   smoothRotation: 0.1

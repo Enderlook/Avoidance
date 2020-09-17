@@ -67,7 +67,7 @@ namespace Avoidance.Player
             playerAnimation.PlayLocomotion(animation);
         }
 
-        public void SetSneaking() => SetMovement(sneakingSpeed, .34f);
+        public void SetSneaking() => SetMovement(sneakingSpeed, .55f);
 
         public void SetWalking() => SetMovement(walkingSpeed, .84f);
 
