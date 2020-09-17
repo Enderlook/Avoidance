@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using UnityEngine;
 
@@ -76,7 +77,7 @@ namespace Avoidance.Enemies
         }
 
 #if UNITY_EDITOR
-        private (Vector3, Vector3)[] avoidGizmos = Array.Empty<(Vector3, Vector3)>();
+        private List<(Vector3, Vector3)> avoidGizmos = new List<(Vector3, Vector3)>();
         private Vector3 finalAvoidGizmos;
 #endif
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
@@ -106,7 +107,6 @@ namespace Avoidance.Enemies
             Collider[] colliders = Physics.OverlapSphere(rigidbody.position, avoidanceRange, layersToAvoid);
 #if UNITY_EDITOR
             finalAvoidGizmos = rigidbody.position;
-            avoidGizmos = new (Vector3, Vector3)[colliders.Length];
             int i = 0;
 #endif
             Vector3 totalForce = Vector3.zero;
@@ -122,11 +122,18 @@ namespace Avoidance.Enemies
                     predictedPosition = collider.transform.position;
 
                 Vector3 direction = predictedPosition - rigidbody.position;
-                Vector3 avoidForce = direction.normalized * ((range - direction.sqrMagnitude) / range);
+                if (Vector3.Angle(transform.forward, direction) > 45)
+                    continue;
+
+                Vector3 normalized = direction.normalized;
+                if (Physics.Raycast(transform.position, normalized, avoidanceRange, ~layersToAvoid))
+                    continue;
+
+                Vector3 avoidForce = normalized * ((range - direction.sqrMagnitude) / range);
                 avoidForce.y = 0;
                 totalForce += avoidForce;
 #if UNITY_EDITOR
-                avoidGizmos[i++] = (predictedPosition, avoidForce);
+                avoidGizmos.Add((predictedPosition, avoidForce));
 #endif
             }
             totalForce = (totalForce.sqrMagnitude > 1 ? totalForce.normalized : totalForce) * avoidanceForce;
