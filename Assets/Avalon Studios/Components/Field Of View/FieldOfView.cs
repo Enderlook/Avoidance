@@ -81,7 +81,7 @@ namespace AvalonStudios.Additions.Components.FieldOfView
             }
         }
 
-        private void Start() => StartCoroutine("FindTargetsEnumerator", .2f);
+        private void Start() => StartCoroutine(FindTargetsEnumerator());
 
         private void Update()
         {
@@ -89,11 +89,11 @@ namespace AvalonStudios.Additions.Components.FieldOfView
                 DrawFieldOfView();
         }
 
-        private IEnumerator FindTargetsEnumerator(float delay)
+        private IEnumerator FindTargetsEnumerator()
         {
             while (true)
             {
-                yield return new WaitForSeconds(delay);
+                yield return new WaitForSeconds(.2f);
                 FindVisibleTargets();
             }
         }
