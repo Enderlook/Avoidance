@@ -2211,7 +2211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementForce: 30
-  maximumSpeed: 1.75
+  maximumSpeed: 1.15
   rotationSpeed: 5
   reachThreshold: 0.3
   avoidanceRange: 0.5
