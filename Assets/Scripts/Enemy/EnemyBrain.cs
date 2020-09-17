@@ -66,12 +66,12 @@ namespace Avoidance.Enemies
             stateMachine = StateMachine<EnemyState, EnemyEvent>.Builder()
                 .SetInitialState(EnemyState.Idle)
                 .In(EnemyState.Idle)
-                    .ExecuteOnEntry(StartResting)
-                    .ExecuteOnUpdate(Idle)
+                    .ExecuteOnEntry(OnEntryIdle)
+                    .ExecuteOnUpdate(OnUpdateIdle)
                     .On(EnemyEvent.StopResting)
                         .Goto(EnemyState.Patrol)
                 .In(EnemyState.Patrol)
-                    .ExecuteOnEntry(StartPatroling)
+                    .ExecuteOnEntry(OnEntryPatrol)
                     .On(EnemyEvent.StartResting)
                         .Goto(EnemyState.Idle)
                 .Build();
@@ -81,13 +81,13 @@ namespace Avoidance.Enemies
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
         private void Update() => stateMachine.Update();
 
-        private void StartResting()
+        private void OnEntryIdle()
         {
             idleLeft = idleDuration;
             movementSystem.StopMovement();
         }
 
-        private void Idle()
+        private void OnUpdateIdle()
         {
             idleLeft -= Time.deltaTime;
             if (idleLeft <= 0)
@@ -112,7 +112,7 @@ namespace Avoidance.Enemies
             waypoint = newWaypoint;
         }
 
-        private void StartPatroling()
+        private void OnEntryPatrol()
         {
             movementSystem.SetPathTo(waypoint);
             patrolsLeft = patrolsAmount;
