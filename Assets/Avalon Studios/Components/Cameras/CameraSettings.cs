@@ -1,4 +1,5 @@
-﻿using AvalonStudios.Additions.Utils.InputsManager;
+﻿using AvalonStudios.Additions.Attributes;
+using AvalonStudios.Additions.Utils.InputsManager;
 
 using UnityEngine;
 
@@ -27,7 +28,7 @@ namespace AvalonStudios.Additions.Components.Cameras
 
         public MovementSettings Movement { get { return movement; } set { movement = value; } }
 
-        [Header("Camera Options")]
+        [StyledHeader("Camera Options")]
 
         [SerializeField]
         private AxisControl xAxis = new AxisControl { InputAxisName = "Mouse X" };
@@ -44,7 +45,7 @@ namespace AvalonStudios.Additions.Components.Cameras
         [SerializeField, Tooltip("Speed of the camera rotation")]
         private float rotationSpeed = 5f;
 
-        [Header("Zoom")]
+        [StyledHeader("Zoom")]
 
         [SerializeField, Tooltip("The zoom of the field of view")]
         private float zoomFieldOfView = 30f;
@@ -52,7 +53,7 @@ namespace AvalonStudios.Additions.Components.Cameras
         [SerializeField, Tooltip("Speed of the camera zoom")]
         private float zoomSpeed = 3f;
 
-        [Header("Inputs Settings")]
+        [StyledHeader("Inputs Settings")]
 
         [SerializeField]
         private MouseInputManager aimButton = null;
@@ -60,7 +61,7 @@ namespace AvalonStudios.Additions.Components.Cameras
         [SerializeField]
         private MouseInputManager switchCameraViewDirectionButton = null;
 
-        [Header("Movement Settings")]
+        [StyledHeader("Movement Settings")]
 
         [SerializeField]
         private MovementSettings movement = null;

@@ -1,4 +1,5 @@
-﻿using AvalonStudios.Additions.Utils.CustomRandom;
+﻿using AvalonStudios.Additions.Attributes;
+using AvalonStudios.Additions.Utils.CustomRandom;
 using AvalonStudios.Additions.Utils.InputsManager;
 
 using System.IO;
@@ -10,7 +11,7 @@ namespace AvalonStudios.Additions.Components.RenderSystem
     {
         public enum Format { JPG, PNG, RAW }
 
-        [Header("General")]
+        [StyledHeader("General")]
 
         [SerializeField, Tooltip("Image width.")]
         private int width = 1920;
@@ -21,7 +22,7 @@ namespace AvalonStudios.Additions.Components.RenderSystem
         [SerializeField, Tooltip("Optimize render system for many screenshots.")]
         private bool optimizeForManyScreenshots = true;
 
-        [Header("Setup")]
+        [StyledHeader("Setup")]
 
         [SerializeField, Tooltip("Input key to take the screenshot.")]
         private KeyInputManager screenshotInput = null;
