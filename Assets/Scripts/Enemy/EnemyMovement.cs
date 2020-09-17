@@ -41,6 +41,7 @@ namespace Avoidance.Enemies
         private Action onReachTarget;
 
         private new Rigidbody rigidbody;
+        private EnemyAnimation enemyAnimation;
 
         public void SetTarget(Vector3 target)
         {
@@ -48,13 +49,27 @@ namespace Avoidance.Enemies
             this.target.y = .5f;
         }
 
-        public void StartMovement() => canMove = true;
+        private void SetMovement(float animation) => enemyAnimation.PlayLocomotion(animation);
 
-        public void StopMovement() => canMove = false;
+        public void StartMovement()
+        {
+            canMove = true;
+            SetMovement(.51f);
+        }
+
+        public void StopMovement()
+        {
+            canMove = false;
+            SetMovement(0);
+        }
 
         public void SetOnReachTarget(Action onReachTarget) => this.onReachTarget = onReachTarget;
 
-        private void Awake() => rigidbody = GetComponent<Rigidbody>();
+        private void Awake()
+        {
+            rigidbody = GetComponent<Rigidbody>();
+            enemyAnimation = GetComponent<EnemyAnimation>();
+        }
 
         private void FixedUpdate()
         {

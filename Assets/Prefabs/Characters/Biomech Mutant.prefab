@@ -2080,6 +2080,7 @@ GameObject:
   - component: {fileID: 5828525486448972187}
   - component: {fileID: 2363469143143719581}
   - component: {fileID: 7776316317720688436}
+  - component: {fileID: 4887748083227975811}
   m_Layer: 11
   m_Name: Biomech Mutant
   m_TagString: Untagged
@@ -2210,8 +2211,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c14f76a609376f4ca790d9133f6e7fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementForce: 30
-  maximumSpeed: 1.15
+  movementForce: 10
+  maximumSpeed: 0.6
   rotationSpeed: 5
   reachThreshold: 0.3
   avoidanceRange: 0.5
@@ -2232,6 +2233,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3a355370fef3134ead5b160f9617b62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4887748083227975811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1666891238228660144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0af1793c1d04f846bcb7a3440bd2271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  locomotionParameter: Vertical
+  shootParameter: 
 --- !u!1 &1666891238228660146
 GameObject:
   m_ObjectHideFlags: 0
