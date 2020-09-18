@@ -5,8 +5,6 @@ using Avoidance.Scene;
 using Enderlook.Enumerables;
 using Enderlook.Unity.Navigation.D2;
 
-using System;
-
 using UnityEngine;
 
 namespace Avoidance.Enemies
