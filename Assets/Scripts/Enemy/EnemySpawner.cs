@@ -31,8 +31,11 @@ namespace Avoidance.Enemies
         {
             Player = player;
             IReadOnlyCollection<Node> nodes = ((IGraphAtoms<Node, Edge>)MazeGenerator.Graph).Nodes;
-            HashSet<Vector3> alreadyUsed = new HashSet<Vector3>();
-            alreadyUsed.Add(player.position);
+            HashSet<Vector3> alreadyUsed = new HashSet<Vector3>
+            {
+                player.position
+            };
+
             for (int i = 0; i < enemiesAmount; i++)
             {
                 Node a;

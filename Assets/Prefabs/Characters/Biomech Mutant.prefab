@@ -2165,9 +2165,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e76aa79b997fbc44fbabe1d0a1173d7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootingRange: 1.5
   idleDuration: 5
   patrolsAmount: 2
   state: 
+  a: 
 --- !u!114 &5828525486448972187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2180,7 +2182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14bed8c9aaa3ee64387bce920d85d70a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewRadius: 3
+  viewRadius: 2
   viewAngle: 90
   targetsToDetect:
     serializedVersion: 2
@@ -2216,7 +2218,7 @@ MonoBehaviour:
   reachThreshold: 0.3
   avoidanceRange: 0.5
   avoidancePrediction: 1
-  avoidanceForce: 15
+  avoidanceForce: 35
   layersToAvoid:
     serializedVersion: 2
     m_Bits: 2048
