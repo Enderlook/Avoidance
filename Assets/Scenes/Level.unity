@@ -1893,11 +1893,11 @@ MonoBehaviour:
   height: 1080
   optimizeForManyScreenshots: 1
   screenshotInput:
-    keys: 
+    keys: 72000000
     canBeHoldDown: 0
   timeBtwScreenshots: 0.5
   format: 0
-  folder: 
+  folder: Assets/Renders
 --- !u!81 &1165832905
 AudioListener:
   m_ObjectHideFlags: 0
