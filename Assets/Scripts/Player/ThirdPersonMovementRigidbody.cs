@@ -1,4 +1,5 @@
-﻿using AvalonStudios.Additions.Components.Cameras;
+﻿using AvalonStudios.Additions.Attributes;
+using AvalonStudios.Additions.Components.Cameras;
 using AvalonStudios.Additions.Components.GroundCheckers;
 using AvalonStudios.Additions.Utils.InputsManager;
 
@@ -10,7 +11,7 @@ namespace Avoidance.Player
     public class ThirdPersonMovementRigidbody : MonoBehaviour
     {
 #pragma warning disable CS0649
-        [Header("Inputs")]
+        [StyledHeader("Inputs")]
         [SerializeField]
         private string verticalInput = "Vertical";
         [SerializeField]
@@ -21,7 +22,7 @@ namespace Avoidance.Player
         [SerializeField, Tooltip("Key maintained to enable running.")]
         private KeyInputManager runInput;
 
-        [Header("Setup")]
+        [StyledHeader("Setup")]
         [SerializeField, Tooltip("Sneaking speed for movement")]
         private float sneakingSpeed;
 
@@ -67,7 +68,7 @@ namespace Avoidance.Player
             playerAnimation.PlayLocomotion(animation);
         }
 
-        public void SetSneaking() => SetMovement(sneakingSpeed, .34f);
+        public void SetSneaking() => SetMovement(sneakingSpeed, .55f);
 
         public void SetWalking() => SetMovement(walkingSpeed, .84f);
 

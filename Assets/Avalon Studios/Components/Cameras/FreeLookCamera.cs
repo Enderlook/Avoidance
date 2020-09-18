@@ -1,4 +1,5 @@
-﻿using AvalonStudios.Additions.Extensions;
+﻿using AvalonStudios.Additions.Attributes;
+using AvalonStudios.Additions.Extensions;
 
 using UnityEngine;
 
@@ -40,7 +41,7 @@ namespace AvalonStudios.Additions.Components.Cameras
 
         // Variables
 
-        [Header("General")]
+        [StyledHeader("General")]
 
         [SerializeField]
         private Mode mode = Mode.FreeLook;

@@ -1,4 +1,5 @@
-﻿using AvalonStudios.Additions.Extensions;
+﻿using AvalonStudios.Additions.Attributes;
+using AvalonStudios.Additions.Extensions;
 
 using System.Collections;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace AvalonStudios.Additions.Components.FieldOfView
 
         public List<Transform> GetVisibleTargets => visibleTargets;
 
-        [Header("General")]
+        [StyledHeader("General")]
 
         [SerializeField, Tooltip("Viewing radius.")]
         private float viewRadius = 0;
@@ -43,7 +44,7 @@ namespace AvalonStudios.Additions.Components.FieldOfView
         [SerializeField]
         private Color detectorLineColor = Color.red;
 
-        [Header("Mesh Filter")]
+        [StyledHeader("Mesh Filter")]
 
         [SerializeField]
         private bool drawMeshFilter = true;
