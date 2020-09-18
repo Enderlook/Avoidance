@@ -107,7 +107,6 @@ namespace Avoidance.Enemies
             Collider[] colliders = Physics.OverlapSphere(rigidbody.position, avoidanceRange, layersToAvoid);
 #if UNITY_EDITOR
             finalAvoidGizmos = rigidbody.position;
-            int i = 0;
 #endif
             Vector3 totalForce = Vector3.zero;
             foreach (Collider collider in colliders)
