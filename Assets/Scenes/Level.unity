@@ -407,7 +407,7 @@ GameObject:
   m_Layer: 0
   m_Name: Pivot
   m_TagString: Untagged
-  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1206,6 +1206,8 @@ MonoBehaviour:
     m_Bits: 768
   maxCheckDistanceObstacles: 0.1
   lookInTheDirection: 0
+  pivotRadiusGizmos: 0.04
+  pivotGizmosColor: {r: 0.63367796, g: 1, b: 0, a: 1}
   pivotPosition: {x: 0, y: 0.34, z: 0}
   cameraCentralPosition: {x: 0, y: 0.13, z: -0.4}
   cameraRotation: {x: 19.57, y: 0, z: 0}

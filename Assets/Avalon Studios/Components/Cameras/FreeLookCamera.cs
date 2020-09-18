@@ -75,6 +75,12 @@ namespace AvalonStudios.Additions.Components.Cameras
         private LookInTheDirection lookInTheDirection = LookInTheDirection.Center;
 
         [SerializeField]
+        private float pivotRadiusGizmos = 1f;
+
+        [SerializeField]
+        private Color pivotGizmosColor = Color.red;
+
+        [SerializeField]
         private Vector3 pivotPosition = Vector3.zero;
 
         [SerializeField]
@@ -341,5 +347,13 @@ namespace AvalonStudios.Additions.Components.Cameras
                 transform.position = newPos;
             }
         }
+
+#if UNITY_EDITOR
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = pivotGizmosColor;
+            Gizmos.DrawWireSphere(pivotPosition, pivotRadiusGizmos);
+        }
+#endif
     }
 }
