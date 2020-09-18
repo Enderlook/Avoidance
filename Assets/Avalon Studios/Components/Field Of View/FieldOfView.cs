@@ -81,21 +81,11 @@ namespace AvalonStudios.Additions.Components.FieldOfView
             }
         }
 
-        private void Start() => StartCoroutine(FindTargetsEnumerator());
-
         private void Update()
         {
+            FindVisibleTargets();
             if (drawMeshFilter)
                 DrawFieldOfView();
-        }
-
-        private IEnumerator FindTargetsEnumerator()
-        {
-            while (true)
-            {
-                yield return new WaitForSeconds(.2f);
-                FindVisibleTargets();
-            }
         }
 
         private void FindVisibleTargets()
