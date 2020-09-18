@@ -1,4 +1,11 @@
-﻿using Enderlook.Unity.Prefabs.HealthBarGUI;
+﻿using Avoidance.Scene;
+
+using Enderlook.Enumerables;
+using Enderlook.Unity.Navigation;
+using Enderlook.Unity.Navigation.D2;
+using Enderlook.Unity.Prefabs.HealthBarGUI;
+
+using System.Collections.Generic;
 
 using UnityEngine;
 
@@ -27,6 +34,17 @@ namespace Avoidance.Player
 
         [SerializeField, Tooltip("Stamina recovering multiplier when idle.")]
         private float staminaIdleMultiplier;
+
+        [Header("Health")]
+        [SerializeField, Tooltip("Health Bar.")]
+        private HealthBar healthBar;
+
+        [SerializeField, Tooltip("Maximum health.")]
+        private float maximumHealth;
+        private float health;
+
+        [SerializeField, Tooltip("Healing per second when idle.")]
+        private float healingRate;
 #pragma warning restore CS0649
 
         private enum PlayerState
@@ -51,12 +69,25 @@ namespace Avoidance.Player
 
         private ThirdPersonMovementRigidbody movementSystem;
 
+        private Vector3 winLocation;
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
         private void Awake()
         {
             stamina = maximumStamina;
             staminaBar.ManualUpdate(stamina, maximumStamina);
+
+            health = maximumHealth;
+            healthBar.ManualUpdate(health, maximumHealth);
+
             movementSystem = GetComponent<ThirdPersonMovementRigidbody>();
+
+            IReadOnlyCollection<Node> nodes = ((IGraphAtoms<Node, Edge>)MazeGenerator.Graph).Nodes;
+            do
+            {
+                winLocation = MazeGenerator.Graph.TweakOrientationToWorld(nodes.RandomPick().Position);
+                winLocation.y = .5f;
+            } while (winLocation == transform.position);
 
             stateMachine = StateMachine<PlayerState, PlayerEvent>.Builder()
                 .SetInitialState(PlayerState.Idle)
@@ -117,7 +148,35 @@ namespace Avoidance.Player
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
-        private void Update() => stateMachine.Update();
+        private void Update()
+        {
+            stateMachine.Update();
+
+            if (Vector3.Distance(transform.position, winLocation) < .3f)
+            {
+                Debug.Log("Unimplemented");
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.white;
+            Gizmos.DrawSphere(winLocation, .3f);
+        }
+
+        public void TakeDamage(float amount)
+        {
+            health -= amount;
+            if (health > 0)
+                return;
+
+            health = 0;
+            healthBar.UpdateValues(health);
+            Destroy(gameObject);
+
+            Debug.LogError("Unimplemented");
+        }
 
         private void Rest()
         {
@@ -127,6 +186,10 @@ namespace Avoidance.Player
             stamina += staminaRecovering * staminaIdleMultiplier * Time.deltaTime;
             stamina = Mathf.Min(stamina, maximumStamina);
             staminaBar.UpdateValues(stamina);
+
+            health += healingRate * Time.deltaTime;
+            health = Mathf.Max(health, maximumHealth);
+            healthBar.UpdateValues(health);
         }
 
         private void Walk()
