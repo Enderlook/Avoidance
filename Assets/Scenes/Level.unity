@@ -1399,8 +1399,8 @@ MonoBehaviour:
   targetTag: Player
   minimapHeight: 0.1
   speedFollow: 10
-  size: 4
-  nearClippingPlanes: 0.01
+  size: 2.5
+  nearClippingPlanes: -4
   farClippingPlanes: 500
   targetTexture: {fileID: 8400000, guid: ae6a853e1a79aaa42a8c0784be575ee6, type: 2}
   smoothRotation: 1
@@ -1833,11 +1833,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.01
+  near clip plane: -4
   far clip plane: 500
   field of view: 60
   orthographic: 1
-  orthographic size: 4
+  orthographic size: 2.5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
