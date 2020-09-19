@@ -26,10 +26,13 @@ namespace AvalonStudios.Additions.Components.MinimapSystem
 
             minimap.transform.localPosition = new Vector3(0, minimap.MinimapHeight, 0);
 
+            camera.backgroundColor = minimap.Background;
+            camera.cullingMask = minimap.CullingMask;
             camera.orthographicSize = minimap.Size;
             camera.nearClipPlane = minimap.NearClipPlane;
             camera.farClipPlane = minimap.FarClipPlane;
             camera.targetTexture = minimap.TargetTexture;
+            camera.allowHDR = minimap.UseHDR;
 
             minimapRoot.GetComponent<Image>().sprite = minimap.MinimapRootImage;
             Outline minimapRootOutline = minimapRoot.GetComponent<Outline>();

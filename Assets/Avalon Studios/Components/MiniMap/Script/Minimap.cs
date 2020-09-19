@@ -34,6 +34,10 @@ namespace AvalonStudios.Additions.Components.MinimapSystem
 
         public float MinimapHeight => minimapHeight;
 
+        public Color Background => background;
+
+        public LayerMask CullingMask => cullingMask;
+
         public float Size => size;
 
         public float NearClipPlane => nearClippingPlanes;
@@ -41,6 +45,8 @@ namespace AvalonStudios.Additions.Components.MinimapSystem
         public float FarClipPlane => farClippingPlanes;
 
         public RenderTexture TargetTexture => targetTexture;
+
+        public bool UseHDR => HDR;
 
         public Canvas MinimapCanvas { get => minimapCanvas; set => minimapCanvas = value; }
 
@@ -88,6 +94,12 @@ namespace AvalonStudios.Additions.Components.MinimapSystem
         private float speedFollow = 10f;
 
         [StyledHeader("Camera Settings")]
+        [SerializeField, Tooltip("The Camera clears the screen to this color before rendering.")]
+        private Color background = Color.black;
+
+        [SerializeField, Tooltip("Which layers the camera renders.")]
+        private LayerMask cullingMask = ~0;
+
         [SerializeField, Tooltip("The vertical size of the camera.")]
         private float size = 5;
 
@@ -99,6 +111,9 @@ namespace AvalonStudios.Additions.Components.MinimapSystem
 
         [SerializeField, Tooltip("The texture to render this camera into.")]
         private RenderTexture targetTexture = null;
+
+        [SerializeField, Tooltip("Use HDR?.")]
+        private bool HDR = true;
 
         [StyledHeader("Rotation Setup")]
         [SerializeField, Tooltip("Smooth rotation?")]
