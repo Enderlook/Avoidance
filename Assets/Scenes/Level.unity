@@ -465,7 +465,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -11, y: -20}
+  m_AnchoredPosition: {x: -11, y: -10}
   m_SizeDelta: {x: 142, y: 142}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &437294793
@@ -480,7 +480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectColor: {r: 0.19023673, g: 0.24799603, b: 0.4245283, a: 1}
   m_EffectDistance: {x: 10, y: -10}
   m_UseGraphicAlpha: 1
 --- !u!114 &437294794
@@ -527,7 +527,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 77680980ac5bca34c9761dbf82144bf5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7aa8551777d5e9145b84072ff41e230e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -716,7 +716,7 @@ GameObject:
   - component: {fileID: 545055628}
   - component: {fileID: 545055627}
   m_Layer: 5
-  m_Name: Border
+  m_Name: MiniMap Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -759,7 +759,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 77680980ac5bca34c9761dbf82144bf5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7aa8551777d5e9145b84072ff41e230e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -790,7 +790,7 @@ GameObject:
   - component: {fileID: 668429750}
   - component: {fileID: 668429749}
   m_Layer: 5
-  m_Name: Player Icon
+  m_Name: Target Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1104,7 +1104,7 @@ GameObject:
   - component: {fileID: 843410530}
   - component: {fileID: 843410529}
   m_Layer: 5
-  m_Name: Overlay
+  m_Name: MiniMap Image Overlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1399,7 +1399,7 @@ MonoBehaviour:
   targetTag: Player
   minimapHeight: 0.1
   speedFollow: 10
-  size: 5
+  size: 4
   nearClippingPlanes: 0.01
   farClippingPlanes: 500
   targetTexture: {fileID: 8400000, guid: ae6a853e1a79aaa42a8c0784be575ee6, type: 2}
@@ -1407,11 +1407,20 @@ MonoBehaviour:
   lerpRotation: 12
   minimapCanvas: {fileID: 724692369}
   minimapRoot: {fileID: 437294792}
-  minimapRootFormMask: {fileID: 7186223825358793108, guid: 395907a03fc98194c821269603415ec5,
-    type: 3}
+  minimapRootImage: {fileID: 21300000, guid: 7aa8551777d5e9145b84072ff41e230e, type: 3}
+  minimapRootOutlineColor: {r: 0.19023673, g: 0.24799603, b: 0.4245283, a: 1}
+  minimapRootOutlineEffectDistance: {x: 10, y: -10}
+  minimapBorderImage: {fileID: 21300000, guid: 7aa8551777d5e9145b84072ff41e230e, type: 3}
+  minimapBorderSizeDelta: {x: 160, y: 160}
+  minimapBorderColor: {r: 0.15686275, g: 0.19215687, b: 0.25882354, a: 1}
+  minimapMask: {fileID: 21300000, guid: 7aa8551777d5e9145b84072ff41e230e, type: 3}
+  minimapImageOverlayColor: {r: 0.10980392, g: 0.16862746, b: 0.2509804, a: 0.12156863}
   targetIcon: {fileID: 668429747}
+  targetIconImage: {fileID: 8390057538234260187, guid: 395907a03fc98194c821269603415ec5,
+    type: 3}
   targetIconColor: {r: 1, g: 0, b: 0, a: 1}
   targetIconOutlineColor: {r: 1, g: 0.4725827, b: 0, a: 1}
+  targetIconOutlineEffectDistance: {x: 0.6, y: -0.6}
   minimapPosition: {x: 0, y: 0, z: 0}
   minimapRotation: {x: 0, y: 0, z: 0}
   minimapSize: {x: 0, y: 0}
@@ -1521,7 +1530,7 @@ GameObject:
   - component: {fileID: 1101222877}
   - component: {fileID: 1101222876}
   m_Layer: 5
-  m_Name: Mask
+  m_Name: MiniMap Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1579,8 +1588,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 7186223825358793108, guid: 395907a03fc98194c821269603415ec5,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7aa8551777d5e9145b84072ff41e230e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1829,16 +1837,16 @@ Camera:
   far clip plane: 500
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 4
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 12085
+    m_Bits: 12087
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: ae6a853e1a79aaa42a8c0784be575ee6, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 0
+  m_HDR: 1
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0

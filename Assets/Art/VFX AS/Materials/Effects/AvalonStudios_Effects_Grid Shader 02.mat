@@ -24,7 +24,7 @@ Material:
     - _GridEmission: 1
     - __dirty: 1
     m_Colors:
-    - _GridColor: {r: 0.9010106, g: 0.0144679835, b: 3.0672052, a: 1}
+    - _GridColor: {r: 0.19073436, g: 3.0672052, b: 0.016058696, a: 1}
     - _GridScale: {r: 6, g: 6, b: 0, a: 0}
     - _LinesThickness: {r: 0.92, g: 0.92, b: 0, a: 0}
     - _MaterialColor: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}

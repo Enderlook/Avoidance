@@ -10,6 +10,7 @@ namespace AvalonStudios.Additions.Components.MinimapSystem
     public class Minimap : MonoBehaviour
     {
         // Properties
+
         public Transform Target
         {
             get
@@ -41,15 +42,35 @@ namespace AvalonStudios.Additions.Components.MinimapSystem
 
         public RenderTexture TargetTexture => targetTexture;
 
-        public RectTransform MinimapRoot => minimapRoot;
+        public Canvas MinimapCanvas { get => minimapCanvas; set => minimapCanvas = value; }
 
-        public Sprite MinimapRootFormMask => minimapRootFormMask;
+        public RectTransform MinimapRoot { get => minimapRoot; set => minimapRoot = value; }
 
-        public GameObject TargetIcon => targetIcon;
+        public Sprite MinimapRootImage => minimapRootImage;
+
+        public Color MinimapRootOutlineColor => minimapRootOutlineColor;
+
+        public Vector2 MinimapRootOutlineEffectDistance => minimapRootOutlineEffectDistance;
+
+        public Sprite MinimapBorderImage => minimapBorderImage;
+
+        public Vector2 MinimapBorderSizeDelta => minimapBorderSizeDelta;
+
+        public Color MinimapBorderColor => minimapBorderColor;
+
+        public Sprite MinimapMask => minimapMask;
+
+        public Color MinimapImageOverlayColor => minimapImageOverlayColor;
+
+        public GameObject TargetIcon { get => targetIcon; set => targetIcon = value; }
+
+        public Sprite TargetIconImage => targetIconImage;
 
         public Color TargetIconColor => targetIconColor;
 
         public Color TargetIconOutlineColor => targetIconOutlineColor;
+
+        public Vector2 TargetIconOutlineEffectDistance => targetIconOutlineEffectDistance;
 
         // Variables
 
@@ -93,17 +114,44 @@ namespace AvalonStudios.Additions.Components.MinimapSystem
         [SerializeField, Tooltip("Minimap root.")]
         private RectTransform minimapRoot = null;
 
-        [SerializeField, Tooltip("Minimap form")]
-        private Sprite minimapRootFormMask = null;
+        [SerializeField, Tooltip("Minimap root imnage.")]
+        private Sprite minimapRootImage = null;
+
+        [SerializeField, Tooltip("Minimap root outline color.")]
+        private Color minimapRootOutlineColor = Color.black;
+
+        [SerializeField, Tooltip("Minimap root outline padding.")]
+        private Vector2 minimapRootOutlineEffectDistance = new Vector2(10, -10);
+
+        [SerializeField, Tooltip("Minimap border image")]
+        private Sprite minimapBorderImage = null;
+
+        [SerializeField, Tooltip("Minimap border size delta.")]
+        private Vector2 minimapBorderSizeDelta = new Vector2(160, 160);
+
+        [SerializeField, Tooltip("Minimap border color")]
+        private Color minimapBorderColor = Color.white;
+
+        [SerializeField, Tooltip("Minimap mask.")]
+        private Sprite minimapMask = null;
+
+        [SerializeField, Tooltip("Minimap image overlay color.")]
+        private Color minimapImageOverlayColor = Color.white;
 
         [SerializeField, Tooltip("Target icon.")]
         private GameObject targetIcon = null;
+
+        [SerializeField, Tooltip("Target icon image.")]
+        private Sprite targetIconImage = null;
 
         [SerializeField, Tooltip("Color of the target icon.")]
         private Color targetIconColor = Color.white;
 
         [SerializeField, Tooltip("Outline color of the target icon")]
         private Color targetIconOutlineColor = Color.red;
+
+        [SerializeField, Tooltip("Outline padding of the target icon.")]
+        private Vector2 targetIconOutlineEffectDistance = new Vector2(.6f, -.6f);
 
         [StyledHeader("Map Rect")]
         [SerializeField, Tooltip("Minimap position.")]
