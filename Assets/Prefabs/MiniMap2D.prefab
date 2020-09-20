@@ -178,7 +178,7 @@ MonoBehaviour:
   targetIcon: {fileID: 1807241697091537915}
   targetIconImage: {fileID: 8390057538234260187, guid: 395907a03fc98194c821269603415ec5,
     type: 3}
-  targetIconColor: {r: 1, g: 0, b: 0, a: 1}
+  targetIconColor: {r: 0, g: 1, b: 0, a: 1}
   targetIconOutlineColor: {r: 1, g: 0.4725827, b: 0, a: 1}
   targetIconOutlineEffectDistance: {x: 0.6, y: -0.6}
   minimapPosition: {x: 0, y: 0, z: 0}
@@ -243,7 +243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
