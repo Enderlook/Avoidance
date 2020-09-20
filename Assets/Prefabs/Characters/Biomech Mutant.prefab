@@ -2199,7 +2199,7 @@ MonoBehaviour:
   edgeDistanceThreshold: 5
   viewMeshFilter: {fileID: 4456292956977669712}
   meshFilterMaterial: {fileID: 2100000, guid: ed39373ea4c1e3d42857a5030078f347, type: 2}
-  meshFilterColorMaterial: {r: 1, g: 1, b: 1, a: 1}
+  meshFilterColorMaterial: {r: 1, g: 0.8, b: 0.8, a: 1}
 --- !u!114 &2363469143143719581
 MonoBehaviour:
   m_ObjectHideFlags: 0
