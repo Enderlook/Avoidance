@@ -1402,7 +1402,7 @@ MonoBehaviour:
   background: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 0.29803923}
   cullingMask:
     serializedVersion: 2
-    m_Bits: 12087
+    m_Bits: 27703
   size: 2.5
   nearClippingPlanes: -4
   farClippingPlanes: 500
@@ -1853,7 +1853,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 12087
+    m_Bits: 27703
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: ae6a853e1a79aaa42a8c0784be575ee6, type: 2}
   m_TargetDisplay: 0
