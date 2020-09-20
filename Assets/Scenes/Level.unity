@@ -1991,7 +1991,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6898458bc7f4b047ba572b7cb85405f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: {x: 21, y: 21}
+  size: {x: 20, y: 20}
   randomWeight: 1
   newestWeight: 1
   middleWeight: 1

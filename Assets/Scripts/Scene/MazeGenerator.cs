@@ -56,10 +56,12 @@ namespace Avoidance.Scene
 
         private void Awake()
         {
+            size += Vector2Int.one;
             CalculateTotalWeigth();
             int[] grid = GenerateGrid();
             GenerateGeometry(grid);
             Graph = GenerateGraph(grid);
+            size -= Vector2Int.one;
         }
 
         private void GenerateGeometry(int[] grid)
@@ -93,13 +95,14 @@ namespace Avoidance.Scene
 
             int ToScaleIndex(Vector2Int coordinates) => (coordinates.x * height) + coordinates.y;
 
+            int maxWidth = width - 1;
+            int maxHeight = height - 1;
             i = 0;
-
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
                 {
-                    if (!path[i])
+                    if (!path[i] && x != maxWidth && y != maxHeight)
                         Instantiate(wallPrefab, new Vector3(transform.position.x + x, 0, transform.position.z + y), Quaternion.identity, transform);
                     i++;
                 }
