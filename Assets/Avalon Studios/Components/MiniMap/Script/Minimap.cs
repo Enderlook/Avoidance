@@ -195,6 +195,7 @@ namespace AvalonStudios.Additions.Components.MinimapSystem
 
         private void Awake()
         {
+            GetMinimapSize();
             if (target == null && targetTag.Length != 0)
                 target = GameObject.FindGameObjectWithTag(targetTag);
 
@@ -257,6 +258,13 @@ namespace AvalonStudios.Additions.Components.MinimapSystem
             }
             else
                 transform.eulerAngles = rot;
+        }
+
+        private void GetMinimapSize()
+        {
+            minimapPosition = minimapRoot.anchoredPosition;
+            minimapRotation = minimapRoot.eulerAngles;
+            minimapSize = minimapRoot.sizeDelta;
         }
     }
 }
