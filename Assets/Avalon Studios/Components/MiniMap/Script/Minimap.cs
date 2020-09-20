@@ -103,6 +103,15 @@ namespace AvalonStudios.Additions.Components.MinimapSystem
         [SerializeField, Tooltip("The vertical size of the camera.")]
         private float size = 5;
 
+        [SerializeField, Tooltip("Minimal vertical size of the camera.")]
+        private float minSize = 1;
+
+        [SerializeField, Tooltip("Maximum vertical size of the camera.")]
+        private float maxSize = 15;
+
+        [SerializeField, Tooltip("Vertical size speed change of the camera when using mouse wheel.")]
+        private float sizeSpeed = 1;
+
         [SerializeField, Tooltip("The closest point relative to the camera that drawing occurs.")]
         private float nearClippingPlanes = .01f;
 
@@ -202,6 +211,16 @@ namespace AvalonStudios.Additions.Components.MinimapSystem
 
             FollowTarget(Time.deltaTime);
             MinimapRotation(Time.deltaTime);
+
+            ResizeMap();
+        }
+
+        private void ResizeMap()
+        {
+            if (Input.mouseScrollDelta.y > 0)
+                size = Mathf.MoveTowards(size, maxSize, Input.mouseScrollDelta.y * sizeSpeed);
+            else if (Input.mouseScrollDelta.y < 0)
+                size = Mathf.MoveTowards(size, minSize, Mathf.Abs(Input.mouseScrollDelta.y) * sizeSpeed);
         }
 
         private void FollowTarget(float time)
