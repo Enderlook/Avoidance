@@ -4,40 +4,603 @@
         <name>Enderlook.Collections</name>
     </assembly>
     <members>
-        <member name="T:Enderlook.Collections.PriorityQueue`1">
+        <member name="T:Enderlook.Collections.BinaryHeapMin`1">
             <summary>
-            A data structure to store elements with priority.
+            Represent a basic binary heap where elements with lowest values have higher priority.
             </summary>
-            <typeparam name="T"></typeparam>
+            <typeparam name="T">Type of element.</typeparam>
         </member>
-        <member name="P:Enderlook.Collections.PriorityQueue`1.Count">
+        <member name="P:Enderlook.Collections.BinaryHeapMin`1.Count">
+            <inheritdoc cref="P:Enderlook.Collections.IPriorityQueue`1.Count"/>
+        </member>
+        <member name="P:Enderlook.Collections.BinaryHeapMin`1.Capacity">
             <summary>
-            Count of elements.
+            Capacity of the heap.
             </summary>
         </member>
-        <member name="M:Enderlook.Collections.PriorityQueue`1.Enqueue(`0,System.Single)">
+        <member name="P:Enderlook.Collections.BinaryHeapMin`1.IsEmpty">
+            <inheritdoc cref="P:Enderlook.Collections.IPriorityQueue`1.IsEmpty"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`1.#ctor">
+            <summary>
+            Creates a new binary heap.
+            </summary>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`1.#ctor(System.Int32)">
+            <summary>
+            Creates a binary heap with the specified capacity.
+            </summary>
+            <param name="capacity">Amount of elements than can be stored in it.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown when <paramref name="capacity"/> is lower than 1.</exception>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Creates a new binary heap.
+            </summary>
+            <param name="values">Elements to add to the heap.</param>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`1.#ctor(`0[])">
+            <summary>
+            Creates a new binary heap.
+            </summary>
+            <param name="values">Elements to add to the heap.</param>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`1.Clear">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`1.Clear"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`1.Enqueue(`0)">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`1.Enqueue(`0)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`1.EnqueueRange(`0[])">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`1.EnqueueRange(`0[])"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`1.EnqueueRange(System.Collections.Generic.IEnumerable{`0})">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`1.EnqueueRange(System.Collections.Generic.IEnumerable{`0})"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`1.Peek">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`1.Peek"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`1.TryPeek(`0@)">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`1.TryPeek(`0@)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`1.Dequeue">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`1.Dequeue"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`1.TryDequeue(`0@)">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`1.TryDequeue(`0@)"/>
+        </member>
+        <member name="P:Enderlook.Collections.BinaryHeapMin`1.System#Collections#Generic#ICollection{T}#IsReadOnly">
+            <inheritdoc cref="P:System.Collections.Generic.ICollection`1.IsReadOnly"/>
+        </member>
+        <member name="P:Enderlook.Collections.BinaryHeapMin`1.System#Collections#ICollection#IsSynchronized">
+            <inheritdoc cref="P:System.Collections.ICollection.IsSynchronized"/>
+        </member>
+        <member name="P:Enderlook.Collections.BinaryHeapMin`1.System#Collections#ICollection#SyncRoot">
+            <inheritdoc cref="P:System.Collections.ICollection.SyncRoot"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`1.System#Collections#Generic#ICollection{T}#Add(`0)">
+            <inheritdoc cref="M:System.Collections.Generic.ICollection`1.Add(`0)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`1.System#Collections#Generic#ICollection{T}#Contains(`0)">
+            <inheritdoc cref="M:System.Collections.Generic.ICollection`1.Contains(`0)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`1.System#Collections#Generic#ICollection{T}#CopyTo(`0[],System.Int32)">
+            <inheritdoc cref="M:System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`1.System#Collections#ICollection#CopyTo(System.Array,System.Int32)">
+            <inheritdoc cref="M:System.Collections.ICollection.CopyTo(System.Array,System.Int32)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`1.System#Collections#Generic#ICollection{T}#Remove(`0)">
+            <inheritdoc cref="M:System.Collections.Generic.ICollection`1.Remove(`0)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`1.GetEnumerator">
+            <inheritdoc cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`1.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc cref="M:System.Collections.IEnumerable.GetEnumerator"/>
+        </member>
+        <member name="T:Enderlook.Collections.BinaryHeapMax`1">
+            <summary>
+            Represent a basic binary heap where elements with highest values have higher priority.
+            </summary>
+            <typeparam name="T">Type of element.</typeparam>
+        </member>
+        <member name="P:Enderlook.Collections.BinaryHeapMax`1.Count">
+            <inheritdoc cref="P:Enderlook.Collections.IPriorityQueue`1.Count"/>
+        </member>
+        <member name="P:Enderlook.Collections.BinaryHeapMax`1.Capacity">
+            <summary>
+            Capacity of the heap.
+            </summary>
+        </member>
+        <member name="P:Enderlook.Collections.BinaryHeapMax`1.IsEmpty">
+            <inheritdoc cref="P:Enderlook.Collections.IPriorityQueue`1.IsEmpty"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`1.#ctor">
+            <summary>
+            Creates a new binary heap.
+            </summary>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`1.#ctor(System.Int32)">
+            <summary>
+            Creates a binary heap with the specified capacity.
+            </summary>
+            <param name="capacity">Amount of elements than can be stored in it.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown when <paramref name="capacity"/> is lower than 1.</exception>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Creates a new binary heap.
+            </summary>
+            <param name="values">Elements to add to the heap.</param>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`1.#ctor(`0[])">
+            <summary>
+            Creates a new binary heap.
+            </summary>
+            <param name="values">Elements to add to the heap.</param>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`1.Clear">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`1.Clear"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`1.Enqueue(`0)">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`1.Enqueue(`0)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`1.EnqueueRange(`0[])">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`1.EnqueueRange(`0[])"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`1.EnqueueRange(System.Collections.Generic.IEnumerable{`0})">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`1.EnqueueRange(System.Collections.Generic.IEnumerable{`0})"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`1.Peek">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`1.Peek"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`1.TryPeek(`0@)">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`1.TryPeek(`0@)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`1.Dequeue">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`1.Dequeue"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`1.TryDequeue(`0@)">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`1.TryDequeue(`0@)"/>
+        </member>
+        <member name="P:Enderlook.Collections.BinaryHeapMax`1.System#Collections#Generic#ICollection{T}#IsReadOnly">
+            <inheritdoc cref="P:System.Collections.Generic.ICollection`1.IsReadOnly"/>
+        </member>
+        <member name="P:Enderlook.Collections.BinaryHeapMax`1.System#Collections#ICollection#IsSynchronized">
+            <inheritdoc cref="P:System.Collections.ICollection.IsSynchronized"/>
+        </member>
+        <member name="P:Enderlook.Collections.BinaryHeapMax`1.System#Collections#ICollection#SyncRoot">
+            <inheritdoc cref="P:System.Collections.ICollection.SyncRoot"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`1.System#Collections#Generic#ICollection{T}#Add(`0)">
+            <inheritdoc cref="M:System.Collections.Generic.ICollection`1.Add(`0)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`1.System#Collections#Generic#ICollection{T}#Contains(`0)">
+            <inheritdoc cref="M:System.Collections.Generic.ICollection`1.Contains(`0)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`1.System#Collections#Generic#ICollection{T}#CopyTo(`0[],System.Int32)">
+            <inheritdoc cref="M:System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`1.System#Collections#ICollection#CopyTo(System.Array,System.Int32)">
+            <inheritdoc cref="M:System.Collections.ICollection.CopyTo(System.Array,System.Int32)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`1.System#Collections#Generic#ICollection{T}#Remove(`0)">
+            <inheritdoc cref="M:System.Collections.Generic.ICollection`1.Remove(`0)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`1.GetEnumerator">
+            <inheritdoc cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`1.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc cref="M:System.Collections.IEnumerable.GetEnumerator"/>
+        </member>
+        <member name="T:Enderlook.Collections.BinaryHeapMin`2">
+            <summary>
+            Represent a basic binary heap where elements with lowest values have higher priority.
+            </summary>
+            <typeparam name="TData">Type of element.</typeparam>
+            <typeparam name="TValue">Type of priority.</typeparam>
+        </member>
+        <member name="P:Enderlook.Collections.BinaryHeapMin`2.Count">
+            <inheritdoc cref="P:Enderlook.Collections.IPriorityQueue`2.Count"/>
+        </member>
+        <member name="P:Enderlook.Collections.BinaryHeapMin`2.IsEmpty">
+            <inheritdoc cref="P:Enderlook.Collections.IPriorityQueue`2.IsEmpty"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`2.#ctor">
+            <summary>
+            Creates a new binary heap.
+            </summary>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`2.#ctor(System.Int32)">
+            <summary>
+            Creates a binary heap with the specified capacity.
+            </summary>
+            <param name="capacity">Amount of elements than can be stored in it.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown when <paramref name="capacity"/> is lower than 1.</exception>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`2.#ctor(System.Collections.Generic.IEnumerable{System.ValueTuple{`0,`1}})">
+            <summary>
+            Creates a new binary heap.
+            </summary>
+            <param name="values">Elements to add to the heap.</param>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`2.#ctor(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{`0,`1}})">
+            <summary>
+            Creates a new binary heap.
+            </summary>
+            <param name="values">Elements to add to the heap.</param>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`2.#ctor(System.ValueTuple{`0,`1}[])">
+            <summary>
+            Creates a new binary heap.
+            </summary>
+            <param name="values">Elements to add to the heap.</param>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`2.#ctor(System.Collections.Generic.KeyValuePair{`0,`1}[])">
+            <summary>
+            Creates a new binary heap.
+            </summary>
+            <param name="values">Elements to add to the heap.</param>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`2.Enqueue(`0,`1)">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`2.Enqueue(`0,`1)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`2.Enqueue(System.ValueTuple{`0,`1})">
+            <inheritdoc cref="!:IPriorityQueue&lt;TData, TValue&gt;.Enqueue((TData data, TValue value))"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`2.Enqueue(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <inheritdoc cref="!:IPriorityQueue&lt;TData, TValue&gt;.Enqueue(KeyValuePair&lt;TData, TValue&gt;))"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`2.EnqueueRange(System.Collections.Generic.IEnumerable{System.ValueTuple{`0,`1}})">
+            <inheritdoc cref="!:IPriorityQueue&lt;TData, TValue&gt;.EnqueueRange((TData data, TValue value)[])"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`2.EnqueueRange(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{`0,`1}})">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`2.EnqueueRange(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{`0,`1}})"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`2.EnqueueRange(System.ValueTuple{`0,`1}[])">
+            <inheritdoc cref="!:IPriorityQueue&lt;TData, TValue&gt;.EnqueueRange((TData data, TValue value)[])"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`2.EnqueueRange(System.Collections.Generic.KeyValuePair{`0,`1}[])">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`2.EnqueueRange(System.Collections.Generic.KeyValuePair{`0,`1}[])"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`2.Clear">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`2.Clear"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`2.Dequeue">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`2.Dequeue"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`2.Peek">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`2.Peek"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`2.TryDequeue(System.ValueTuple{`0,`1}@)">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`2.TryDequeue(`0@,`1@)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`2.TryDequeue(`0@,`1@)">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`2.TryDequeue(`0@,`1@)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`2.TryPeek(System.ValueTuple{`0,`1}@)">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`2.TryPeek(`0@,`1@)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`2.TryPeek(`0@,`1@)">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`2.TryPeek(`0@,`1@)"/>
+        </member>
+        <member name="P:Enderlook.Collections.BinaryHeapMin`2.System#Collections#Generic#ICollection{(TDatadata,TValuevalue)}#IsReadOnly">
+            <inheritdoc cref="P:System.Collections.Generic.ICollection`1.IsReadOnly"/>
+        </member>
+        <member name="P:Enderlook.Collections.BinaryHeapMin`2.System#Collections#ICollection#IsSynchronized">
+            <inheritdoc cref="P:System.Collections.ICollection.IsSynchronized"/>
+        </member>
+        <member name="P:Enderlook.Collections.BinaryHeapMin`2.System#Collections#ICollection#SyncRoot">
+            <inheritdoc cref="P:System.Collections.ICollection.SyncRoot"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`2.System#Collections#Generic#ICollection{(TDatadata,TValuevalue)}#Add(System.ValueTuple{`0,`1})">
+            <inheritdoc cref="M:System.Collections.Generic.ICollection`1.Add(`0)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`2.System#Collections#Generic#ICollection{(TDatadata,TValuevalue)}#Contains(System.ValueTuple{`0,`1})">
+            <inheritdoc cref="M:System.Collections.Generic.ICollection`1.Contains(`0)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`2.System#Collections#Generic#ICollection{(TDatadata,TValuevalue)}#CopyTo(System.ValueTuple{`0,`1}[],System.Int32)">
+            <inheritdoc cref="M:System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`2.System#Collections#ICollection#CopyTo(System.Array,System.Int32)">
+            <inheritdoc cref="M:System.Collections.ICollection.CopyTo(System.Array,System.Int32)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`2.System#Collections#Generic#ICollection{(TDatadata,TValuevalue)}#Remove(System.ValueTuple{`0,`1})">
+            <inheritdoc cref="M:System.Collections.Generic.ICollection`1.Remove(`0)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`2.GetEnumerator">
+            <inheritdoc cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMin`2.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc cref="M:System.Collections.IEnumerable.GetEnumerator"/>
+        </member>
+        <member name="T:Enderlook.Collections.BinaryHeapMax`2">
+            <summary>
+            Represent a basic binary heap where elements with highest values have higher priority.
+            </summary>
+            <typeparam name="TData">Type of element.</typeparam>
+            <typeparam name="TValue">Type of priority.</typeparam>
+        </member>
+        <member name="P:Enderlook.Collections.BinaryHeapMax`2.Count">
+            <inheritdoc cref="P:Enderlook.Collections.IPriorityQueue`2.Count"/>
+        </member>
+        <member name="P:Enderlook.Collections.BinaryHeapMax`2.IsEmpty">
+            <inheritdoc cref="P:Enderlook.Collections.IPriorityQueue`2.IsEmpty"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`2.#ctor">
+            <summary>
+            Creates a new binary heap.
+            </summary>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`2.#ctor(System.Int32)">
+            <summary>
+            Creates a binary heap with the specified capacity.
+            </summary>
+            <param name="capacity">Amount of elements than can be stored in it.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown when <paramref name="capacity"/> is lower than 1.</exception>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`2.#ctor(System.Collections.Generic.IEnumerable{System.ValueTuple{`0,`1}})">
+            <summary>
+            Creates a new binary heap.
+            </summary>
+            <param name="values">Elements to add to the heap.</param>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`2.#ctor(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{`0,`1}})">
+            <summary>
+            Creates a new binary heap.
+            </summary>
+            <param name="values">Elements to add to the heap.</param>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`2.#ctor(System.ValueTuple{`0,`1}[])">
+            <summary>
+            Creates a new binary heap.
+            </summary>
+            <param name="values">Elements to add to the heap.</param>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`2.#ctor(System.Collections.Generic.KeyValuePair{`0,`1}[])">
+            <summary>
+            Creates a new binary heap.
+            </summary>
+            <param name="values">Elements to add to the heap.</param>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`2.Enqueue(`0,`1)">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`2.Enqueue(`0,`1)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`2.Enqueue(System.ValueTuple{`0,`1})">
+            <inheritdoc cref="!:IPriorityQueue&lt;TData, TValue&gt;.Enqueue((TData data, TValue value))"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`2.Enqueue(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <inheritdoc cref="!:IPriorityQueue&lt;TData, TValue&gt;.Enqueue(KeyValuePair&lt;TData, TValue&gt;))"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`2.EnqueueRange(System.Collections.Generic.IEnumerable{System.ValueTuple{`0,`1}})">
+            <inheritdoc cref="!:IPriorityQueue&lt;TData, TValue&gt;.EnqueueRange((TData data, TValue value)[])"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`2.EnqueueRange(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{`0,`1}})">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`2.EnqueueRange(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{`0,`1}})"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`2.EnqueueRange(System.ValueTuple{`0,`1}[])">
+            <inheritdoc cref="!:IPriorityQueue&lt;TData, TValue&gt;.EnqueueRange((TData data, TValue value)[])"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`2.EnqueueRange(System.Collections.Generic.KeyValuePair{`0,`1}[])">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`2.EnqueueRange(System.Collections.Generic.KeyValuePair{`0,`1}[])"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`2.Clear">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`2.Clear"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`2.Dequeue">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`2.Dequeue"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`2.Peek">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`2.Peek"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`2.TryDequeue(System.ValueTuple{`0,`1}@)">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`2.TryDequeue(`0@,`1@)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`2.TryDequeue(`0@,`1@)">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`2.TryDequeue(`0@,`1@)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`2.TryPeek(System.ValueTuple{`0,`1}@)">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`2.TryPeek(`0@,`1@)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`2.TryPeek(`0@,`1@)">
+            <inheritdoc cref="M:Enderlook.Collections.IPriorityQueue`2.TryPeek(`0@,`1@)"/>
+        </member>
+        <member name="P:Enderlook.Collections.BinaryHeapMax`2.System#Collections#Generic#ICollection{(TDatadata,TValuevalue)}#IsReadOnly">
+            <inheritdoc cref="P:System.Collections.Generic.ICollection`1.IsReadOnly"/>
+        </member>
+        <member name="P:Enderlook.Collections.BinaryHeapMax`2.System#Collections#ICollection#IsSynchronized">
+            <inheritdoc cref="P:System.Collections.ICollection.IsSynchronized"/>
+        </member>
+        <member name="P:Enderlook.Collections.BinaryHeapMax`2.System#Collections#ICollection#SyncRoot">
+            <inheritdoc cref="P:System.Collections.ICollection.SyncRoot"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`2.System#Collections#Generic#ICollection{(TDatadata,TValuevalue)}#Add(System.ValueTuple{`0,`1})">
+            <inheritdoc cref="M:System.Collections.Generic.ICollection`1.Add(`0)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`2.System#Collections#Generic#ICollection{(TDatadata,TValuevalue)}#Contains(System.ValueTuple{`0,`1})">
+            <inheritdoc cref="M:System.Collections.Generic.ICollection`1.Contains(`0)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`2.System#Collections#Generic#ICollection{(TDatadata,TValuevalue)}#CopyTo(System.ValueTuple{`0,`1}[],System.Int32)">
+            <inheritdoc cref="M:System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`2.System#Collections#ICollection#CopyTo(System.Array,System.Int32)">
+            <inheritdoc cref="M:System.Collections.ICollection.CopyTo(System.Array,System.Int32)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`2.System#Collections#Generic#ICollection{(TDatadata,TValuevalue)}#Remove(System.ValueTuple{`0,`1})">
+            <inheritdoc cref="M:System.Collections.Generic.ICollection`1.Remove(`0)"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`2.GetEnumerator">
+            <inheritdoc cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator"/>
+        </member>
+        <member name="M:Enderlook.Collections.BinaryHeapMax`2.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc cref="M:System.Collections.IEnumerable.GetEnumerator"/>
+        </member>
+        <member name="T:Enderlook.Collections.IPriorityQueue`1">
+            <summary>
+            Represent a queue where each element has a priority
+            </summary>
+            <typeparam name="T">Type of element</typeparam>
+        </member>
+        <member name="P:Enderlook.Collections.IPriorityQueue`1.Count">
+            <inheritdoc cref="!:ICollection.Count"/>
+        </member>
+        <member name="P:Enderlook.Collections.IPriorityQueue`1.IsEmpty">
+            <summary>
+            Whenever the heap is empty or contains elements.
+            </summary>
+        </member>
+        <member name="M:Enderlook.Collections.IPriorityQueue`1.Clear">
+            <inheritdoc cref="M:System.Collections.Generic.ICollection`1.Clear"/>
+        </member>
+        <member name="M:Enderlook.Collections.IPriorityQueue`1.Enqueue(`0)">
             <summary>
             Add an element.
             </summary>
-            <param name="item">Element to add.</param>
-            <param name="priority">Priority of the element.</param>
+            <param name="element">Element to add.</param>
         </member>
-        <member name="M:Enderlook.Collections.PriorityQueue`1.DequeueMin">
+        <member name="M:Enderlook.Collections.IPriorityQueue`1.EnqueueRange(System.Collections.Generic.IEnumerable{`0})">
             <summary>
-            Dequeues the element with lowest priority.
+            Add several elements.
             </summary>
-            <returns>Element with lowest priority.</returns>
+            <param name="elements">Elements to add.</param>
         </member>
-        <member name="M:Enderlook.Collections.PriorityQueue`1.DequeueMax">
+        <member name="M:Enderlook.Collections.IPriorityQueue`1.EnqueueRange(`0[])">
             <summary>
-            Dequeues the element with highest priority.
+            Add several elements.
             </summary>
-            <returns>Element with highest priority.</returns>
+            <param name="elements">Elements to add.</param>
         </member>
-        <member name="M:Enderlook.Collections.PriorityQueue`1.Clear">
+        <member name="M:Enderlook.Collections.IPriorityQueue`1.Peek">
             <summary>
-            Clears the queue.
+            Returns the element with the highest priority without consuming it.
             </summary>
+            <return>Element with highest priority</return>
+            <exception cref="T:System.InvalidOperationException">Thrown when <see cref="P:Enderlook.Collections.IPriorityQueue`1.Count"/> is 0.</exception>
+        </member>
+        <member name="M:Enderlook.Collections.IPriorityQueue`1.TryPeek(`0@)">
+            <summary>
+            Try to return the element with the highest priority without consuming it.
+            </summary>
+            <param name="element">Element with highest priority, if any.</param>
+            <return>Whenever an element was peek or not if the heap was empty.</return>
+        </member>
+        <member name="M:Enderlook.Collections.IPriorityQueue`1.Dequeue">
+            <summary>
+            Consumes and return the element with the highest priority.
+            </summary>
+            <return>Element with the highest priority.</return>
+        </member>
+        <member name="M:Enderlook.Collections.IPriorityQueue`1.TryDequeue(`0@)">
+            <summary>
+            Try to consume and return the element with the highest priority.
+            </summary>
+            <param name="element">Element with the highest priority, if any.</param>
+            <return>Whenever an element was extracted or not if the heap was empty.</return>
+        </member>
+        <member name="T:Enderlook.Collections.IPriorityQueue`2">
+            <summary>
+            Represent a queue where each element has a priority
+            </summary>
+            <typeparam name="TData">Type of element.</typeparam>
+            <typeparam name="TValue">Type of priority.</typeparam>
+        </member>
+        <member name="P:Enderlook.Collections.IPriorityQueue`2.Count">
+            <inheritdoc cref="!:ICollection.Count"/>
+        </member>
+        <member name="P:Enderlook.Collections.IPriorityQueue`2.IsEmpty">
+            <summary>
+            Whenever the heap is empty or contains elements.
+            </summary>
+        </member>
+        <member name="M:Enderlook.Collections.IPriorityQueue`2.Clear">
+            <inheritdoc cref="M:System.Collections.Generic.ICollection`1.Clear"/>
+        </member>
+        <member name="M:Enderlook.Collections.IPriorityQueue`2.Enqueue(`0,`1)">
+            <summary>
+            Add element <paramref name="data"/> with priority <paramref name="value"/>.
+            </summary>
+            <param name="data">Element to add.</param>
+            <param name="value">Priority of the element.</param>
+        </member>
+        <member name="M:Enderlook.Collections.IPriorityQueue`2.Enqueue(System.ValueTuple{`0,`1})">
+            <summary>
+            Add element with priority.
+            </summary>
+            <param name="element">Element to add.</param>
+        </member>
+        <member name="M:Enderlook.Collections.IPriorityQueue`2.Enqueue(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <summary>
+            Add element with priority.
+            </summary>
+            <param name="element">Element to add.</param>
+        </member>
+        <member name="M:Enderlook.Collections.IPriorityQueue`2.EnqueueRange(System.Collections.Generic.IEnumerable{System.ValueTuple{`0,`1}})">
+            <summary>
+            Add several elements.
+            </summary>
+            <param name="elements">Elements to add.</param>
+        </member>
+        <member name="M:Enderlook.Collections.IPriorityQueue`2.EnqueueRange(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{`0,`1}})">
+            <summary>
+            Add several elements.
+            </summary>
+            <param name="elements">Elements to add.</param>
+        </member>
+        <member name="M:Enderlook.Collections.IPriorityQueue`2.EnqueueRange(System.ValueTuple{`0,`1}[])">
+            <summary>
+            Add several elements.
+            </summary>
+            <param name="elements">Elements to add.</param>
+        </member>
+        <member name="M:Enderlook.Collections.IPriorityQueue`2.EnqueueRange(System.Collections.Generic.KeyValuePair{`0,`1}[])">
+            <summary>
+            Add several elements.
+            </summary>
+            <param name="elements">Elements to add.</param>
+        </member>
+        <member name="M:Enderlook.Collections.IPriorityQueue`2.Peek">
+            <summary>
+            Returns the element with the highest priority without consuming it.
+            </summary>
+            <return>Element with highest priority</return>
+            <exception cref="T:System.InvalidOperationException">Thrown when <see cref="P:Enderlook.Collections.IPriorityQueue`2.Count"/> is 0.</exception>
+        </member>
+        <member name="M:Enderlook.Collections.IPriorityQueue`2.TryPeek(System.ValueTuple{`0,`1}@)">
+            <summary>
+            Try to return the element with the highest priority without consuming it.
+            </summary>
+            <param name="element">Element with highest priority, if any.</param>
+            <return>Whenever an element was peek or not if the heap was empty.</return>
+        </member>
+        <member name="M:Enderlook.Collections.IPriorityQueue`2.TryPeek(`0@,`1@)">
+            <summary>
+            Try to return the element with the highest priority without consuming it.
+            </summary>
+            <param name="data">Element with highest priority, if any.</param>
+            <param name="value">Priority of that element, if any.</param>
+            <return>Whenever an element was peek or not if the heap was empty.</return>
+        </member>
+        <member name="M:Enderlook.Collections.IPriorityQueue`2.Dequeue">
+            <summary>
+            Consumes and return the element with the highest priority.
+            </summary>
+            <return>Element with the highest priority.</return>
+        </member>
+        <member name="M:Enderlook.Collections.IPriorityQueue`2.TryDequeue(System.ValueTuple{`0,`1}@)">
+            <summary>
+            Try to consums and return the element with the highest priority.
+            </summary>
+            <param name="element">Element with the highest priority, if any.</param>
+            <return>Whenever an element was extracted or not if the heap was empty.</return>
+        </member>
+        <member name="M:Enderlook.Collections.IPriorityQueue`2.TryDequeue(`0@,`1@)">
+            <summary>
+            Try to consums and return the element with the highest priority.
+            </summary>
+            <param name="data">Element with highest priority, if any.</param>
+            <param name="value">Priority of that element, if any.</param>
+            <return>Whenever an element was extracted or not if the heap was empty.</return>
         </member>
         <member name="T:Enderlook.Collections.SortedList`1">
             <summary>
