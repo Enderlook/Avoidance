@@ -45,6 +45,10 @@ namespace Avoidance.Player
 
         [SerializeField, Tooltip("Healing per second when idle.")]
         private float healingRate;
+
+        [Header("Setup")]
+        [SerializeField, Tooltip("Object used to show in the mini map the win location.")]
+        private Transform winMarker;
 #pragma warning restore CS0649
 
         private enum PlayerState
@@ -86,8 +90,8 @@ namespace Avoidance.Player
             do
             {
                 winLocation = MazeGenerator.Graph.TweakOrientationToWorld(nodes.RandomPick().Position);
-                winLocation.y = .5f;
             } while (winLocation == transform.position);
+            winMarker.position = new Vector3(winLocation.x, .5f, winLocation.z);
 
             stateMachine = StateMachine<PlayerState, PlayerEvent>.Builder()
                 .SetInitialState(PlayerState.Idle)
