@@ -98,6 +98,11 @@ namespace Avoidance.Enemies
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
         private void OnDrawGizmos()
         {
+#if UNITY_EDITOR
+            if (rigidbody == null)
+                rigidbody = GetComponent<Rigidbody>();
+#endif
+
             if (canMove)
             {
                 Gizmos.color = Color.green;
