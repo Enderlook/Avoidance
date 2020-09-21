@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Avoidance.Enemies
 {
-    [RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(EnemyPathfinder)), RequireComponent(typeof(EnemyMovement)), RequireComponent(typeof(FieldOfView)), DefaultExecutionOrder(1)]
+    [RequireComponent(typeof(EnemyPathfinder)), RequireComponent(typeof(EnemyMovement)), RequireComponent(typeof(FieldOfView)), DefaultExecutionOrder(1)]
     public class EnemyBrain : MonoBehaviour
     {
 #pragma warning disable CS0649
