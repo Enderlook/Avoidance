@@ -22,6 +22,15 @@ namespace Avoidance.Player
         [SerializeField, Tooltip("Amount of stamina the player has.")]
         private float maximumStamina;
         private float stamina;
+        public float Stamina {
+            get => stamina;
+            set {
+                stamina = value;
+                if (stamina < 0)
+                    stamina = 0;
+                staminaBar.UpdateValues(stamina);
+            }
+        }
 
         [SerializeField, Tooltip("Stamina consumed per second when running.")]
         private float runCost;
@@ -34,6 +43,16 @@ namespace Avoidance.Player
 
         [SerializeField, Tooltip("Stamina recovering multiplier when idle.")]
         private float staminaIdleMultiplier;
+
+        [Header("XRay")]
+        [SerializeField, Tooltip("XRay effect configuration.")]
+        private XRay xRay;
+
+        [SerializeField, Tooltip("Stamina consumed per second when XRay is enabled.")]
+        private float xRayCost;
+
+        [SerializeField, Tooltip("Minimum amount of stamina to enable XRay.")]
+        private float minStaminaToXRay;
 
         [Header("Health")]
         [SerializeField, Tooltip("Health Bar.")]
@@ -78,8 +97,8 @@ namespace Avoidance.Player
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
         private void Awake()
         {
-            stamina = maximumStamina;
-            staminaBar.ManualUpdate(stamina, maximumStamina);
+            Stamina = maximumStamina;
+            staminaBar.ManualUpdate(Stamina, maximumStamina);
 
             health = maximumHealth;
             healthBar.ManualUpdate(health, maximumHealth);
@@ -92,6 +111,8 @@ namespace Avoidance.Player
                 winLocation = MazeGenerator.Graph.TweakOrientationToWorld(nodes.RandomPick().Position);
             } while (winLocation == transform.position);
             winMarker.position = new Vector3(winLocation.x, .5f, winLocation.z);
+
+            xRay.Initialize();
 
             stateMachine = StateMachine<PlayerState, PlayerEvent>.Builder()
                 .SetInitialState(PlayerState.Idle)
@@ -148,13 +169,27 @@ namespace Avoidance.Player
                 .Build();
             stateMachine.Start();
 
-            bool HasEnoughStamina() => stamina >= minStaminaToRun;
+            bool HasEnoughStamina() => Stamina >= minStaminaToRun;
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
         private void Update()
         {
             stateMachine.Update();
+
+            if (xRay.IsActive)
+            {
+                Stamina -= xRayCost * Time.deltaTime;
+                if (Stamina <= 0)
+                    xRay.IsActive = false;
+                else if (xRay.WantTrigger())
+                    xRay.IsActive = false;
+            }
+            else
+            {
+                if (Stamina >= minStaminaToXRay && xRay.WantTrigger())
+                    xRay.IsActive = true;
+            }
 
             if (Vector3.Distance(transform.position, winLocation) < .3f)
             {
@@ -187,9 +222,11 @@ namespace Avoidance.Player
             if (movementSystem.IsMoving)
                 stateMachine.Fire(PlayerEvent.StartWalking);
 
-            stamina += staminaRecovering * staminaIdleMultiplier * Time.deltaTime;
-            stamina = Mathf.Min(stamina, maximumStamina);
-            staminaBar.UpdateValues(stamina);
+            if (!xRay.IsActive)
+            {
+                Stamina += staminaRecovering * staminaIdleMultiplier * Time.deltaTime;
+                Stamina = Mathf.Min(Stamina, maximumStamina);
+            }
 
             health += healingRate * Time.deltaTime;
             health = Mathf.Max(health, maximumHealth);
@@ -210,9 +247,11 @@ namespace Avoidance.Player
 
         private void RecoverStamina()
         {
-            stamina += staminaRecovering * Time.deltaTime;
-            stamina = Mathf.Min(stamina, maximumStamina);
-            staminaBar.UpdateValues(stamina);
+            if (xRay.IsActive)
+                return;
+
+            Stamina += staminaRecovering * Time.deltaTime;
+            Stamina = Mathf.Min(Stamina, maximumStamina);
         }
 
         private void Run()
@@ -222,13 +261,9 @@ namespace Avoidance.Player
             if (!movementSystem.IsMoving)
                 stateMachine.Fire(PlayerEvent.StopMovement);
 
-            stamina -= runCost * Time.deltaTime;
-            if (stamina <= 0)
-            {
-                stamina = 0;
+            Stamina -= runCost * Time.deltaTime;
+            if (Stamina <= 0)
                 stateMachine.Fire(PlayerEvent.StopRunning);
-            }
-            staminaBar.UpdateValues(stamina);
         }
 
         private void Sneak()

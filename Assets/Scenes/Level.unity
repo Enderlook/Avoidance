@@ -1069,16 +1069,6 @@ PrefabInstance:
       objectReference: {fileID: 1213933970}
     - target: {fileID: 5368124319739733166, guid: 694119ec681dd424ea4e58d5c49c4bd7,
         type: 3}
-      propertyPath: maximumHealth
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 5368124319739733166, guid: 694119ec681dd424ea4e58d5c49c4bd7,
-        type: 3}
-      propertyPath: healingRate
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5368124319739733166, guid: 694119ec681dd424ea4e58d5c49c4bd7,
-        type: 3}
       propertyPath: winMarker
       value: 
       objectReference: {fileID: 1500191883}
@@ -1127,7 +1117,8 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8803689665215102987, guid: 694119ec681dd424ea4e58d5c49c4bd7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 694119ec681dd424ea4e58d5c49c4bd7, type: 3}
 --- !u!4 &1105267161 stripped
 Transform:

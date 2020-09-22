@@ -1680,7 +1680,6 @@ GameObject:
   - component: {fileID: 1105267162}
   - component: {fileID: 2132882680911115982}
   - component: {fileID: 5368124319739733166}
-  - component: {fileID: 8803689665215102987}
   m_Layer: 10
   m_Name: Player_Kyle
   m_TagString: Player
@@ -1833,27 +1832,17 @@ MonoBehaviour:
   minStaminaToRun: 10
   staminaRecovering: 2
   staminaIdleMultiplier: 3
+  xRay:
+    XRayInput:
+      keys: 65000000
+      canBeHoldDown: 0
+    XRayShader: {fileID: 4800000, guid: f76a134a93c3c1e40a03bfd0afe23ba5, type: 3}
+  xRayCost: 8
+  minStaminaToXRay: 15
   healthBar: {fileID: 0}
-  maximumHealth: 0
-  healingRate: 0
+  maximumHealth: 100
+  healingRate: 5
   winMarker: {fileID: 0}
---- !u!114 &8803689665215102987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5827938181232493132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 527c261ae98bb4041a6bad6bcafe24d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  XRayInput:
-    keys: 65000000
-    canBeHoldDown: 0
-  XRayShader: {fileID: 4800000, guid: f76a134a93c3c1e40a03bfd0afe23ba5, type: 3}
-  cooldown: 3
 --- !u!1 &6110230905401743243
 GameObject:
   m_ObjectHideFlags: 0
