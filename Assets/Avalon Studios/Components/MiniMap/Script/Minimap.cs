@@ -187,8 +187,8 @@ namespace AvalonStudios.Additions.Components.MinimapSystem
         [SerializeField, Tooltip("Minimap size.")]
         private Vector2 minimapSize = Vector2.zero;
 
-        private static Camera minimapCamera = null;
-        private static RectTransform root = null;
+        public static Camera MinimapCamera { get; set; }
+        public static RectTransform Root { get; set; }
 
         private RectTransform targetIconRect;
         private Vector3 currentVel = Vector3.zero;
@@ -199,8 +199,8 @@ namespace AvalonStudios.Additions.Components.MinimapSystem
             if (target == null && targetTag.Length != 0)
                 target = GameObject.FindGameObjectWithTag(targetTag);
 
-            minimapCamera = transform.GetChild(0).GetComponent<Camera>();
-            root = minimapRoot;
+            MinimapCamera = transform.GetChild(0).GetComponent<Camera>();
+            Root = minimapRoot;
 
             targetIconRect = targetIcon.GetComponent<RectTransform>();
         }
@@ -235,8 +235,8 @@ namespace AvalonStudios.Additions.Components.MinimapSystem
 
             if (Target != null)
             {
-                Vector3 targetPoint = minimapCamera.WorldToViewportPoint(TargetPosition);
-                targetIconRect.anchoredPosition = MinimapUtils.CalculatePosition(targetPoint, root);
+                Vector3 targetPoint = MinimapCamera.WorldToViewportPoint(TargetPosition);
+                targetIconRect.anchoredPosition = MinimapUtils.CalculatePosition(targetPoint, Root);
             }
             
             transform.position = Vector3.SmoothDamp(transform.position, pos, ref currentVel, time / speedFollow);
