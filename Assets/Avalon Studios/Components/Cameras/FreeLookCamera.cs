@@ -55,6 +55,12 @@ namespace AvalonStudios.Additions.Components.Cameras
         [SerializeField, Tooltip("The Tag name of the object.")]
         private string tagNameOfTheObject = "";
 
+        [SerializeField, Tooltip("Use Additinal Camera?.")]
+        private bool useAdditionalCamera = false;
+
+        [SerializeField, Tooltip("Additional Camera.")]
+        private Camera additionalCamera = null;
+
         [SerializeField, Tooltip("The hight of the Camera's view angle, measured in degrees along the local Y axis")]
         [Range(0, 179f)]
         private float fieldOfView = 70f;
@@ -119,6 +125,9 @@ namespace AvalonStudios.Additions.Components.Cameras
             originalPivotRotation = pivot.localRotation;
             mainCamera = pivot.GetChild(0).GetComponent<Camera>();
             originalCamRotation = mainCamera.transform.localRotation;
+
+            if (useAdditionalCamera)
+                additionalCamera = mainCamera.transform.GetChild(0).GetComponent<Camera>();
 
             resetRotation = mode == Mode.FollowTarget ? true : false;
         }
@@ -306,16 +315,14 @@ namespace AvalonStudios.Additions.Components.Cameras
             if (!mainCamera)
                 return;
 
+            float fow;
             if (isZooming)
-            {
-                float newFieldOfView = Mathf.Lerp(mainCamera.fieldOfView, cameraSettings.ZoomFieldOfView, time * cameraSettings.ZoomSpeed);
-                mainCamera.fieldOfView = newFieldOfView;
-            }
+                fow = Mathf.Lerp(mainCamera.fieldOfView, cameraSettings.ZoomFieldOfView, time * cameraSettings.ZoomSpeed);
             else
-            {
-                float originalFieldOfView = Mathf.Lerp(mainCamera.fieldOfView, fieldOfView, time * cameraSettings.ZoomSpeed);
-                mainCamera.fieldOfView = originalFieldOfView;
-            }
+                fow = Mathf.Lerp(mainCamera.fieldOfView, fieldOfView, time * cameraSettings.ZoomSpeed);
+
+            mainCamera.fieldOfView = fow;
+            if (useAdditionalCamera) additionalCamera.fieldOfView = fow;
         }
 
         private void SwitchCameraViewDirection()
