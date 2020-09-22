@@ -192,7 +192,6 @@ namespace AvalonStudios.Additions.Components.MinimapSystem
 
         private void Awake()
         {
-            GetMinimapSize();
             if (target == null && targetTag.Length != 0)
                 target = GameObject.FindGameObjectWithTag(targetTag);
 
