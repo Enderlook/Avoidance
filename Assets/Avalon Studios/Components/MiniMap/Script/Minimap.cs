@@ -1,9 +1,6 @@
 ﻿using AvalonStudios.Additions.Attributes;
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace AvalonStudios.Additions.Components.MinimapSystem
 {
@@ -223,7 +220,7 @@ namespace AvalonStudios.Additions.Components.MinimapSystem
             else if (Input.mouseScrollDelta.y < 0)
                 size = Mathf.MoveTowards(size, minSize, Mathf.Abs(Input.mouseScrollDelta.y) * sizeSpeed);
 
-            minimapCamera.orthographicSize = Size;
+            MinimapCamera.orthographicSize = Size;
         }
 
         private void FollowTarget(float time)
@@ -262,7 +259,7 @@ namespace AvalonStudios.Additions.Components.MinimapSystem
                 transform.eulerAngles = rot;
         }
 
-        private void GetMinimapSize()
+        public void GetMinimapSize()
         {
             minimapPosition = minimapRoot.anchoredPosition;
             minimapRotation = minimapRoot.eulerAngles;
