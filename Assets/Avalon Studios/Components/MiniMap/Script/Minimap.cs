@@ -222,6 +222,8 @@ namespace AvalonStudios.Additions.Components.MinimapSystem
                 size = Mathf.MoveTowards(size, maxSize, Input.mouseScrollDelta.y * sizeSpeed);
             else if (Input.mouseScrollDelta.y < 0)
                 size = Mathf.MoveTowards(size, minSize, Mathf.Abs(Input.mouseScrollDelta.y) * sizeSpeed);
+
+            minimapCamera.orthographicSize = Size;
         }
 
         private void FollowTarget(float time)
