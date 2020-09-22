@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Avoidance.Enemies
 {
-    [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(Animator))]
     public class EnemyMovement : MonoBehaviour
     {
 #pragma warning disable CS0649
@@ -34,6 +34,10 @@ namespace Avoidance.Enemies
 
         [SerializeField, Tooltip("Layers to avoid.")]
         private LayerMask layersToAvoid;
+
+        [Header("Setup")]
+        [SerializeField, Tooltip("Name of the walk animation.")]
+        private string walkAnimation;
 #pragma warning restore CS0649
 
         private Vector3 target;
@@ -42,7 +46,7 @@ namespace Avoidance.Enemies
         private Action onReachTarget;
 
         private new Rigidbody rigidbody;
-        private EnemyAnimation enemyAnimation;
+        private Animator animator;
 
         public void SetTarget(Vector3 target)
         {
@@ -50,7 +54,7 @@ namespace Avoidance.Enemies
             this.target.y = .5f;
         }
 
-        private void SetMovement(float animation) => enemyAnimation.PlayLocomotion(animation);
+        private void SetMovement(float animation) => animator.SetFloat(walkAnimation, animation);
 
         public void StartMovement()
         {
@@ -69,7 +73,7 @@ namespace Avoidance.Enemies
         private void Awake()
         {
             rigidbody = GetComponent<Rigidbody>();
-            enemyAnimation = GetComponent<EnemyAnimation>();
+            animator = GetComponent<Animator>();
         }
 
         private void FixedUpdate()

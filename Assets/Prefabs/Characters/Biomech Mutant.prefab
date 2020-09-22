@@ -2159,8 +2159,8 @@ GameObject:
   - component: {fileID: 5828525486448972187}
   - component: {fileID: 2363469143143719581}
   - component: {fileID: 7776316317720688436}
-  - component: {fileID: 4887748083227975811}
   - component: {fileID: 5663061320448801567}
+  - component: {fileID: 7203421324887659352}
   m_Layer: 11
   m_Name: Biomech Mutant
   m_TagString: Untagged
@@ -2302,6 +2302,7 @@ MonoBehaviour:
   layersToAvoid:
     serializedVersion: 2
     m_Bits: 2048
+  walkAnimation: Vertical
 --- !u!114 &7776316317720688436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2314,20 +2315,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3a355370fef3134ead5b160f9617b62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4887748083227975811
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1666891238228660144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0af1793c1d04f846bcb7a3440bd2271, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locomotionParameter: Vertical
-  shootParameter: 
 --- !u!114 &5663061320448801567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2349,6 +2336,20 @@ MonoBehaviour:
   isCircularMinimap: 1
   noChangeRotation: 1
   rotationDiameter: 140
+--- !u!114 &7203421324887659352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1666891238228660144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02b0c0fa7a075a14ebc3af30e5470d49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootingAnimation: isDuringShootAnimation
+  fireRate: 2
 --- !u!1 &1666891238228660146
 GameObject:
   m_ObjectHideFlags: 0

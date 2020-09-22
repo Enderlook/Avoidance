@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Avoidance.Enemies
 {
-    [RequireComponent(typeof(EnemyPathfinder)), RequireComponent(typeof(EnemyMovement)), RequireComponent(typeof(FieldOfView)), DefaultExecutionOrder(1)]
+    [RequireComponent(typeof(EnemyPathfinder)), RequireComponent(typeof(EnemyMovement)), RequireComponent(typeof(EnemyAttack)), RequireComponent(typeof(FieldOfView)), DefaultExecutionOrder(1)]
     public class EnemyBrain : MonoBehaviour
     {
 #pragma warning disable CS0649
@@ -35,6 +35,7 @@ namespace Avoidance.Enemies
         private EnemyPathfinder pathfinder;
         private EnemyMovement movement;
         private FieldOfView fieldOfView;
+        private EnemyAttack enemyAttack;
 
         public void SetWayPoints(params Node[] waypoints)
         {
@@ -87,6 +88,8 @@ namespace Avoidance.Enemies
 
             movement = GetComponent<EnemyMovement>();
 
+            enemyAttack = GetComponent<EnemyAttack>();
+
             idleLeft = idleDuration;
 
             stateMachine = StateMachine<EnemyState, EnemyEvent>.Builder()
@@ -121,6 +124,7 @@ namespace Avoidance.Enemies
                 .In(EnemyState.Shoot)
                     .ExecuteOnEntry(OnEntryShoot)
                     .ExecuteOnUpdate(OnUpdateShoot)
+                    .ExecuteOnExit(OnExitShoot)
                     .On(EnemyEvent.PlayerOutOfShootRange)
                         .Goto(EnemyState.Hunt)
                 .Build();
@@ -173,7 +177,11 @@ namespace Avoidance.Enemies
             }
         }
 
-        private void OnEntryShoot() => movement.StopMovement();
+        private void OnEntryShoot()
+        {
+            movement.StopMovement();
+            enemyAttack.CanShoot = true;
+        }
 
         private void OnUpdateShoot()
         {
@@ -181,10 +189,12 @@ namespace Avoidance.Enemies
                 stateMachine.Fire(EnemyEvent.LostPlayer);
             else if (Vector3.Distance(fieldOfView.GetVisibleTargets[0].position, transform.position) > shootingRange)
                 stateMachine.Fire(EnemyEvent.PlayerOutOfShootRange);
-            else
-            {
-                Debug.LogError("Unimplemented");
-            }
+        }
+
+        private void OnExitShoot()
+        {
+            enemyAttack.CanShoot = false;
+            movement.StartMovement();
         }
 
         private void OnEntryChase() => movement.SetOnReachTarget(OnReachTargetChase);
