@@ -17,7 +17,18 @@ Shader "AvalonStudios/Effects/Grid Shader 02"
 	SubShader
 	{
 		Tags{ "RenderType" = "Opaque"  "Queue" = "Geometry+0" "IsEmissive" = "true"  }
+		LOD 200
 		Cull Off
+		Stencil
+		{
+			Ref 1
+			CompFront Always
+			PassFront Replace
+			ZFailFront Keep
+			CompBack Always
+			PassBack Replace
+			ZFailBack Keep
+		}
 		CGINCLUDE
 		#include "UnityShaderVariables.cginc"
 		#include "UnityPBSLighting.cginc"
@@ -147,39 +158,39 @@ Shader "AvalonStudios/Effects/Grid Shader 02"
 }
 /*ASEBEGIN
 Version=18301
-0;0;1920;1059;2516.917;823.0991;1;True;False
+0;0;1920;1059;3485.019;1006.658;2.144629;True;False
 Node;AmplifyShaderEditor.CommentaryNode;12;-2040.073,-202.561;Inherit;False;1537.746;578.2463;;15;4;3;7;8;16;19;14;13;15;2;1;21;22;23;24;Grid and Emission;1,1,1,1;0;0
-Node;AmplifyShaderEditor.Vector2Node;21;-2015.678,146.5817;Inherit;False;Property;_SpeedGridOffset;Speed Grid Offset;6;0;Create;True;0;0;False;0;False;0,0;1,0;0;3;FLOAT2;0;FLOAT;1;FLOAT;2
+Node;AmplifyShaderEditor.Vector2Node;21;-2015.678,146.5817;Inherit;False;Property;_SpeedGridOffset;Speed Grid Offset;6;0;Create;True;0;0;False;0;False;0,0;0,0;0;3;FLOAT2;0;FLOAT;1;FLOAT;2
 Node;AmplifyShaderEditor.SimpleTimeNode;19;-1986.603,275.8403;Inherit;False;1;0;FLOAT;1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.PosVertexDataNode;14;-2020.208,-75.5708;Inherit;False;0;0;5;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.TransformPositionNode;15;-1810.48,-81.06055;Inherit;False;Object;Tangent;False;Fast;True;1;0;FLOAT3;0,0,0;False;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
 Node;AmplifyShaderEditor.Vector2Node;13;-1786.095,65.54221;Inherit;False;Property;_GridScale;Grid Scale;5;0;Create;True;0;0;False;0;False;1,1;4,4;0;3;FLOAT2;0;FLOAT;1;FLOAT;2
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;16;-1766.959,216.2936;Inherit;False;2;2;0;FLOAT2;0,0;False;1;FLOAT;0;False;1;FLOAT2;0
-Node;AmplifyShaderEditor.Vector2Node;22;-1412.175,178.4341;Inherit;False;Property;_LinesThickness;Lines Thickness;4;0;Create;True;0;0;False;0;False;0.9,0.9;0,0;0;3;FLOAT2;0;FLOAT;1;FLOAT;2
+Node;AmplifyShaderEditor.Vector2Node;22;-1412.175,178.4341;Inherit;False;Property;_LinesThickness;Lines Thickness;4;0;Create;True;0;0;False;0;False;0.9,0.9;0.9,0.9;0;3;FLOAT2;0;FLOAT;1;FLOAT;2
 Node;AmplifyShaderEditor.ScaleAndOffsetNode;8;-1521.177,48.12511;Inherit;False;3;0;FLOAT3;0,0,0;False;1;FLOAT3;2,0,0;False;2;FLOAT3;0,0,0;False;1;FLOAT3;0
-Node;AmplifyShaderEditor.WireNode;23;-1204.175,143.4341;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.FractNode;7;-1282.208,47.11397;Inherit;False;1;0;FLOAT3;0,0,0;False;1;FLOAT3;0
 Node;AmplifyShaderEditor.WireNode;24;-1153.175,223.4341;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.WireNode;23;-1204.175,143.4341;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.FunctionNode;1;-1108.375,47.01019;Inherit;False;Rectangle;-1;;1;6b23e0c975270fb4084c354b2c83366a;0;3;1;FLOAT2;0,0;False;2;FLOAT;0.9;False;3;FLOAT;0.9;False;1;FLOAT;0
 Node;AmplifyShaderEditor.CommentaryNode;11;-1194.193,-549.4053;Inherit;False;457.9426;257;;2;6;5;Albedo;1,1,1,1;0;0
-Node;AmplifyShaderEditor.ColorNode;3;-885.0189,-152.561;Inherit;False;Property;_GridColor;Grid Color;3;1;[HDR];Create;True;0;0;False;0;False;0,0.3944352,1,0;0,0.3944352,1,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.ColorNode;6;-1144.193,-499.4053;Inherit;False;Property;_MaterialColor;Material Color;1;0;Create;True;0;0;False;0;False;0,0,0,0;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.ColorNode;3;-885.0189,-152.561;Inherit;False;Property;_GridColor;Grid Color;3;1;[HDR];Create;True;0;0;False;0;False;0,0.3944352,1,0;0,11.0338,27.85762,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.CommentaryNode;27;-2030.917,-515.0991;Inherit;False;430;165;;2;25;26;Drawers;1,1,1,1;0;0
 Node;AmplifyShaderEditor.OneMinusNode;2;-871.0468,47.64182;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.ColorNode;6;-1144.193,-499.4053;Inherit;False;Property;_MaterialColor;Material Color;1;0;Create;True;0;0;False;0;False;0,0,0,0;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.RangedFloatNode;26;-1825.917,-465.0991;Inherit;False;Property;_GridEmission;Grid & Emission;2;0;Create;True;0;0;True;1;StyledHeader(Grid  Emission);False;1;1;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;25;-1980.917,-465.0991;Inherit;False;Property;_Albedo;Albedo;0;0;Create;True;0;0;True;1;StyledHeader(Albedo);False;1;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;25;-1980.917,-465.0991;Inherit;False;Property;_Albedo;Albedo;0;0;Create;True;0;0;True;1;StyledHeader(Albedo);False;1;1;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;5;-905.2501,-497.4108;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;FLOAT;0;False;1;COLOR;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;4;-645.1527,-71.65228;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;FLOAT;0;False;1;COLOR;0
-Node;AmplifyShaderEditor.StandardSurfaceOutputNode;0;-112.6391,-313.7805;Float;False;True;-1;2;ASEMaterialInspector;0;0;Standard;AvalonStudios/Effects/Grid Shader 02;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;Off;0;False;-1;0;False;-1;False;0;False;-1;0;False;-1;False;0;Opaque;0.5;True;True;0;False;Opaque;;Geometry;All;14;all;True;True;True;True;0;False;-1;False;0;False;-1;255;False;-1;255;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;False;2;15;10;25;False;0.5;True;0;0;False;-1;0;False;-1;0;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;0;0,0,0,0;VertexOffset;True;False;Cylindrical;False;Relative;0;;-1;-1;-1;-1;0;False;0;0;False;-1;-1;0;False;-1;0;0;0;False;0.1;False;-1;0;False;-1;16;0;FLOAT3;0,0,0;False;1;FLOAT3;0,0,0;False;2;FLOAT3;0,0,0;False;3;FLOAT;0;False;4;FLOAT;0;False;5;FLOAT;0;False;6;FLOAT3;0,0,0;False;7;FLOAT3;0,0,0;False;8;FLOAT;0;False;9;FLOAT;0;False;10;FLOAT;0;False;13;FLOAT3;0,0,0;False;11;FLOAT3;0,0,0;False;12;FLOAT3;0,0,0;False;14;FLOAT4;0,0,0,0;False;15;FLOAT3;0,0,0;False;0
+Node;AmplifyShaderEditor.StandardSurfaceOutputNode;0;-112.6391,-313.7805;Float;False;True;-1;2;ASEMaterialInspector;200;0;Standard;AvalonStudios/Effects/Grid Shader 02;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;Off;0;False;-1;0;False;-1;False;0;False;-1;0;False;-1;False;0;Opaque;0.5;True;True;0;False;Opaque;;Geometry;All;14;all;True;True;True;True;0;False;-1;True;1;False;-1;255;False;-1;255;False;-1;7;False;-1;3;False;-1;0;False;-1;1;False;-1;7;False;-1;3;False;-1;0;False;-1;1;False;-1;False;2;15;10;25;False;0.5;True;0;5;False;-1;10;False;-1;0;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;0;0,0,0,0;VertexOffset;True;False;Cylindrical;False;Relative;200;;-1;-1;-1;-1;0;False;0;0;False;-1;-1;0;False;-1;0;0;0;False;0.1;False;-1;0;False;-1;16;0;FLOAT3;0,0,0;False;1;FLOAT3;0,0,0;False;2;FLOAT3;0,0,0;False;3;FLOAT;0;False;4;FLOAT;0;False;5;FLOAT;0;False;6;FLOAT3;0,0,0;False;7;FLOAT3;0,0,0;False;8;FLOAT;0;False;9;FLOAT;0;False;10;FLOAT;0;False;13;FLOAT3;0,0,0;False;11;FLOAT3;0,0,0;False;12;FLOAT3;0,0,0;False;14;FLOAT4;0,0,0,0;False;15;FLOAT3;0,0,0;False;0
 WireConnection;15;0;14;0
 WireConnection;16;0;21;0
 WireConnection;16;1;19;0
 WireConnection;8;0;15;0
 WireConnection;8;1;13;0
 WireConnection;8;2;16;0
-WireConnection;23;0;22;1
 WireConnection;7;0;8;0
 WireConnection;24;0;22;2
+WireConnection;23;0;22;1
 WireConnection;1;1;7;0
 WireConnection;1;2;23;0
 WireConnection;1;3;24;0
@@ -191,4 +202,4 @@ WireConnection;4;1;2;0
 WireConnection;0;0;5;0
 WireConnection;0;2;4;0
 ASEEND*/
-//CHKSM=76ADEDCCE43CE0028A25DB4CEE5B61BAADEC855A
+//CHKSM=AD6EA8D53AAD205E8401736744BFBADE95B4B30A
