@@ -20,6 +20,7 @@ namespace AvalonStudios.Additions.Components.Cameras
             mainCamera.transform.localPosition = freeLook.CameraPosition;
             mainCamera.transform.localRotation = Quaternion.Euler(freeLook.CameraRotation);
             mainCamera.fieldOfView = freeLook.FieldOfView;
+            freeLook.AdditionalCamera.fieldOfView = freeLook.FieldOfView;
             mainCamera.nearClipPlane = freeLook.NearClippingPlanes;
             mainCamera.farClipPlane = freeLook.FarClippingPlanes;
 

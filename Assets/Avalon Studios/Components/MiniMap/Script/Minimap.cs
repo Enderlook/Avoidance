@@ -1,9 +1,6 @@
 ﻿using AvalonStudios.Additions.Attributes;
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace AvalonStudios.Additions.Components.MinimapSystem
 {
@@ -187,20 +184,19 @@ namespace AvalonStudios.Additions.Components.MinimapSystem
         [SerializeField, Tooltip("Minimap size.")]
         private Vector2 minimapSize = Vector2.zero;
 
-        private static Camera minimapCamera = null;
-        private static RectTransform root = null;
+        public static Camera MinimapCamera { get; set; }
+        public static RectTransform Root { get; set; }
 
         private RectTransform targetIconRect;
         private Vector3 currentVel = Vector3.zero;
 
         private void Awake()
         {
-            GetMinimapSize();
             if (target == null && targetTag.Length != 0)
                 target = GameObject.FindGameObjectWithTag(targetTag);
 
-            minimapCamera = transform.GetChild(0).GetComponent<Camera>();
-            root = minimapRoot;
+            MinimapCamera = transform.GetChild(0).GetComponent<Camera>();
+            Root = minimapRoot;
 
             targetIconRect = targetIcon.GetComponent<RectTransform>();
         }
@@ -223,7 +219,7 @@ namespace AvalonStudios.Additions.Components.MinimapSystem
             else if (Input.mouseScrollDelta.y < 0)
                 size = Mathf.MoveTowards(size, minSize, Mathf.Abs(Input.mouseScrollDelta.y) * sizeSpeed);
 
-            minimapCamera.orthographicSize = Size;
+            MinimapCamera.orthographicSize = Size;
         }
 
         private void FollowTarget(float time)
@@ -235,8 +231,8 @@ namespace AvalonStudios.Additions.Components.MinimapSystem
 
             if (Target != null)
             {
-                Vector3 targetPoint = minimapCamera.WorldToViewportPoint(TargetPosition);
-                targetIconRect.anchoredPosition = MinimapUtils.CalculatePosition(targetPoint, root);
+                Vector3 targetPoint = MinimapCamera.WorldToViewportPoint(TargetPosition);
+                targetIconRect.anchoredPosition = MinimapUtils.CalculatePosition(targetPoint, Root);
             }
             
             transform.position = Vector3.SmoothDamp(transform.position, pos, ref currentVel, time / speedFollow);
@@ -262,7 +258,7 @@ namespace AvalonStudios.Additions.Components.MinimapSystem
                 transform.eulerAngles = rot;
         }
 
-        private void GetMinimapSize()
+        public void GetMinimapSize()
         {
             minimapPosition = minimapRoot.anchoredPosition;
             minimapRotation = minimapRoot.eulerAngles;

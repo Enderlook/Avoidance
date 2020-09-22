@@ -158,6 +158,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 27703
   size: 2.5
+  minSize: 1.8
+  maxSize: 15
+  sizeSpeed: 1
   nearClippingPlanes: -4
   farClippingPlanes: 500
   targetTexture: {fileID: 8400000, guid: ae6a853e1a79aaa42a8c0784be575ee6, type: 2}

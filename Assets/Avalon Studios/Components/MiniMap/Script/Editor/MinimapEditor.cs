@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using AvalonStudios.Additions.Attributes.StylizedGUIs;
+
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
 
@@ -52,6 +54,12 @@ namespace AvalonStudios.Additions.Components.MinimapSystem
             targetIcon.color = minimap.TargetIconColor;
             targetIconOutline.effectColor = minimap.TargetIconOutlineColor;
             targetIconOutline.effectDistance = minimap.TargetIconOutlineEffectDistance;
+
+            GUIStyle stylesConstants = GUIStylesConstants.TitleStyle();
+            EditorGUILayout.LabelField("Camera Helper", stylesConstants);
+
+            if (GUILayout.Button("Save Minimap UI Position"))
+                minimap.GetMinimapSize();
         }
 
         private void OnEnable()
