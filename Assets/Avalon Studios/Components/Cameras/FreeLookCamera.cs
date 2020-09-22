@@ -23,6 +23,8 @@ namespace AvalonStudios.Additions.Components.Cameras
             }
         }
 
+        public Camera AdditionalCamera { get => additionalCamera; set => additionalCamera = value; }
+
         public float NearClippingPlanes { get { return nearClippingPlanes; } set { nearClippingPlanes = value; } }
 
         public float FarClippingPlanes { get { return farClippingPlanes; } set { farClippingPlanes = value; } }
