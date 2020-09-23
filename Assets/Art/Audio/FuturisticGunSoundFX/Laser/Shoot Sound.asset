@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 525132703, guid: a1787eaee3ab7ca4ba8f4cc484ae1faf, type: 3}
+  m_Name: SoundList
+  m_EditorClassIdentifier: 
+  sounds:
+  - {fileID: 6811210368084611366}
+  - {fileID: 6832367421329881454}
+  - {fileID: 402724961964485043}
+  - {fileID: 1314608724035100269}
+  playMode: 0
+  playListMode: 1
+  playsAmount: 1
+--- !u!114 &402724961964485043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1179470597, guid: a1787eaee3ab7ca4ba8f4cc484ae1faf, type: 3}
+  m_Name: Laser12
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 4a14985fcced5674bb9a3ec19845dc96, type: 3}
+  playsAmount: 1
+  modifiers: []
+--- !u!114 &1314608724035100269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1179470597, guid: a1787eaee3ab7ca4ba8f4cc484ae1faf, type: 3}
+  m_Name: Laser11
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 321c57076d528934aa5e2ed5eb2798ce, type: 3}
+  playsAmount: 1
+  modifiers: []
+--- !u!114 &6811210368084611366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1179470597, guid: a1787eaee3ab7ca4ba8f4cc484ae1faf, type: 3}
+  m_Name: Laser13
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 0800b4854e84ad243a55e1f7a44844f2, type: 3}
+  playsAmount: 1
+  modifiers: []
+--- !u!114 &6832367421329881454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1179470597, guid: a1787eaee3ab7ca4ba8f4cc484ae1faf, type: 3}
+  m_Name: Laser14
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: fa5a8beea5991cb4e8fa6302dc57c59f, type: 3}
+  playsAmount: 1
+  modifiers: []

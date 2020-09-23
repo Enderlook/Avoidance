@@ -2,6 +2,8 @@
 
 using Avoidance.Attacks;
 
+using Enderlook.Unity.Components.ScriptableSound;
+
 using System;
 
 using UnityEngine;
@@ -34,6 +36,9 @@ namespace Avoidance.Enemies
         [SerializeField, Tooltip("Shoots per second.")]
         private float fireRate;
         private float fireCooldown;
+
+        [SerializeField, Tooltip("Sound played on shoot.")]
+        private SimpleSoundPlayer shootSound;
 #pragma warning restore CS0649
 
         [NonSerialized]
@@ -64,6 +69,7 @@ namespace Avoidance.Enemies
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity animator.")]
         private void TriggerFromAnimation()
         {
+            shootSound.Play();
             GameObject tempProjectile = Instantiate(projectile, shootPosition.position, shootPosition.rotation);
             Projectile.AddComponentTo(tempProjectile, damage, speed, EnemySpawner.Player.position, hitLayers);
             isDuringShootAnimation = false;
