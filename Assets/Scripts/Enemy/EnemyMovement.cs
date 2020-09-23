@@ -98,15 +98,12 @@ namespace Avoidance.Enemies
 #if UNITY_EDITOR
         private List<(Vector3, Vector3)> avoidGizmos = new List<(Vector3, Vector3)>();
         private Vector3 finalAvoidGizmos;
-#endif
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
         private void OnDrawGizmos()
         {
-#if UNITY_EDITOR
             if (rigidbody == null)
                 rigidbody = GetComponent<Rigidbody>();
-#endif
-
             if (canMove)
             {
                 Gizmos.color = Color.green;
@@ -125,6 +122,7 @@ namespace Avoidance.Enemies
             Gizmos.color = orange;
             Gizmos.DrawLine(rigidbody.position, rigidbody.position + finalAvoidGizmos);
         }
+#endif
         private void AvoidCollisions()
         {
             float range = avoidanceRange * avoidanceRange;
