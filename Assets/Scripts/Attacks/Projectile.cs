@@ -1,5 +1,6 @@
 ﻿using AvalonStudios.Additions.Attributes;
-using AvalonStudios.Additions.Extensions;
+
+using Avoidance.Player;
 
 using UnityEngine;
 
@@ -12,24 +13,27 @@ namespace Avoidance.Attacks
         [SerializeField, Tooltip("Damage.")]
         private int damage = 1;
 
-        [SerializeField, Tooltip("Speed at which the projectile is fired.")]
-        private float speed = 0;
-
         [SerializeField, Tooltip("Layers to hit.")]
         private LayerMask hitLayers = default;
 
-        private new Rigidbody rigidbody;
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.TryGetComponent(out PlayerBrain player))
+                player.TakeDamage(damage);
+        }
 
-        private void Awake() => rigidbody = GetComponent<Rigidbody>();
-
-        private void FixedUpdate() => rigidbody.MovePosition(rigidbody.position + (transform.forward * speed * Time.fixedDeltaTime));
-
-        public static void AddComponentTo(GameObject obj, int damage, float speed, LayerMask hitLayers = default)
+        public static void AddComponentTo(GameObject obj, int damage, float speed, Vector3 target, LayerMask hitLayers = default)
         {
             Projectile projectile = obj.AddComponent<Projectile>();
             projectile.damage = damage;
-            projectile.speed = speed;
             projectile.hitLayers = hitLayers;
+
+            projectile.transform.LookAt(target);
+            Rigidbody rigidbody = projectile.GetComponent<Rigidbody>();
+
+            Vector3 direction = target - projectile.transform.position;
+            rigidbody.velocity = direction * speed;
         }
     }
 }

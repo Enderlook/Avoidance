@@ -1842,6 +1842,7 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   maximumHealth: 100
   healingRate: 5
+  healingDelay: 2
   winMarker: {fileID: 0}
 --- !u!1 &6110230905401743243
 GameObject:

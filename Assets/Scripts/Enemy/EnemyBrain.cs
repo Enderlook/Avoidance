@@ -114,6 +114,8 @@ namespace Avoidance.Enemies
                         .Goto(EnemyState.Chase)
                     .On(EnemyEvent.PlayerInShootRange)
                         .Goto(EnemyState.Shoot)
+                    .On(EnemyEvent.LostTrack)
+                        .Goto(EnemyState.Idle)
                 .In(EnemyState.Chase)
                     .ExecuteOnEntry(OnEntryChase)
                     .ExecuteOnUpdate(OnUpdateChase)
@@ -127,6 +129,8 @@ namespace Avoidance.Enemies
                     .ExecuteOnExit(OnExitShoot)
                     .On(EnemyEvent.PlayerOutOfShootRange)
                         .Goto(EnemyState.Hunt)
+                    .On(EnemyEvent.LostPlayer)
+                        .Goto(EnemyState.Chase)
                 .Build();
             stateMachine.Start();
         }
@@ -170,6 +174,7 @@ namespace Avoidance.Enemies
                 stateMachine.Fire(EnemyEvent.LostPlayer);
             else
             {
+                transform.LookAt(EnemySpawner.Player);
                 if (Vector3.Distance(fieldOfView.GetVisibleTargets[0].position, transform.position) <= shootingRange)
                     stateMachine.Fire(EnemyEvent.PlayerInShootRange);
                 else
@@ -189,6 +194,8 @@ namespace Avoidance.Enemies
                 stateMachine.Fire(EnemyEvent.LostPlayer);
             else if (Vector3.Distance(fieldOfView.GetVisibleTargets[0].position, transform.position) > shootingRange)
                 stateMachine.Fire(EnemyEvent.PlayerOutOfShootRange);
+            else
+                transform.LookAt(EnemySpawner.Player);
         }
 
         private void OnExitShoot()

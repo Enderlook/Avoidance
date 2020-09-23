@@ -65,7 +65,7 @@ namespace Avoidance.Enemies
         private void TriggerFromAnimation()
         {
             GameObject tempProjectile = Instantiate(projectile, shootPosition.position, shootPosition.rotation);
-            Projectile.AddComponentTo(tempProjectile, damage, speed, hitLayers);
+            Projectile.AddComponentTo(tempProjectile, damage, speed, EnemySpawner.Player.position, hitLayers);
             isDuringShootAnimation = false;
         }
     }

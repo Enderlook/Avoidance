@@ -65,6 +65,10 @@ namespace Avoidance.Player
         [SerializeField, Tooltip("Healing per second when idle.")]
         private float healingRate;
 
+        [SerializeField, Tooltip("Delay in seconds before start healing.")]
+        private float healingDelay;
+        private float healingCooldown;
+
         [Header("Setup")]
         [SerializeField, Tooltip("Object used to show in the mini map the win location.")]
         private Transform winMarker;
@@ -117,8 +121,8 @@ namespace Avoidance.Player
             stateMachine = StateMachine<PlayerState, PlayerEvent>.Builder()
                 .SetInitialState(PlayerState.Idle)
                 .In(PlayerState.Idle)
-                    .ExecuteOnEntry(movementSystem.SetIdle)
-                    .ExecuteOnUpdate(Rest)
+                    .ExecuteOnEntry(OnEntryIdle)
+                    .ExecuteOnUpdate(OnUpdateIdle)
                     .On(PlayerEvent.StartSneaking)
                         .Goto(PlayerState.Sneaking)
                     .On(PlayerEvent.StartWalking)
@@ -131,7 +135,7 @@ namespace Avoidance.Player
                     .Ignore(PlayerEvent.StopSneaking)
                 .In(PlayerState.Sneaking)
                     .ExecuteOnEntry(movementSystem.SetSneaking)
-                    .ExecuteOnUpdate(Sneak)
+                    .ExecuteOnUpdate(OnUpdateSneaking)
                     .On(PlayerEvent.StopMovement)
                         .Goto(PlayerState.Idle)
                     .On(PlayerEvent.StartRunning)
@@ -144,7 +148,7 @@ namespace Avoidance.Player
                     .Ignore(PlayerEvent.StartWalking)
                 .In(PlayerState.Walking)
                     .ExecuteOnEntry(movementSystem.SetWalking)
-                    .ExecuteOnUpdate(Walk)
+                    .ExecuteOnUpdate(OnUpdateWalking)
                     .On(PlayerEvent.StopMovement)
                         .Goto(PlayerState.Idle)
                     .On(PlayerEvent.StartSneaking)
@@ -156,7 +160,7 @@ namespace Avoidance.Player
                     .Ignore(PlayerEvent.StopRunning)
                     .Ignore(PlayerEvent.StopSneaking)
                 .In(PlayerState.Running)
-                    .ExecuteOnUpdate(Run)
+                    .ExecuteOnUpdate(OnUpdateRunning)
                     .ExecuteOnEntry(movementSystem.SetRunning)
                     .On(PlayerEvent.StopMovement)
                         .Goto(PlayerState.Idle)
@@ -208,7 +212,11 @@ namespace Avoidance.Player
         {
             health -= amount;
             if (health > 0)
+            {
+                healingCooldown = healingDelay;
+                healthBar.UpdateValues(health);
                 return;
+            }
 
             health = 0;
             healthBar.UpdateValues(health);
@@ -217,7 +225,13 @@ namespace Avoidance.Player
             Debug.LogError("Unimplemented");
         }
 
-        private void Rest()
+        private void OnEntryIdle()
+        {
+            movementSystem.SetIdle();
+            healingCooldown = healingDelay;
+        }
+
+        private void OnUpdateIdle()
         {
             if (movementSystem.IsMoving)
                 stateMachine.Fire(PlayerEvent.StartWalking);
@@ -228,12 +242,15 @@ namespace Avoidance.Player
                 Stamina = Mathf.Min(Stamina, maximumStamina);
             }
 
-            health += healingRate * Time.deltaTime;
-            health = Mathf.Max(health, maximumHealth);
-            healthBar.UpdateValues(health);
+            if ((healingCooldown -= Time.deltaTime) <= 0)
+            {
+                health += healingRate * Time.deltaTime;
+                health = Mathf.Min(health, maximumHealth);
+                healthBar.UpdateValues(health);
+            }
         }
 
-        private void Walk()
+        private void OnUpdateWalking()
         {
             if (movementSystem.IsSneaking)
                 stateMachine.Fire(PlayerEvent.StartSneaking);
@@ -254,7 +271,7 @@ namespace Avoidance.Player
             Stamina = Mathf.Min(Stamina, maximumStamina);
         }
 
-        private void Run()
+        private void OnUpdateRunning()
         {
             if (!movementSystem.IsRunning)
                 stateMachine.Fire(PlayerEvent.StopRunning);
@@ -266,7 +283,7 @@ namespace Avoidance.Player
                 stateMachine.Fire(PlayerEvent.StopRunning);
         }
 
-        private void Sneak()
+        private void OnUpdateSneaking()
         {
             if (!movementSystem.IsSneaking)
                 stateMachine.Fire(PlayerEvent.StopSneaking);
