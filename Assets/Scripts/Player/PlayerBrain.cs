@@ -1,6 +1,7 @@
 ﻿using Avoidance.Scene;
 
 using Enderlook.Enumerables;
+using Enderlook.Unity.Components.ScriptableSound;
 using Enderlook.Unity.Navigation;
 using Enderlook.Unity.Navigation.D2;
 using Enderlook.Unity.Prefabs.HealthBarGUI;
@@ -72,6 +73,12 @@ namespace Avoidance.Player
         [Header("Setup")]
         [SerializeField, Tooltip("Object used to show in the mini map the win location.")]
         private Transform winMarker;
+
+        [SerializeField, Tooltip("Sound played when healing.")]
+        private SimpleSoundPlayer healingSound;
+
+        [SerializeField, Tooltip("Sound played when restoring energy.")]
+        private SimpleSoundPlayer energySound;
 #pragma warning restore CS0649
 
         private enum PlayerState
@@ -236,17 +243,21 @@ namespace Avoidance.Player
             if (movementSystem.IsMoving)
                 stateMachine.Fire(PlayerEvent.StartWalking);
 
-            if (!xRay.IsActive)
-            {
-                Stamina += staminaRecovering * staminaIdleMultiplier * Time.deltaTime;
-                Stamina = Mathf.Min(Stamina, maximumStamina);
-            }
+            RecoverStamina(staminaIdleMultiplier);
 
             if ((healingCooldown -= Time.deltaTime) <= 0)
             {
                 health += healingRate * Time.deltaTime;
                 health = Mathf.Min(health, maximumHealth);
                 healthBar.UpdateValues(health);
+
+                if (health < maximumHealth)
+                {
+                    if (!healingSound.IsPlaying)
+                        healingSound.Play();
+                }
+                else
+                    health = maximumHealth;
             }
         }
 
@@ -259,16 +270,23 @@ namespace Avoidance.Player
             if (!movementSystem.IsMoving)
                 stateMachine.Fire(PlayerEvent.StopMovement);
 
-            RecoverStamina();
+            RecoverStamina(1);
         }
 
-        private void RecoverStamina()
+        private void RecoverStamina(float multiplier)
         {
             if (xRay.IsActive)
                 return;
 
-            Stamina += staminaRecovering * Time.deltaTime;
-            Stamina = Mathf.Min(Stamina, maximumStamina);
+            Stamina += staminaRecovering * Time.deltaTime * multiplier;
+
+            if (Stamina < maximumStamina)
+            {
+                if (!energySound.IsPlaying)
+                    energySound.Play();
+            }
+            else
+                Stamina = maximumStamina;
         }
 
         private void OnUpdateRunning()
@@ -290,7 +308,7 @@ namespace Avoidance.Player
             if (!movementSystem.IsMoving)
                 stateMachine.Fire(PlayerEvent.StopMovement);
 
-            RecoverStamina();
+            RecoverStamina(1);
         }
     }
 }
