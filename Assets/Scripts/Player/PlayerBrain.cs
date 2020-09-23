@@ -96,6 +96,8 @@ namespace Avoidance.Player
 
         private ThirdPersonMovementRigidbody movementSystem;
 
+        private UIManagement uiManagment;
+
         private Vector3 winLocation;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
@@ -108,6 +110,7 @@ namespace Avoidance.Player
             healthBar.ManualUpdate(health, maximumHealth);
 
             movementSystem = GetComponent<ThirdPersonMovementRigidbody>();
+            uiManagment = FindObjectOfType<UIManagement>();
 
             IReadOnlyCollection<Node> nodes = ((IGraphAtoms<Node, Edge>)MazeGenerator.Graph).Nodes;
             do
@@ -221,6 +224,7 @@ namespace Avoidance.Player
             health = 0;
             healthBar.UpdateValues(health);
             Destroy(gameObject);
+            uiManagment.Load("Level");
 
             Debug.LogError("Unimplemented");
         }
