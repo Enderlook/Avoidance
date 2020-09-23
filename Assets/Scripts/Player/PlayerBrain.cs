@@ -230,10 +230,7 @@ namespace Avoidance.Player
 
             health = 0;
             healthBar.UpdateValues(health);
-            Destroy(gameObject);
             uiManagment.Load("Level");
-
-            Debug.LogError("Unimplemented");
         }
 
         private void OnEntryIdle()
