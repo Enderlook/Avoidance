@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1179470597, guid: a1787eaee3ab7ca4ba8f4cc484ae1faf, type: 3}
+  m_Name: Game Repeat
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 3b1004ad812b932439f5176254f177a2, type: 3}
+  playsAmount: -1
+  modifiers:
+  - {fileID: 2912285323481646590}
+--- !u!114 &2912285323481646590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 877298264, guid: a1787eaee3ab7ca4ba8f4cc484ae1faf, type: 3}
+  m_Name: Repeat
+  m_EditorClassIdentifier: 
+  startAtSecond: 54.85

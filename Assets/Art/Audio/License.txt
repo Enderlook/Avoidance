@@ -9,4 +9,7 @@ Seamless Energy Emission Loop made by zeroisnotnull under license CC0
 Space Ship Shield Sounds made by bart under license CC0
 	https://opengameart.org/content/space-ship-shield-sounds
 	roboticsqueeze.flac
-	
+
+difficulties made by Gundatsch under license CC-BY 3.0
+	https://opengameart.org/content/difficulties
+	Game.ogg
