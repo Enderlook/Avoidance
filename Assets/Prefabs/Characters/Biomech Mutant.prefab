@@ -2262,7 +2262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14bed8c9aaa3ee64387bce920d85d70a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewRadius: 2
+  viewRadius: 3
   viewAngle: 90
   targetsToDetect:
     serializedVersion: 2
@@ -2349,7 +2349,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootingAnimation: Shoot
-  fireRate: 2
+  fireRate: 1
 --- !u!1 &1666891238228660146
 GameObject:
   m_ObjectHideFlags: 0
