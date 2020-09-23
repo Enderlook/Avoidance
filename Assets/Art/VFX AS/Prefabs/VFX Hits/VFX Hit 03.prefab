@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7826954708463386162}
   - component: {fileID: 7826954708463386164}
   - component: {fileID: 7826954708463386163}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Beam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4822,7 +4822,7 @@ GameObject:
   - component: {fileID: 7826954708730396727}
   - component: {fileID: 7826954708730396729}
   - component: {fileID: 7826954708730396728}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Sparks 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9651,7 +9651,7 @@ GameObject:
   - component: {fileID: 7826954708768895561}
   - component: {fileID: 7826954708768895563}
   - component: {fileID: 7826954708768895562}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14480,7 +14480,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7826954708784745161}
-  m_Layer: 0
+  - component: {fileID: 3744649110274561857}
+  m_Layer: 15
   m_Name: VFX Hit 03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14502,3 +14503,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3744649110274561857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7826954708784745160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -331317425, guid: cf777bf1f75adb64da66e05a6c76ad9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  includeNestedParticleSystems: 1

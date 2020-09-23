@@ -1,4 +1,8 @@
-﻿using System;
+﻿using AvalonStudios.Additions.Attributes;
+
+using Avoidance.Attacks;
+
+using System;
 
 using UnityEngine;
 
@@ -8,8 +12,24 @@ namespace Avoidance.Enemies
     public class EnemyAttack : MonoBehaviour
     {
 #pragma warning disable CS0649
+        [StyledHeader("General")]
+        [SerializeField, Tooltip("Prefab projectile.")]
+        private GameObject projectile = null;
+
+        [SerializeField, Tooltip("Shoot position.")]
+        private Transform shootPosition = null;
+
+        [SerializeField, Tooltip("Layers to hit")]
+        private LayerMask hitLayers = default;
+
         [SerializeField, Tooltip("Name of the shooting animation.")]
         private string shootingAnimation;
+
+        [SerializeField, Tooltip("Projectile damage.")]
+        private int damage = 0;
+
+        [SerializeField, Tooltip("Speed at which the projectile is fired.")]
+        private float speed = 0;
 
         [SerializeField, Tooltip("Shoots per second.")]
         private float fireRate;
@@ -44,8 +64,9 @@ namespace Avoidance.Enemies
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity animator.")]
         private void TriggerFromAnimation()
         {
+            GameObject tempProjectile = Instantiate(projectile, shootPosition.position, shootPosition.rotation);
+            Projectile.AddComponentTo(tempProjectile, damage, speed, hitLayers);
             isDuringShootAnimation = false;
-            Debug.Log("Phew");
         }
     }
 }
