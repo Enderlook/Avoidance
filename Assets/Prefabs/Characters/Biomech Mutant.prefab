@@ -2348,7 +2348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02b0c0fa7a075a14ebc3af30e5470d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingAnimation: isDuringShootAnimation
+  shootingAnimation: Shoot
   fireRate: 2
 --- !u!1 &1666891238228660146
 GameObject:

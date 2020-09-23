@@ -36,7 +36,7 @@ namespace Avoidance.Enemies
                 {
                     fireCooldown = 1 / fireRate;
                     isDuringShootAnimation = true;
-                    animator.Play(shootingAnimation);
+                    animator.SetTrigger(shootingAnimation);
                 }
             }
         }
