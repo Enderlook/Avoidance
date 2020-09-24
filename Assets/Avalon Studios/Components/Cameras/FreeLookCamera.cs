@@ -8,6 +8,7 @@ namespace AvalonStudios.Additions.Components.Cameras
     public class FreeLookCamera : MonoBehaviour
     {
         // Properties
+        public static bool Stop { get; set; } = false;
 
         public Mode GetMode => mode;
 
@@ -136,6 +137,9 @@ namespace AvalonStudios.Additions.Components.Cameras
 
         private void Update()
         {
+            if (Stop)
+                return;
+
             Rotate(Time.deltaTime);
             Zoom(cameraSettings.AimButton.Execute(), Time.deltaTime);
 
@@ -156,6 +160,9 @@ namespace AvalonStudios.Additions.Components.Cameras
 
         private void LateUpdate()
         {
+            if (Stop)
+                return;
+
             if (mode == Mode.FreeLook && follow != null)
                 return;
 

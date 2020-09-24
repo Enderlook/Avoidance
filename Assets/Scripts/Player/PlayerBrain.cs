@@ -87,6 +87,7 @@ namespace Avoidance.Player
             Sneaking,
             Walking,
             Running,
+            Death,
         }
 
         private enum PlayerEvent
@@ -97,13 +98,19 @@ namespace Avoidance.Player
             StopMovement,
             StopSneaking,
             StopRunning,
+            Death,
         }
+
+        public static bool Win { get; private set; } = false;
+
+        public static bool Death { get; private set; } = false;
 
         private StateMachine<PlayerState, PlayerEvent> stateMachine;
 
         private ThirdPersonMovementRigidbody movementSystem;
+        private PlayerAnimation playerAnimation;
 
-        private UIManagement uiManagment;
+        private Menu menu;
 
         private Vector3 winLocation;
 
@@ -117,7 +124,8 @@ namespace Avoidance.Player
             healthBar.ManualUpdate(health, maximumHealth);
 
             movementSystem = GetComponent<ThirdPersonMovementRigidbody>();
-            uiManagment = FindObjectOfType<UIManagement>();
+            playerAnimation = GetComponent<PlayerAnimation>();
+            menu = FindObjectOfType<Menu>();
 
             IReadOnlyCollection<Node> nodes = ((IGraphAtoms<Node, Edge>)MazeGenerator.Graph).Nodes;
             do
@@ -133,11 +141,19 @@ namespace Avoidance.Player
                 .In(PlayerState.Idle)
                     .ExecuteOnEntry(OnEntryIdle)
                     .ExecuteOnUpdate(OnUpdateIdle)
+                    .On(PlayerEvent.Death)
+                        .Goto(PlayerState.Death)
                     .On(PlayerEvent.StartSneaking)
+                        .If(IsDead)
+                            .Goto(PlayerState.Death)
                         .Goto(PlayerState.Sneaking)
                     .On(PlayerEvent.StartWalking)
+                        .If(IsDead)
+                            .Goto(PlayerState.Death)
                         .Goto(PlayerState.Walking)
                     .On(PlayerEvent.StartRunning)
+                        .If(IsDead)
+                            .Goto(PlayerState.Death)
                         .If(HasEnoughStamina)
                             .Goto(PlayerState.Running)
                         .Goto(PlayerState.Walking)
@@ -146,6 +162,8 @@ namespace Avoidance.Player
                 .In(PlayerState.Sneaking)
                     .ExecuteOnEntry(movementSystem.SetSneaking)
                     .ExecuteOnUpdate(OnUpdateSneaking)
+                    .On(PlayerEvent.Death)
+                        .Goto(PlayerState.Death)
                     .On(PlayerEvent.StopMovement)
                         .Goto(PlayerState.Idle)
                     .On(PlayerEvent.StartRunning)
@@ -159,6 +177,8 @@ namespace Avoidance.Player
                 .In(PlayerState.Walking)
                     .ExecuteOnEntry(movementSystem.SetWalking)
                     .ExecuteOnUpdate(OnUpdateWalking)
+                    .On(PlayerEvent.Death)
+                        .Goto(PlayerState.Death)
                     .On(PlayerEvent.StopMovement)
                         .Goto(PlayerState.Idle)
                     .On(PlayerEvent.StartSneaking)
@@ -172,6 +192,8 @@ namespace Avoidance.Player
                 .In(PlayerState.Running)
                     .ExecuteOnUpdate(OnUpdateRunning)
                     .ExecuteOnEntry(movementSystem.SetRunning)
+                    .On(PlayerEvent.Death)
+                        .Goto(PlayerState.Death)
                     .On(PlayerEvent.StopMovement)
                         .Goto(PlayerState.Idle)
                     .On(PlayerEvent.StartSneaking)
@@ -180,15 +202,20 @@ namespace Avoidance.Player
                         .Goto(PlayerState.Walking)
                     .Ignore(PlayerEvent.StopSneaking)
                     .Ignore(PlayerEvent.StartWalking)
+                .In(PlayerState.Death)
+                .ExecuteOnEntry(OnEntryDeath)
                 .Build();
             stateMachine.Start();
 
             bool HasEnoughStamina() => Stamina >= minStaminaToRun;
+            bool IsDead() => Death;
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
         private void Update()
         {
+            if (Death)
+                return;
             stateMachine.Update();
 
             if (xRay.IsActive)
@@ -207,7 +234,11 @@ namespace Avoidance.Player
 
             if (Vector3.Distance(transform.position, winLocation) < .3f)
             {
-                Debug.Log("Unimplemented");
+                stateMachine.Fire(PlayerEvent.StopMovement);
+                gameObject.layer = default;
+                Win = true;
+                playerAnimation.WinAnimation(Win);
+                menu.GameOver(Win);
             }
         }
 
@@ -229,8 +260,18 @@ namespace Avoidance.Player
             }
 
             health = 0;
-            healthBar.UpdateValues(health);
-            uiManagment.Load("Level");
+            Death = true;
+            stateMachine.Fire(PlayerEvent.Death);
+            movementSystem.DeactiveGravity();
+            GetComponent<Collider>().isTrigger = true;
+            gameObject.layer = default;
+            menu.GameOver(false);
+        }
+
+        private void OnEntryDeath() 
+        {
+            movementSystem.SetIdle();
+            playerAnimation.SetDeathAnimation(Death); 
         }
 
         private void OnEntryIdle()

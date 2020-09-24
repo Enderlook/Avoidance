@@ -12,7 +12,7 @@ namespace Avoidance.Scene
         public void Exit() => Application.Quit();
 
         public void GoToMenu()
-            => FixTimeWhenSceneEndsLoading(SceneManager.LoadSceneAsync(MAIN_MENU_SCENE)).completed += (_) => Destroy(Camera.main.gameObject);
+            => FixTimeWhenSceneEndsLoading(SceneManager.LoadSceneAsync(MAIN_MENU_SCENE));
 
         private AsyncOperation FixTimeWhenSceneEndsLoading(AsyncOperation asyncOperation)
         {

@@ -157,9 +157,9 @@ MonoBehaviour:
   cullingMask:
     serializedVersion: 2
     m_Bits: 27703
-  size: 2.5
+  size: 3.5
   minSize: 1.8
-  maxSize: 15
+  maxSize: 12
   sizeSpeed: 1
   nearClippingPlanes: -4
   farClippingPlanes: 500
@@ -626,7 +626,7 @@ Camera:
   far clip plane: 500
   field of view: 60
   orthographic: 1
-  orthographic size: 2.5
+  orthographic size: 3.5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2

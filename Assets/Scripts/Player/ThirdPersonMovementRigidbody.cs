@@ -82,8 +82,13 @@ namespace Avoidance.Player
 
         public bool IsMoving => movement != Vector3.zero;
 
+        public void DeactiveGravity() => rigidbody.isKinematic = true;
+
         private void FixedUpdate()
         {
+            if (PlayerBrain.Win || PlayerBrain.Death)
+                return;
+
             if (!groundChecker.IsGrounded())
                 return;
 

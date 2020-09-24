@@ -1814,6 +1814,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   locomotionParameter: Vertical
+  deathAnimationParameter: is death
+  winAnimationParameter: won
 --- !u!114 &5368124319739733166
 MonoBehaviour:
   m_ObjectHideFlags: 0
