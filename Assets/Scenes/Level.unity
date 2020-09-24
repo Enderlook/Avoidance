@@ -1418,6 +1418,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2253235712746354678, guid: 694119ec681dd424ea4e58d5c49c4bd7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4885658674574210939, guid: 694119ec681dd424ea4e58d5c49c4bd7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5368124319739733166, guid: 694119ec681dd424ea4e58d5c49c4bd7,
         type: 3}
       propertyPath: staminaBar
@@ -1447,6 +1457,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player_Kyle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7007994737408375308, guid: 694119ec681dd424ea4e58d5c49c4bd7,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7402694293063364703, guid: 694119ec681dd424ea4e58d5c49c4bd7,
         type: 3}
