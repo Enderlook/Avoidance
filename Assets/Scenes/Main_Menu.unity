@@ -1542,6 +1542,7 @@ GameObject:
   - component: {fileID: 1893854949}
   - component: {fileID: 1893854948}
   - component: {fileID: 1893854951}
+  - component: {fileID: 1893854952}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1674,6 +1675,27 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &1893854952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1893854947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c97400377d5e00b48ac4ff2c7bdd9fb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 1920
+  height: 1080
+  optimizeForManyScreenshots: 1
+  screenshotInput:
+    keys: 72000000
+    canBeHoldDown: 0
+  timeBtwScreenshots: 0.5
+  format: 1
+  folder: Assets/Renders
 --- !u!1 &1923787028
 GameObject:
   m_ObjectHideFlags: 0
