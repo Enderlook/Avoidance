@@ -7,7 +7,7 @@ namespace Avoidance.Attacks
     public class SpawnOnCollision : MonoBehaviour
     {
         [SerializeField, Tooltip("Prefab spawn on hit.")]
-        private GameObject prefab;
+        private GameObject prefab = null;
 
         private void OnCollisionEnter(Collision collision)
         {
