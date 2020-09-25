@@ -49,7 +49,7 @@ namespace AvalonStudios.Additions.Components.RenderSystem
             camera = GetComponent<Camera>();
         }
 
-        private void Update()
+        private void LateUpdate()
         {
             if (screenshotInput.Execute() && Cooldown())
                 Screenshot();
@@ -83,6 +83,7 @@ namespace AvalonStudios.Additions.Components.RenderSystem
 
             RenderTexture.active = renderTexture;
             screenshot.ReadPixels(rect, 0, 0);
+            screenshot.Apply();
 
             camera.targetTexture = null;
             RenderTexture.active = null;
