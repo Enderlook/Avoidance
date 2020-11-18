@@ -2827,35 +2827,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1227797125897716391, guid: 694119ec681dd424ea4e58d5c49c4bd7,
+    - target: {fileID: 49217823079364683, guid: 694119ec681dd424ea4e58d5c49c4bd7,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1682872723364306267, guid: 694119ec681dd424ea4e58d5c49c4bd7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2253235712746354678, guid: 694119ec681dd424ea4e58d5c49c4bd7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4291217198470910521, guid: 694119ec681dd424ea4e58d5c49c4bd7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4376822621621338089, guid: 694119ec681dd424ea4e58d5c49c4bd7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4885658674574210939, guid: 694119ec681dd424ea4e58d5c49c4bd7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: m_RootOrder
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5368124319739733166, guid: 694119ec681dd424ea4e58d5c49c4bd7,
         type: 3}
@@ -2882,40 +2857,10 @@ PrefabInstance:
       propertyPath: energySound
       value: 
       objectReference: {fileID: 425975954}
-    - target: {fileID: 5394713591979385127, guid: 694119ec681dd424ea4e58d5c49c4bd7,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 633c975088074034f887bc4818854264, type: 2}
-    - target: {fileID: 5394713591979385127, guid: 694119ec681dd424ea4e58d5c49c4bd7,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5394713591979385127, guid: 694119ec681dd424ea4e58d5c49c4bd7,
-        type: 3}
-      propertyPath: m_ReceiveShadows
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5738677186376676881, guid: 694119ec681dd424ea4e58d5c49c4bd7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5827938181232493132, guid: 694119ec681dd424ea4e58d5c49c4bd7,
         type: 3}
       propertyPath: m_Name
       value: Player_Kyle
-      objectReference: {fileID: 0}
-    - target: {fileID: 6730614919570271636, guid: 694119ec681dd424ea4e58d5c49c4bd7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7007994737408375308, guid: 694119ec681dd424ea4e58d5c49c4bd7,
-        type: 3}
-      propertyPath: m_Intensity
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7402694293063364703, guid: 694119ec681dd424ea4e58d5c49c4bd7,
         type: 3}
