@@ -1,5 +1,7 @@
 ﻿using Avoidance.Scene;
 
+using AvalonStudios.Additions.Attributes;
+
 using Enderlook.Enumerables;
 using Enderlook.Unity.Components.ScriptableSound;
 using Enderlook.Unity.Navigation;
@@ -16,7 +18,7 @@ namespace Avoidance.Player
     public class PlayerBrain : MonoBehaviour
     {
 #pragma warning disable CS0649
-        [Header("Stamina")]
+        [StyledHeader("Stamina")]
         [SerializeField, Tooltip("Stamina Bar.")]
         private HealthBar staminaBar;
 
@@ -45,7 +47,7 @@ namespace Avoidance.Player
         [SerializeField, Tooltip("Stamina recovering multiplier when idle.")]
         private float staminaIdleMultiplier;
 
-        [Header("XRay")]
+        [StyledHeader("XRay")]
         [SerializeField, Tooltip("XRay effect configuration.")]
         private XRay xRay;
 
@@ -55,7 +57,7 @@ namespace Avoidance.Player
         [SerializeField, Tooltip("Minimum amount of stamina to enable XRay.")]
         private float minStaminaToXRay;
 
-        [Header("Health")]
+        [StyledHeader("Health")]
         [SerializeField, Tooltip("Health Bar.")]
         private HealthBar healthBar;
 
@@ -70,7 +72,7 @@ namespace Avoidance.Player
         private float healingDelay;
         private float healingCooldown;
 
-        [Header("Setup")]
+        [StyledHeader("Setup")]
         [SerializeField, Tooltip("Object used to show in the mini map the win location.")]
         private Transform winMarker;
 
