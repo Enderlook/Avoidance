@@ -41,7 +41,7 @@ namespace AvalonStudios.Additions.Components.MinimapSystem
             camera.transform.localRotation = Quaternion.Euler(new Vector3(90, 0, 0));
             minimapCamera.orthographic = true;
             minimapCamera.clearFlags = CameraClearFlags.SolidColor;
-            minimapCamera.backgroundColor = new Color(50, 50, 50, 76);
+            minimapCamera.backgroundColor = minimap.Background;
             minimapCamera.orthographicSize = minimap.Size;
             minimapCamera.nearClipPlane = minimap.NearClipPlane;
             minimapCamera.farClipPlane = minimap.FarClipPlane;

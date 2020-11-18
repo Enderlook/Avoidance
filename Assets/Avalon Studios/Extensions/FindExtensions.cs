@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace AvalonStudios.Additions.Extensions
@@ -114,5 +115,105 @@ namespace AvalonStudios.Additions.Extensions
 
             return transformsChildWithLayer.ToArray();
         }
+
+        /// <summary>
+        /// Returns the first active loaded object of Type type that is inside of the transform.
+        /// </summary>
+        /// <typeparam name="T">The generic type of object to find.</typeparam>
+        /// <returns>
+        /// This returns the Object that matches the specified type. It returns null if no
+        /// Object matches the type.
+        /// </returns>
+        public static T FindTransformChildOfType<T>(this Transform transform) where T : Object
+        {
+            T childType;
+            foreach (Transform child in transform)
+            {
+                if (child.TryGetComponent(out childType))
+                    return childType;
+            }
+            return default;
+        }
+
+        /// <summary>
+        /// Returns a list of all active loaded objects of Type type that is inside of the transform.
+        /// </summary>
+        /// <typeparam name="T">The generic type of object to find.</typeparam>
+        /// <returns>
+        /// The array of objects found matching the type specified.
+        /// </returns>
+        public static T[] FindTransformsChildOfType<T>(this Transform transform) where T : Object
+        {
+            List<T> ts = new List<T>();
+            foreach (Transform child in transform)
+            {
+                T childType = child.GetComponent<T>();
+                if (!childType.IsNull())
+                    ts.Add(childType);
+            }
+
+            return ts.ToArray();
+        }
+
+        public static GameObject FindChildWithName(this GameObject obj, string name)
+        {
+            Transform transform = obj.transform;
+            GameObject child = transform.Find(name).gameObject;
+
+            return child == null ? null : child;
+        }
+
+#if UNITY_EDITOR
+        /// <summary>
+        /// Find <seealso cref="SerializedProperty"/> by name.
+        /// </summary>
+        /// <param name="path">The path of the property.</param>
+        /// <returns>
+        /// This returns the <seealso cref="SerializedProperty"/> that matches with the specified path.
+        /// </returns>
+        public static SerializedProperty FindSerializedProperty(this SerializedObject serializedObject, string path)
+        {
+            SerializedProperty property = serializedObject.FindProperty(path);
+            if (property.IsNull())
+                property = serializedObject.FindProperty($"<{path}>k__BackingField");
+            return property;
+        }
+
+        /// <summary>
+        /// Retrieves the <seealso cref="SerializedProperty"/> at a relative path to the current property.
+        /// </summary>
+        /// <param name="path">The path of the property.</param>
+        /// <returns>
+        /// This returns the relative <seealso cref="SerializedProperty"/> that matches with the specified path.
+        /// </returns>
+        public static SerializedProperty FindSerializedPropertyRelative(this SerializedProperty serializedObject, string path)
+        {
+            SerializedProperty property = serializedObject.FindPropertyRelative(path);
+            if (property.IsNull())
+                property = serializedObject.FindPropertyRelative($"<{path}>k__BackingField");
+
+            return property;
+        }
+
+        /// <summary>
+        /// Find Auto <seealso cref="SerializedProperty"/> by name.
+        /// </summary>
+        /// <param name="propertyName">Name of the property.</param>
+        /// <returns>
+        /// This returns the Auto <seealso cref="SerializedProperty"/> that matches with the specified name of the property.
+        /// </returns>
+        public static SerializedProperty FindPropertyByAutoSerializePropertyName(this SerializedObject serializedObject, string propertyName) =>
+            serializedObject.FindProperty($"<{propertyName}>k__BackingField");
+
+        /// <summary>
+        /// Retrieves the Auto <seealso cref="SerializedProperty"/> at a relative path to the current property.
+        /// </summary>
+        /// <param name="propertyName">Name of the property.</param>
+        /// <returns>
+        /// This returns the relative Auto <seealso cref="SerializedProperty"/> that matches with the specified name of the property.
+        /// </returns>
+        public static SerializedProperty FindPropertyRelativeByAutoSerializePropertyName(this SerializedProperty serializedObject, string propertyName) =>
+            serializedObject.FindPropertyRelative($"<{propertyName}>k__BackingField");
+#endif
     }
 }

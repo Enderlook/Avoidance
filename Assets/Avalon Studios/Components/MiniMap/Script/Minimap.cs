@@ -29,76 +29,37 @@ namespace AvalonStudios.Additions.Components.MinimapSystem
             }
         }
 
-        public float MinimapHeight => minimapHeight;
-
-        public Color Background => background;
-
-        public LayerMask CullingMask => cullingMask;
-
-        public float Size => size;
-
-        public float NearClipPlane => nearClippingPlanes;
-
-        public float FarClipPlane => farClippingPlanes;
-
-        public RenderTexture TargetTexture => targetTexture;
-
-        public bool UseHDR => HDR;
-
-        public Canvas MinimapCanvas { get => minimapCanvas; set => minimapCanvas = value; }
-
-        public RectTransform MinimapRoot { get => minimapRoot; set => minimapRoot = value; }
-
-        public Sprite MinimapRootImage => minimapRootImage;
-
-        public Color MinimapRootOutlineColor => minimapRootOutlineColor;
-
-        public Vector2 MinimapRootOutlineEffectDistance => minimapRootOutlineEffectDistance;
-
-        public Sprite MinimapBorderImage => minimapBorderImage;
-
-        public Vector2 MinimapBorderSizeDelta => minimapBorderSizeDelta;
-
-        public Color MinimapBorderColor => minimapBorderColor;
-
-        public Sprite MinimapMask => minimapMask;
-
-        public Color MinimapImageOverlayColor => minimapImageOverlayColor;
-
-        public GameObject TargetIcon { get => targetIcon; set => targetIcon = value; }
-
-        public Sprite TargetIconImage => targetIconImage;
-
-        public Color TargetIconColor => targetIconColor;
-
-        public Color TargetIconOutlineColor => targetIconOutlineColor;
-
-        public Vector2 TargetIconOutlineEffectDistance => targetIconOutlineEffectDistance;
-
         // Variables
 
-        [StyledHeader("General")]
+        [field: StyledHeader("General")]
         [SerializeField, Tooltip("Target for the Minimap.")]
         private GameObject target;
 
         [SerializeField, Tooltip("Tag of the target.")]
         private string targetTag = "";
 
-        [SerializeField, Tooltip("Camera Y position.")]
-        private float minimapHeight = .1f;
+        [field: SerializeField, Tooltip("Camera Y position."), IsProperty]
+        public float MinimapHeight { get; private set; } = .1f;
 
         [SerializeField, Tooltip("Speed of the follow target.")]
         private float speedFollow = 10f;
 
-        [StyledHeader("Camera Settings")]
-        [SerializeField, Tooltip("The Camera clears the screen to this color before rendering.")]
-        private Color background = Color.black;
+        [field: StyledHeader("Rotation Setup")]
+        [SerializeField, Tooltip("Smooth rotation?")]
+        private bool smoothRotation = true;
 
-        [SerializeField, Tooltip("Which layers the camera renders.")]
-        private LayerMask cullingMask = ~0;
+        [SerializeField, Tooltip("Lerp rotation.")]
+        private float lerpRotation = 8f;
 
-        [SerializeField, Tooltip("The vertical size of the camera.")]
-        private float size = 5;
+        [field: StyledHeader("Camera Settings")]
+        [field: SerializeField, Tooltip("The Camera clears the screen to this color before rendering."), IsProperty]
+        public Color Background { get; private set; } = Color.black;
+
+        [field: SerializeField, Tooltip("Which layers the camera renders."), IsProperty]
+        public LayerMask CullingMask { get; private set; } = ~0;
+
+        [field: SerializeField, Tooltip("The vertical size of the camera."), IsProperty]
+        public float Size { get; private set; } = 5;
 
         [SerializeField, Tooltip("Minimal vertical size of the camera.")]
         private float minSize = 1;
@@ -109,72 +70,65 @@ namespace AvalonStudios.Additions.Components.MinimapSystem
         [SerializeField, Tooltip("Vertical size speed change of the camera when using mouse wheel.")]
         private float sizeSpeed = 1;
 
-        [SerializeField, Tooltip("The closest point relative to the camera that drawing occurs.")]
-        private float nearClippingPlanes = .01f;
+        [field: SerializeField, Tooltip("The closest point relative to the camera that drawing occurs."), IsProperty]
+        public float NearClipPlane { get; private set; } = .01f;
 
-        [SerializeField, Tooltip("The furthest point relative to the camera that drawing occurs.")]
-        private float farClippingPlanes = 500f;
+        [field: SerializeField, Tooltip("The furthest point relative to the camera that drawing occurs."), IsProperty]
+        public float FarClipPlane { get; private set; } = 500f;
 
-        [SerializeField, Tooltip("The texture to render this camera into.")]
-        private RenderTexture targetTexture = null;
+        [field: SerializeField, Tooltip("The texture to render this camera into."), IsProperty]
+        public RenderTexture TargetTexture { get; private set; } = null;
 
-        [SerializeField, Tooltip("Use HDR?.")]
-        private bool HDR = true;
+        [field: SerializeField, Tooltip("Use HDR?."), IsProperty]
+        public bool HDR { get; private set; } = true;
 
-        [StyledHeader("Rotation Setup")]
-        [SerializeField, Tooltip("Smooth rotation?")]
-        private bool smoothRotation = true;
+        [field: StyledHeader("UI")]
+        [field: SerializeField, Tooltip("Minimap canvas.")]
+        public Canvas MinimapCanvas { get; set; } = null;
 
-        [SerializeField, Tooltip("Lerp rotation.")]
-        private float lerpRotation = 8f;
+        [field: SerializeField, Tooltip("Minimap root.")]
+        public RectTransform MinimapRoot { get; set; } = null;
 
-        [StyledHeader("UI")]
-        [SerializeField, Tooltip("Minimap canvas.")]
-        private Canvas minimapCanvas = null;
+        [field: SerializeField, Tooltip("Minimap root imnage.")]
+        public Sprite MinimapRootImage { get; private set; } = null;
 
-        [SerializeField, Tooltip("Minimap root.")]
-        private RectTransform minimapRoot = null;
+        [field: SerializeField, Tooltip("Minimap root outline color.")]
+        public Color MinimapRootOutlineColor { get; private set; } = Color.black;
 
-        [SerializeField, Tooltip("Minimap root imnage.")]
-        private Sprite minimapRootImage = null;
+        [field: SerializeField, Tooltip("Minimap root outline padding.")]
+        public Vector2 MinimapRootOutlineEffectDistance { get; private set; } = new Vector2(10, -10);
 
-        [SerializeField, Tooltip("Minimap root outline color.")]
-        private Color minimapRootOutlineColor = Color.black;
+        [field: SerializeField, Tooltip("Minimap border image")]
+        public Sprite MinimapBorderImage { get; private set; } = null;
 
-        [SerializeField, Tooltip("Minimap root outline padding.")]
-        private Vector2 minimapRootOutlineEffectDistance = new Vector2(10, -10);
+        [field: SerializeField, Tooltip("Minimap border size delta.")]
+        public Vector2 MinimapBorderSizeDelta { get; private set; } = new Vector2(160, 160);
 
-        [SerializeField, Tooltip("Minimap border image")]
-        private Sprite minimapBorderImage = null;
+        [field: SerializeField, Tooltip("Minimap border color")]
+        public Color MinimapBorderColor { get; private set; } = Color.white;
 
-        [SerializeField, Tooltip("Minimap border size delta.")]
-        private Vector2 minimapBorderSizeDelta = new Vector2(160, 160);
+        [field: SerializeField, Tooltip("Minimap mask.")]
+        public Sprite MinimapMask { get; private set; } = null;
 
-        [SerializeField, Tooltip("Minimap border color")]
-        private Color minimapBorderColor = Color.white;
+        [field: SerializeField, Tooltip("Minimap image overlay color.")]
+        public Color MinimapImageOverlayColor { get; private set; } = Color.white;
 
-        [SerializeField, Tooltip("Minimap mask.")]
-        private Sprite minimapMask = null;
+        [field: SerializeField, Tooltip("Target icon."), IsProperty]
+        public GameObject TargetIcon { get; set; } = null;
 
-        [SerializeField, Tooltip("Minimap image overlay color.")]
-        private Color minimapImageOverlayColor = Color.white;
+        [field: SerializeField, Tooltip("Target icon image."), IsProperty]
+        public Sprite TargetIconImage { get; private set; } = null;
 
-        [SerializeField, Tooltip("Target icon.")]
-        private GameObject targetIcon = null;
+        [field: SerializeField, Tooltip("Color of the target icon."), IsProperty]
+        public Color TargetIconColor { get; private set; } = Color.white;
 
-        [SerializeField, Tooltip("Target icon image.")]
-        private Sprite targetIconImage = null;
+        [field: SerializeField, Tooltip("Outline color of the target icon"), IsProperty]
+        public Color TargetIconOutlineColor { get; private set; } = Color.red;
 
-        [SerializeField, Tooltip("Color of the target icon.")]
-        private Color targetIconColor = Color.white;
+        [field: SerializeField, Tooltip("Outline padding of the target icon.")]
+        public Vector2 TargetIconOutlineEffectDistance { get; private set; } = new Vector2(.6f, -.6f);
 
-        [SerializeField, Tooltip("Outline color of the target icon")]
-        private Color targetIconOutlineColor = Color.red;
-
-        [SerializeField, Tooltip("Outline padding of the target icon.")]
-        private Vector2 targetIconOutlineEffectDistance = new Vector2(.6f, -.6f);
-
-        [StyledHeader("Map Rect")]
+        [field: StyledHeader("Map Rect")]
         [SerializeField, Tooltip("Minimap position.")]
         private Vector3 minimapPosition = Vector2.zero;
 
@@ -193,12 +147,12 @@ namespace AvalonStudios.Additions.Components.MinimapSystem
         private void Awake()
         {
             if (target == null && targetTag.Length != 0)
-                target = GameObject.FindGameObjectWithTag(targetTag);
+                target = GetTarget(targetTag);
 
             MinimapCamera = transform.GetChild(0).GetComponent<Camera>();
-            Root = minimapRoot;
+            Root = MinimapRoot;
 
-            targetIconRect = targetIcon.GetComponent<RectTransform>();
+            targetIconRect = TargetIcon.GetComponent<RectTransform>();
         }
 
         void Update()
@@ -215,9 +169,9 @@ namespace AvalonStudios.Additions.Components.MinimapSystem
         private void ResizeMap()
         {
             if (Input.mouseScrollDelta.y > 0)
-                size = Mathf.MoveTowards(size, maxSize, Input.mouseScrollDelta.y * sizeSpeed);
+                Size = Mathf.MoveTowards(Size, maxSize, Input.mouseScrollDelta.y * sizeSpeed);
             else if (Input.mouseScrollDelta.y < 0)
-                size = Mathf.MoveTowards(size, minSize, Mathf.Abs(Input.mouseScrollDelta.y) * sizeSpeed);
+                Size = Mathf.MoveTowards(Size, minSize, Mathf.Abs(Input.mouseScrollDelta.y) * sizeSpeed);
 
             MinimapCamera.orthographicSize = Size;
         }
@@ -260,9 +214,12 @@ namespace AvalonStudios.Additions.Components.MinimapSystem
 
         public void GetMinimapSize()
         {
-            minimapPosition = minimapRoot.anchoredPosition;
-            minimapRotation = minimapRoot.eulerAngles;
-            minimapSize = minimapRoot.sizeDelta;
+            minimapPosition = MinimapRoot.anchoredPosition;
+            minimapRotation = MinimapRoot.eulerAngles;
+            minimapSize = MinimapRoot.sizeDelta;
         }
+
+        public GameObject GetTarget(string targetTag)
+            => GameObject.FindGameObjectWithTag(targetTag);
     }
 }

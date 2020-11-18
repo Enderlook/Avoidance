@@ -13,7 +13,6 @@ namespace AvalonStudios.Additions.Attributes
         public override void OnGUI(Rect position)
         {
             styledHeader = attribute as StyledHeader;
-            GUI.enabled = true;
             StylizedGUI.DrawInspectorHeader(position, styledHeader.header, styledHeader.defaultFontSize ? 0 : styledHeader.fontSize);
         }
 

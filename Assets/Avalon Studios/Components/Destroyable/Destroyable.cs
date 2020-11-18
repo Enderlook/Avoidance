@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace AvalonStudios.Game.Destroyables
+namespace AvalonStudios.Additions.Components.Destroyables
 {
     public class Destroyable : MonoBehaviour
     {

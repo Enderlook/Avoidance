@@ -45,7 +45,7 @@ namespace Avoidance.Scene
 
             if (won)
             {
-                FreeLookCamera.Stop = true;
+                FreeLookCamera.StopCameraActions = true;
                 Cursor.lockState = CursorLockMode.None;
                 winWindow.SetActive(won);
             }

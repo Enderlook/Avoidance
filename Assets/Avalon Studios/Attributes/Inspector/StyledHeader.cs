@@ -6,8 +6,8 @@ namespace AvalonStudios.Additions.Attributes
     /// <summary>
     /// Use this PropertyAttribute to add a styled header above some fields in the Inspector.
     /// </summary>
-    //[AttributeUsage(AttributeTargets.Field, Inherited = true, AllowMultiple = true)]
-    public class StyledHeader : PropertyAttribute
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, Inherited = true, AllowMultiple = true)]
+    public sealed class StyledHeader : PropertyAttribute
     {
         public readonly string header;
 

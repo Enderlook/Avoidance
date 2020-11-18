@@ -1,5 +1,5 @@
 ﻿using AvalonStudios.Additions.Attributes;
-using AvalonStudios.Additions.Utils.CustomRandom;
+using Random = AvalonStudios.Additions.Utils.Random;
 using AvalonStudios.Additions.Utils.InputsManager;
 
 using System.IO;
@@ -143,12 +143,12 @@ namespace AvalonStudios.Additions.Components.RenderSystem
                 Directory.CreateDirectory(folder);
             }
 
-            string randomName = CustomRandom.RandomString(6);
+            string randomName = Random.RandomString(6);
             string filename = $"{folder}/screen_{width}x{height}_{randomName}.{format}";
 
             while (File.Exists(filename))
             {
-                randomName = CustomRandom.RandomString(6);
+                randomName = Random.RandomString(6);
                 filename = $"{folder}/screen_{width}x{height}_{randomName}.{format}";
             }
 

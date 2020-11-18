@@ -4,7 +4,7 @@ using AvalonStudios.Additions.Components.RenderSystem;
 using UnityEngine;
 using UnityEditor;
 
-public class CreateThirdPersonFollowCameraEditor
+public class CreateFreeLookCameraEditor
 {
     private const string TAG = "MainCamera";
 
@@ -22,25 +22,23 @@ public class CreateThirdPersonFollowCameraEditor
         pivot.transform.localPosition = new Vector3(0, 1, 0);
 
         camera.transform.SetParent(pivot.transform);
-        camera.transform.localPosition = new Vector3(0, 1, -10);
-        camera.transform.localRotation = Quaternion.Euler(Vector3.zero);
+        camera.transform.localPosition = freeLook.CameraPosition;
+        camera.transform.localRotation = Quaternion.Euler(freeLook.CameraRotation);
         camera.tag = TAG;
         Camera cameraComponent = camera.GetComponent<Camera>();
-        cameraComponent.depth = -1;
-        cameraComponent.fieldOfView = 70f;
-        cameraComponent.nearClipPlane = .5f;
-        cameraComponent.farClipPlane = 1000f;
-
-        if (freeLook != null)
-        {
-            freeLook.PivotPosition = pivot.transform.localPosition;
-            freeLook.CameraPosition = camera.transform.localPosition;
-            freeLook.CameraRotation = camera.transform.localRotation.eulerAngles;
-            freeLook.FieldOfView = cameraComponent.fieldOfView;
-            freeLook.NearClippingPlanes = cameraComponent.nearClipPlane;
-            freeLook.FarClippingPlanes = cameraComponent.farClipPlane;
-        }
-        else
-            Debug.Log("Error Free Look Camera doesn't exist.");
+        cameraComponent.clearFlags = freeLook.ClearFlags;
+        cameraComponent.backgroundColor = freeLook.BackgroundColor;
+        cameraComponent.cullingMask = freeLook.CullingMask;
+        cameraComponent.orthographic = freeLook.Orthographic;
+        cameraComponent.fieldOfView = freeLook.FieldOfView;
+        cameraComponent.nearClipPlane = freeLook.NearClippingPlanes;
+        cameraComponent.farClipPlane = freeLook.FarClippingPlanes;
+        cameraComponent.depth = freeLook.Depth;
+        cameraComponent.renderingPath = freeLook.RenderingPath;
+        cameraComponent.useOcclusionCulling = freeLook.OcclusionCulling;
+        cameraComponent.allowHDR = freeLook.AllowHDR;
+        cameraComponent.allowMSAA = freeLook.AllowMSAA;
+        cameraComponent.allowDynamicResolution = freeLook.AllowDynamicResolution;
+        cameraComponent.targetDisplay = (int)freeLook.TargetDisplay;
     }
 }

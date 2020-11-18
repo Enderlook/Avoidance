@@ -26,9 +26,7 @@ namespace AvalonStudios.Additions.Components.Cameras
 
         public MouseInputManager SwitchCameraViewDirectionButton => switchCameraViewDirectionButton;
 
-        public MovementSettings Movement { get { return movement; } set { movement = value; } }
-
-        [StyledHeader("Camera Options")]
+        [StyledHeader("Control Camera Options")]
 
         [SerializeField]
         private AxisControl xAxis = new AxisControl { InputAxisName = "Mouse X" };
@@ -58,13 +56,13 @@ namespace AvalonStudios.Additions.Components.Cameras
         [SerializeField]
         private MouseInputManager aimButton = null;
 
-        [SerializeField]
+        [SerializeField, ShowInInspectorIf(nameof(isFollow), true)]
         private MouseInputManager switchCameraViewDirectionButton = null;
 
-        [StyledHeader("Movement Settings")]
+        public bool IsFollow { get => isFollow; set => isFollow = value; }
 
-        [SerializeField]
-        private MovementSettings movement = null;
+        [SerializeField, HideInInspector]
+        private bool isFollow = true;
     }
 
     [System.Serializable]
@@ -107,6 +105,8 @@ namespace AvalonStudios.Additions.Components.Cameras
         public float FollowSpeed { get { return followSpeed; } set { followSpeed = value; } }
 
         // Variables
+
+        [StyledHeader("Movement Settings")]
 
         [SerializeField]
         private KeyInputManager forwardMovement = null;
