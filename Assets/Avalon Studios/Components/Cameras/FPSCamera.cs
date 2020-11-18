@@ -13,6 +13,7 @@ namespace AvalonStudios.Additions.Components.Cameras
 
         public override void Awake()
         {
+            StopCameraActions = false;
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             if (mode == Mode.FPS)

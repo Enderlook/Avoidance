@@ -229,6 +229,7 @@ namespace AvalonStudios.Additions.Components.Cameras
 
         public virtual void Awake()
         {
+            StopCameraActions = false;
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
 
