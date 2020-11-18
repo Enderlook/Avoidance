@@ -1,6 +1,7 @@
 ﻿using AvalonStudios.Additions.Components.FieldOfView;
 
 using Avoidance.Scene;
+using Avoidance.Player;
 
 using Enderlook.Enumerables;
 using Enderlook.Unity.Navigation.D2;
@@ -98,6 +99,8 @@ namespace Avoidance.Enemies
                     .ExecuteOnEntry(OnEntryIdle)
                     .ExecuteOnUpdate(OnUpdateIdle)
                     .On(EnemyEvent.StopResting)
+                        .If(PlayerWon)
+                            .Goto(EnemyState.Idle)
                         .Goto(EnemyState.Patrol)
                     .On(EnemyEvent.FoundPlayer)
                         .Goto(EnemyState.Hunt)
@@ -113,6 +116,8 @@ namespace Avoidance.Enemies
                     .On(EnemyEvent.LostPlayer)
                         .Goto(EnemyState.Chase)
                     .On(EnemyEvent.PlayerInShootRange)
+                        .If(PlayerWon)
+                            .Goto(EnemyState.Idle)
                         .Goto(EnemyState.Shoot)
                     .On(EnemyEvent.LostTrack)
                         .Goto(EnemyState.Idle)
@@ -133,6 +138,8 @@ namespace Avoidance.Enemies
                         .Goto(EnemyState.Chase)
                 .Build();
             stateMachine.Start();
+
+            bool PlayerWon() => PlayerBrain.Win;
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
